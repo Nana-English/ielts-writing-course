@@ -106,6 +106,16 @@
   /* Writing task */
   .task-box{background:#f2f6fb;border-radius:12px;padding:22px;margin-bottom:16px;font-size:.92rem}
   .task-box .prompt{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-top:10px;font-style:italic;font-size:.9rem}
+  .task-box .prompt table{width:100%;border-collapse:collapse;font-style:normal;font-size:.85rem;margin:10px 0}
+  .task-box .prompt th{background:var(--accent);color:#fff;padding:6px 10px;border:1px solid var(--accent);font-weight:700;text-align:left}
+  .task-box .prompt td{border:1px solid var(--line);padding:6px 10px;background:#fff}
+  .chartbox{margin:12px 0;font-style:normal}
+  .chart-src{font-size:.72rem;color:var(--gray);text-align:right;margin-top:4px;font-style:normal}
+  .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;font-style:normal;margin:12px 0}
+  .fstep{background:#fff;border:1.5px solid var(--accent);border-radius:10px;padding:10px 12px;font-size:.78rem;line-height:1.5;position:relative}
+  .fstep b{display:block;color:var(--main);font-family:'Montserrat';font-size:.68rem;letter-spacing:.06em;margin-bottom:2px}
+  .fstep:not(:last-child)::after{content:'▶';position:absolute;right:-13px;top:50%;transform:translateY(-50%);color:var(--accent);font-size:.65rem}
+  @media (max-width:900px){.flow{grid-template-columns:repeat(2,1fr)}}
   textarea.writing{
     width:100%;min-height:220px;border:1.5px solid var(--line);border-radius:12px;padding:16px;
     font-family:inherit;font-size:.95rem;line-height:1.8;resize:vertical;background:#fff;
@@ -294,6 +304,140 @@ document.getElementById('logoutBtn').addEventListener('click', () => {
 });
 
 /* =========================================================
+   SVG図表の描画エンジン
+   ========================================================= */
+function txtEl(x,y,t,o){o=o||{};return '<text x="'+x+'" y="'+y+'"'+(o.a?' text-anchor="'+o.a+'"':'')+' font-size="'+(o.fs||12)+'"'+(o.fw?' font-weight="'+o.fw+'"':'')+' fill="'+(o.c||'#1e2430')+'" font-family="Noto Sans JP,sans-serif">'+t+'</text>';}
+function svgWrap(W,H,inner){return '<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;background:#fff;border:1px solid #e4e9f0;border-radius:10px">'+inner+'</svg>';}
+function lineChart(o){
+  var W=680,H=o.h||350,pL=52,pR=22,pT=o.title?40:22,pB=64;
+  var iw=W-pL-pR,ih=H-pT-pB,n=o.x.length;
+  function xp(i){return pL+i*(iw/(n-1));}
+  function yp(v){return pT+ih-(v/o.yMax)*ih;}
+  var s='';
+  if(o.title)s+=txtEl(W/2,22,o.title,{a:'middle',fs:13.5,fw:700,c:'#003366'});
+  for(var v=0;v<=o.yMax;v+=o.yStep){s+='<line x1="'+pL+'" y1="'+yp(v).toFixed(1)+'" x2="'+(W-pR)+'" y2="'+yp(v).toFixed(1)+'" stroke="#eef1f5"/>'+txtEl(pL-8,(yp(v)+4).toFixed(1),v,{a:'end',fs:11,c:'#5f6b7a'});}
+  o.x.forEach(function(lb,i){s+=txtEl(xp(i).toFixed(1),(pT+ih+18).toFixed(1),lb,{a:'middle',fs:11,c:'#5f6b7a'});});
+  if(o.unit)s+=txtEl(W-pR,pT-8,o.unit,{a:'end',fs:11,c:'#5f6b7a'});
+  o.series.forEach(function(se){
+    var pts=[];se.v.forEach(function(val,i){if(val!==null)pts.push(xp(i).toFixed(1)+','+yp(val).toFixed(1));});
+    s+='<polyline points="'+pts.join(' ')+'" fill="none" stroke="'+se.c+'" stroke-width="2.5"'+(se.dash?' stroke-dasharray="7 5"':'')+'/>';
+    se.v.forEach(function(val,i){if(val===null)return;
+      s+='<circle cx="'+xp(i).toFixed(1)+'" cy="'+yp(val).toFixed(1)+'" r="3.5" fill="'+se.c+'"/>';
+      if(o.labels)s+=txtEl(xp(i).toFixed(1),(yp(val)-9).toFixed(1),val,{a:'middle',fs:10.5,fw:700,c:se.c});
+    });
+  });
+  var lx=pL;o.series.forEach(function(se){var ly=H-16;
+    s+='<line x1="'+lx+'" y1="'+ly+'" x2="'+(lx+24)+'" y2="'+ly+'" stroke="'+se.c+'" stroke-width="3"'+(se.dash?' stroke-dasharray="7 5"':'')+'/>'+txtEl(lx+30,ly+4,se.n,{fs:12});
+    lx+=30+se.n.length*13+28;});
+  return svgWrap(W,H,s);
+}
+function barChart(o){
+  var W=680,H=350,pL=52,pR=22,pT=o.title?44:24,pB=48;
+  var iw=W-pL-pR,ih=H-pT-pB,n=o.cats.length,bw=iw/n*0.5;
+  function yp(v){return pT+ih-(v/o.yMax)*ih;}
+  var s='';
+  if(o.title)s+=txtEl(W/2,22,o.title,{a:'middle',fs:13.5,fw:700,c:'#003366'});
+  for(var v=0;v<=o.yMax;v+=o.yStep){s+='<line x1="'+pL+'" y1="'+yp(v).toFixed(1)+'" x2="'+(W-pR)+'" y2="'+yp(v).toFixed(1)+'" stroke="#eef1f5"/>'+txtEl(pL-8,(yp(v)+4).toFixed(1),v.toLocaleString(),{a:'end',fs:11,c:'#5f6b7a'});}
+  o.cats.forEach(function(cat,i){var cx=pL+(i+0.5)*(iw/n),val=o.vals[i];
+    s+='<rect x="'+(cx-bw/2).toFixed(1)+'" y="'+yp(val).toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+(pT+ih-yp(val)).toFixed(1)+'" rx="3" fill="'+(o.color||'#0A4A8A')+'"/>'
+      +txtEl(cx.toFixed(1),(yp(val)-7).toFixed(1),val.toLocaleString(),{a:'middle',fs:11.5,fw:700,c:'#003366'})
+      +txtEl(cx.toFixed(1),(pT+ih+18).toFixed(1),cat,{a:'middle',fs:11.5,c:'#5f6b7a'});});
+  if(o.unit)s+=txtEl(W-pR,pT-8,o.unit,{a:'end',fs:11,c:'#5f6b7a'});
+  return svgWrap(W,H,s);
+}
+function arcPath(cx,cy,r,a0,a1){var x0=cx+r*Math.cos(a0),y0=cy+r*Math.sin(a0),x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1),la=(a1-a0)>Math.PI?1:0;return 'M'+cx+','+cy+' L'+x0.toFixed(1)+','+y0.toFixed(1)+' A'+r+','+r+' 0 '+la+' 1 '+x1.toFixed(1)+','+y1.toFixed(1)+' Z';}
+function pie(o){
+  var W=340,H=310,cx=115,cy=168,r=90,a=-Math.PI/2,s='';
+  s+=txtEl(W/2,22,o.title,{a:'middle',fs:13,fw:700,c:'#003366'});
+  o.slices.forEach(function(sl){var a1=a+sl.v/100*2*Math.PI;
+    s+='<path d="'+arcPath(cx,cy,r,a,a1)+'" fill="'+sl.c+'" stroke="#fff" stroke-width="1.5"/>';
+    var am=(a+a1)/2,lr=sl.v>=8?r*0.6:r+16,tx=cx+lr*Math.cos(am),ty=cy+lr*Math.sin(am);
+    s+=txtEl(tx.toFixed(1),(ty+4).toFixed(1),sl.v+'%',{a:'middle',fs:11.5,fw:700,c:sl.v>=8?'#fff':'#1e2430'});
+    a=a1;});
+  o.slices.forEach(function(sl,k){var ly=84+k*26;
+    s+='<rect x="232" y="'+(ly-11)+'" width="14" height="14" rx="2" fill="'+sl.c+'"/>'+txtEl(252,ly+1,sl.l,{fs:11.5});});
+  return svgWrap(W,H,s);
+}
+function sideBySide(a,b){return '<div style="display:flex;gap:12px;flex-wrap:wrap;font-style:normal"><div style="flex:1;min-width:280px">'+a+'</div><div style="flex:1;min-width:280px">'+b+'</div></div>';}
+function mapZone(x,y,w,h,fill,label,l2){var s='<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+h+'" fill="'+fill+'" stroke="#8a97a6" rx="3"/>'+txtEl(x+w/2,y+h/2+(l2?-2:4),label,{a:'middle',fs:10.5,fw:700});if(l2)s+=txtEl(x+w/2,y+h/2+12,l2,{a:'middle',fs:9.5,c:'#5f6b7a'});return s;}
+function mapBridge(y){return '<rect x="252" y="'+y+'" width="50" height="10" fill="#8a97a6" rx="2"/>';}
+function mapBox(title,inner){
+  var s=txtEl(170,20,title,{a:'middle',fs:13,fw:700,c:'#003366'});
+  s+='<rect x="12" y="34" width="244" height="272" fill="#fbfcfe" stroke="#c9d4e0"/>';
+  s+='<rect x="262" y="34" width="30" height="272" fill="#bcd7f0"/>'+txtEl(277,300,'River',{a:'middle',fs:9.5,c:'#38618c'});
+  s+=txtEl(318,48,'N',{a:'middle',fs:12,fw:700,c:'#5f6b7a'})+'<line x1="318" y1="72" x2="318" y2="54" stroke="#5f6b7a" stroke-width="2"/><path d="M314,58 L318,50 L322,58 Z" fill="#5f6b7a"/>';
+  s+=inner;
+  return svgWrap(340,320,s);
+}
+const CHARTS={
+  d1:function(){return lineChart({title:'Average monthly temperatures in Tokyo and Sydney',unit:'°C',yMax:30,yStep:5,x:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],series:[{n:'Tokyo',c:'#E31837',v:[5,6,9,14,19,22,26,27,23,18,12,8]},{n:'Sydney',c:'#0A4A8A',v:[23,23,21,18,15,12,12,13,15,18,20,22]}]});},
+  d3a:function(){return lineChart({title:'Overseas visitors to Japan',unit:'million',yMax:35,yStep:5,labels:true,x:['2010','2013','2016','2019','2020'],series:[{n:'Visitors',c:'#E31837',v:[8.6,10.4,24,31.9,4.1]}]});},
+  d3b:function(){return sideBySide(
+    pie({title:'Energy sources, 1995',slices:[{l:'Coal',v:58,c:'#5f6b7a'},{l:'Natural gas',v:25,c:'#0A4A8A'},{l:'Renewables',v:5,c:'#0d7a4f'},{l:'Other',v:12,c:'#e0a800'}]}),
+    pie({title:'Energy sources, 2015',slices:[{l:'Coal',v:30,c:'#5f6b7a'},{l:'Natural gas',v:35,c:'#0A4A8A'},{l:'Renewables',v:28,c:'#0d7a4f'},{l:'Other',v:7,c:'#e0a800'}]}));},
+  d5:function(){return lineChart({title:'Number of cafe stores',yMax:500,yStep:100,labels:true,x:['2000','2005','2010','2015','2018','2022'],series:[{n:'Stores',c:'#0A4A8A',v:[120,180,400,395,250,310]}]});},
+  d7:function(){return lineChart({title:'Electric vehicles in use (actual and projected)',unit:'million',yMax:16,yStep:4,labels:true,x:['2010','2015','2020','2030','2040'],series:[{n:'Actual',c:'#E31837',v:[0.05,0.3,1.2,null,null]},{n:'Projected',c:'#E31837',dash:true,v:[null,null,1.2,6,15]}]});},
+  d8:function(){return barChart({title:'Annual coffee consumption per person, 2023',unit:'cups',yMax:1400,yStep:200,cats:['Finland','Brazil','US','Japan','India'],vals:[1200,810,600,400,30]});},
+  d9:function(){return lineChart({title:'Households with access to three technologies',unit:'%',yMax:100,yStep:20,labels:true,x:['2000','2005','2010','2015','2020'],series:[{n:'Internet',c:'#0A4A8A',v:[10,35,60,80,92]},{n:'Smartphone',c:'#E31837',v:[0,10,25,70,88]},{n:'Landline',c:'#8a97a6',v:[90,83,75,55,30]}]});},
+  d10:function(){return sideBySide(
+    pie({title:'Electricity generated, 1995',slices:[{l:'Coal',v:58,c:'#5f6b7a'},{l:'Natural gas',v:25,c:'#0A4A8A'},{l:'Nuclear',v:12,c:'#e0a800'},{l:'Renewables',v:5,c:'#0d7a4f'}]}),
+    pie({title:'Electricity generated, 2015',slices:[{l:'Coal',v:30,c:'#5f6b7a'},{l:'Natural gas',v:35,c:'#0A4A8A'},{l:'Nuclear',v:7,c:'#e0a800'},{l:'Renewables',v:28,c:'#0d7a4f'}]}));},
+  d12:function(){
+    var s=txtEl(340,22,'How recycled paper is made',{a:'middle',fs:13.5,fw:700,c:'#003366'});
+    /* 1. House */
+    s+='<polygon points="40,92 70,66 100,92" fill="#E31837" opacity="0.85"/><rect x="48" y="92" width="44" height="38" fill="#f8cecc" stroke="#8a97a6"/><rect x="63" y="106" width="14" height="24" fill="#8a97a6"/>';
+    /* 2. Truck */
+    s+='<rect x="150" y="92" width="42" height="28" rx="3" fill="#0A4A8A"/><rect x="192" y="102" width="20" height="18" rx="2" fill="#5f6b7a"/><circle cx="162" cy="124" r="7" fill="#1e2430"/><circle cx="198" cy="124" r="7" fill="#1e2430"/>';
+    /* 3. Factory */
+    s+='<rect x="262" y="90" width="60" height="40" fill="#8a97a6"/><polygon points="262,90 262,74 282,90 282,74 302,90 302,74 322,90" fill="#5f6b7a"/><rect x="268" y="62" width="8" height="22" fill="#5f6b7a"/>';
+    /* 4. Pulping vat */
+    s+='<path d="M375,95 L380,130 L420,130 L425,95 Z" fill="#dae8fc" stroke="#8a97a6"/><path d="M378,103 Q389,96 400,103 T422,103" fill="none" stroke="#0A4A8A" stroke-width="2"/><circle cx="392" cy="113" r="2.5" fill="#0A4A8A"/><circle cx="407" cy="118" r="2" fill="#0A4A8A"/>';
+    /* 5. Rollers */
+    s+='<circle cx="498" cy="100" r="12" fill="#5f6b7a"/><circle cx="524" cy="100" r="12" fill="#5f6b7a"/><line x1="480" y1="118" x2="545" y2="118" stroke="#e0a800" stroke-width="4"/>';
+    /* 6. Paper roll */
+    s+='<circle cx="612" cy="106" r="20" fill="#fff" stroke="#8a97a6" stroke-width="3"/><circle cx="612" cy="106" r="9" fill="#eceff3" stroke="#8a97a6"/><rect x="632" y="114" width="26" height="6" fill="#eceff3" stroke="#8a97a6"/>';
+    /* arrows */
+    function arw(x1,x2){return '<line x1="'+x1+'" y1="104" x2="'+(x2-9)+'" y2="104" stroke="#003366" stroke-width="2"/><path d="M'+x2+',104 l-9,-5 v10 Z" fill="#003366"/>';}
+    s+=arw(108,144)+arw(218,256)+arw(328,369)+arw(431,474)+arw(549,586);
+    /* labels */
+    s+=txtEl(70,152,'Homes',{a:'middle',fs:10,c:'#5f6b7a'})+txtEl(181,152,'Truck collection',{a:'middle',fs:10,c:'#5f6b7a'})+txtEl(292,152,'Sorting plant',{a:'middle',fs:10,c:'#5f6b7a'})+txtEl(400,152,'Pulping & de-inking',{a:'middle',fs:10,c:'#5f6b7a'})+txtEl(511,152,'Rolled & dried',{a:'middle',fs:10,c:'#5f6b7a'})+txtEl(620,152,'New paper rolls',{a:'middle',fs:10,c:'#5f6b7a'});
+    /* recycle return arrow */
+    s+='<path d="M612,168 C520,212 165,212 82,176" fill="none" stroke="#0d7a4f" stroke-width="2.5" stroke-dasharray="7 5"/><path d="M78,174 l14,0 -6,11 Z" fill="#0d7a4f"/>';
+    s+=txtEl(345,228,'Recycled paper is sold and returns to homes',{a:'middle',fs:10.5,fw:700,c:'#0d7a4f'});
+    var diagram=svgWrap(680,242,s);
+    var steps=['Used paper is collected from homes','Transported to a recycling plant by truck','Sorted into different types','Mixed with water and chemicals to make pulp','Ink is removed from the pulp','Pulp is washed and bleached','Spread into thin sheets by rollers and dried','Wound onto large rolls and dispatched'];
+    return diagram+'<div class="flow">'+steps.map(function(t,i){return '<div class="fstep"><b>STAGE '+(i+1)+'</b>'+t+'</div>';}).join('')+'</div>';},
+  d13:function(){return sideBySide(
+    mapBox('Riverton in 1990',
+      mapZone(24,48,220,70,'#d5e8d4','Farmland')
+      +mapZone(24,132,120,58,'#ffe6a7','Shopping street')
+      +mapZone(156,132,88,58,'#e1d5e7','Church')
+      +mapZone(24,204,130,86,'#f8cecc','Housing')
+      +mapZone(166,204,78,86,'#dae8fc','School')
+      +mapBridge(150)),
+    mapBox('Riverton in 2020',
+      mapZone(24,48,140,70,'#d0d4da','Shopping mall')
+      +mapZone(176,48,68,70,'#eceff3','Car park')
+      +mapZone(24,132,120,58,'#ffe6a7','Pedestrian','shopping street')
+      +mapZone(156,132,88,58,'#e1d5e7','Church')
+      +mapZone(24,204,150,86,'#f8cecc','Housing','(expanded ×2)')
+      +mapZone(186,204,58,86,'#dae8fc','Hospital')
+      +mapBridge(70)+mapBridge(150)+mapBridge(230)));},
+  d14:function(){return barChart({title:'International students by country, 2022',unit:'thousand',yMax:1000,yStep:200,cats:['US','UK','Australia','Canada'],vals:[950,600,440,400]});},
+  d14b:function(){return pie({title:'Subjects studied',slices:[{l:'Business',v:32,c:'#0A4A8A'},{l:'Engineering',v:25,c:'#E31837'},{l:'IT',v:18,c:'#0d7a4f'},{l:'Humanities',v:14,c:'#e0a800'},{l:'Other',v:11,c:'#8a97a6'}]});},
+  d15:function(){return lineChart({title:'Average weekly hours spent on social media',unit:'hours',yMax:24,yStep:4,labels:true,x:['2012','2016','2020','2024'],series:[{n:'16-24',c:'#E31837',v:[8,15,22,20]},{n:'25-44',c:'#0A4A8A',v:[4,8,14,16]},{n:'45-64',c:'#8a97a6',v:[1,2,6,9]}]});}
+};
+function renderCharts(){
+  document.querySelectorAll('.chartbox[data-chart]').forEach(function(el){
+    var f=CHARTS[el.getAttribute('data-chart')];
+    if(f&&!el.getAttribute('data-done')){
+      el.innerHTML=f()+'<div class="chart-src">図表：本講座オリジナル作成（練習用の架空データです）</div>';
+      el.setAttribute('data-done','1');
+    }
+  });
+}
+
+/* =========================================================
    Day 1-15 コンテンツ
    ========================================================= */
 const DAYS = [
@@ -332,7 +476,7 @@ const DAYS = [
   ],
   task:{
     intro:'下の6.0モデル答案を読み、4部構成（Introduction / Overview / Body 1 / Body 2）がどこで切り替わるかを意識しながら、各パートの役割を自分の言葉で1行ずつメモしてください。',
-    prompt:'The graph below shows average monthly temperatures in Tokyo and Sydney over one year.<br><br>【モデル答案】The line graph compares the average temperature each month in Tokyo and Sydney. Overall, the two cities show opposite patterns over the year, with Tokyo peaking in summer months while Sydney reaches its highest figures in December and January. In Tokyo, temperatures start at around 5°C in January and climb steadily to a peak of approximately 27°C in August. They then fall sharply towards December. Sydney, by contrast, begins the year at about 23°C, declines to roughly 12°C in July, and recovers by the end of the year.',
+    prompt:'The graph below shows average monthly temperatures in Tokyo and Sydney over one year.<div class="chartbox" data-chart="d1"></div>【モデル答案】The line graph compares the average temperature each month in Tokyo and Sydney. Overall, the two cities show opposite patterns over the year, with Tokyo peaking in summer months while Sydney reaches its highest figures in December and January. In Tokyo, temperatures start at around 5°C in January and climb steadily to a peak of approximately 27°C in August. They then fall sharply towards December. Sydney, by contrast, begins the year at about 23°C, declines to roughly 12°C in July, and recovers by the end of the year.',
     placeholder:'例）1文目＝Introduction。設問文をcompares/average temperature each monthと言い換えている…',
     minWords:0
   },
@@ -419,7 +563,7 @@ const DAYS = [
   ],
   task:{
     intro:'次の3つのデータ概要を読み、それぞれOverview（1〜2文）だけを書いてください。数字は使わないこと。',
-    prompt:'1.【折れ線】日本を訪れる観光客数：2010年 860万人 → 2019年 3,190万人まで毎年増加 → 2020年に410万人へ急落。<br>2.【円グラフ×2】ある国の発電源：1995年（石炭58%・ガス25%・再エネ5%・その他12%）→ 2015年（石炭30%・ガス35%・再エネ28%・その他7%）。<br>3.【表】5か国のインターネット利用率：全ての国で2010年から2022年にかけて上昇。最高は韓国（97%）、最低はインド（46%）だが、インドの伸び幅が最大。',
+    prompt:'1.【折れ線グラフ】日本を訪れる外国人観光客数<div class="chartbox" data-chart="d3a"></div>2.【円グラフ×2】ある国の発電源の内訳<div class="chartbox" data-chart="d3b"></div>3.【表】5か国のインターネット利用率（%）<table><tr><th>Country</th><th>2010</th><th>2022</th></tr><tr><td>South Korea</td><td>84</td><td>97</td></tr><tr><td>UK</td><td>73</td><td>95</td></tr><tr><td>Japan</td><td>78</td><td>90</td></tr><tr><td>Brazil</td><td>40</td><td>77</td></tr><tr><td>India</td><td>8</td><td>46</td></tr></table>',
     placeholder:'1. Overall, the number of visitors to Japan grew dramatically over the decade before falling sharply in the final year.\n2. …\n3. …',
     minWords:0
   },
@@ -463,7 +607,7 @@ const DAYS = [
   `,
   drills:[
     {q:'「74%」の言い換えとして最も適切なのは？', c:['just under three quarters','a third','well over 90%'], a:0, fb:'74%は75%（three quarters）のわずかに下なので just under three quarters が最適です。'},
-    {q:'「52%」を表すのに不適切なのは？', c:['just over half','slightly more than 50%','a quarter'], a:2, fb:'a quarterは25%。52%は「半分を少し超える」なので just over half が自然です。'},
+    {q:'「52%」を表すのに最も適切なのは？', c:['just over half','just under half','a quarter'], a:0, fb:'52%は50%をわずかに超えるので just over half が正解。just under half は48%など「半分弱」、a quarter は25%を表します。'},
     {q:'数字を引用するときの正しい姿勢は？', c:['全データを漏れなく書く','代表的な数字を選び、概数表現と組み合わせる','数字は一切書かない'], a:1, fb:'最大値・最小値・大きな変化点など「選んだ数字」を引用します。全部書くと整理力（TA・CC）が下がります。'}
   ],
   task:{
@@ -524,7 +668,7 @@ const DAYS = [
   ],
   task:{
     intro:'次の折れ線グラフのデータを、区間ごとに1文ずつ（合計5文）描写してください。動詞型と名詞型の両方を使うこと。',
-    prompt:'あるカフェチェーンの店舗数：2000年 120店 → 2005年 180店（ゆるやかに増加）→ 2010年 400店（急増）→ 2015年 395店（ほぼ横ばい）→ 2018年 250店（急減）→ 2022年 310店（回復）',
+    prompt:'あるカフェチェーンの店舗数の推移（2000〜2022年）<div class="chartbox" data-chart="d5"></div>',
     placeholder:'The number of stores rose gradually from 120 in 2000 to 180 in 2005.\nThere was then a dramatic increase…',
     minWords:40
   },
@@ -568,8 +712,8 @@ Finally, there was a recovery, with the number of stores climbing to 310 by 2022
     {q:'文法的に正しいのはどれ？', c:['The figure very increased.','The figure increased significantly.','The figure was significant increased.'], a:1, fb:'動詞＋副詞の正しい組み合わせ。veryは動詞を直接修飾できません。'}
   ],
   task:{
-    intro:'Day 5で書いた5文（カフェチェーンの描写）に、適切な副詞・形容詞を加えてアップグレードしてください。変化の大きさに合った修飾語を選ぶこと。',
-    prompt:'例）The number of stores rose from 120 to 180. → The number of stores rose <strong>steadily</strong> from 120 to 180, before <strong>surging dramatically</strong> to 400 by 2010.',
+    intro:'Day 5で書いた5文（カフェチェーンの描写）に、適切な副詞・形容詞を加えてアップグレードしてください。変化の大きさに合った修飾語を選ぶこと。Day 5の答案が手元にない場合は、下の【基本文】をそのまま書き換えてOKです。',
+    prompt:'例）The number of stores rose from 120 to 180. → The number of stores rose <strong>steadily</strong> from 120 to 180.<div class="chartbox" data-chart="d5"></div>【基本文（修飾語を加える前の5文）】<br>1. The number of stores rose from 120 in 2000 to 180 in 2005.<br>2. The figure then increased to a peak of 400 in 2010.<br>3. Between 2010 and 2015, the number remained stable at around 395.<br>4. The total then fell to 250 in 2018.<br>5. Finally, the number of stores recovered to 310 by 2022.',
     placeholder:'The number of stores rose steadily from 120 in 2000 to 180 in 2005.\n…',
     minWords:40
   },
@@ -616,7 +760,7 @@ Finally, there was a <strong>moderate</strong> recovery, with the number of stor
   ],
   task:{
     intro:'次のデータ（実績＋予測）を4〜5文で描写してください。過去形と予測表現を正しく切り替えること。',
-    prompt:'ある国の電気自動車保有台数：2010年 5万台 → 2015年 30万台 → 2020年 120万台（ここまで実績）→ 2030年 600万台（予測）→ 2040年 1,500万台（予測）',
+    prompt:'ある国の電気自動車保有台数（実線＝実績、破線＝予測）<div class="chartbox" data-chart="d7"></div>',
     placeholder:'The number of electric vehicles rose from just 50,000 in 2010 to 300,000 in 2015.\n…By 2040, the figure is projected to…',
     minWords:50
   },
@@ -658,7 +802,7 @@ Finally, there was a <strong>moderate</strong> recovery, with the number of stor
   ],
   task:{
     intro:'次の棒グラフのデータから、比較の文を8つ書いてください。比較級・最上級・倍数・whereasをすべて1回以上使うこと。',
-    prompt:'【2023年・1人あたり年間コーヒー消費量（杯）】フィンランド 1,200 ／ 日本 400 ／ アメリカ 600 ／ ブラジル 810 ／ インド 30',
+    prompt:'2023年・1人あたり年間コーヒー消費量（杯）<div class="chartbox" data-chart="d8"></div>',
     placeholder:'Finland had the highest coffee consumption, at 1,200 cups per person.\nThe figure for Finland was twice as high as that for the US.\n…',
     minWords:60
   },
@@ -707,7 +851,7 @@ Finally, there was a <strong>moderate</strong> recovery, with the number of stor
   ],
   task:{
     intro:'【実戦】タイマーを20分にセットして、次の折れ線グラフの問題をフルで書いてください（150語以上・4部構成）。',
-    prompt:'The graph below shows the percentage of households with access to three types of technology in one country between 2000 and 2020.<br><br>【データ】<br>・Internet：2000年 10% → 2005年 35% → 2010年 60% → 2015年 80% → 2020年 92%<br>・Smartphone：2000年 0% → 2010年 25% → 2015年 70% → 2020年 88%<br>・Landline（固定電話）：2000年 90% → 2010年 75% → 2015年 55% → 2020年 30%',
+    prompt:'The graph below shows the percentage of households with access to three types of technology in one country between 2000 and 2020.<div class="chartbox" data-chart="d9"></div>',
     placeholder:'The line graph illustrates how the proportion of homes with…\n\nOverall, …',
     minWords:150
   },
@@ -751,7 +895,7 @@ By contrast, the figure for landlines fell throughout the period. It declined mo
   ],
   task:{
     intro:'【実戦】20分で次の円グラフ問題をフルで書いてください（150語以上）。',
-    prompt:'The pie charts below show the sources of electricity generated in one country in 1995 and 2015.<br><br>【1995年】石炭 58%・天然ガス 25%・再生可能エネルギー 5%・原子力 12%<br>【2015年】石炭 30%・天然ガス 35%・再生可能エネルギー 28%・原子力 7%',
+    prompt:'The pie charts below show the sources of electricity generated in one country in 1995 and 2015.<div class="chartbox" data-chart="d10"></div>',
     placeholder:'The pie charts compare how electricity was produced in…\n\nOverall, …',
     minWords:150
   },
@@ -839,7 +983,7 @@ The final period, however, saw a sharp acceleration in all five countries. The U
   ],
   task:{
     intro:'【実戦】20分で次のプロセス図の問題をフルで書いてください（150語以上・現在形・受動態中心）。',
-    prompt:'The diagram below shows how recycled paper is made.<br><br>【工程】1. 使用済みの紙が家庭から回収される → 2. 工場へトラックで運ばれる → 3. 種類ごとに選別される → 4. 水と薬品と混ぜてパルプ状にする → 5. インクを除去する → 6. パルプを洗浄・漂白する → 7. ローラーで薄く伸ばして乾燥させる → 8. 新しい紙としてロール状に巻き取られ、出荷される',
+    prompt:'The diagram below shows how recycled paper is made.<div class="chartbox" data-chart="d12"></div>',
     placeholder:'The diagram illustrates the process by which used paper is recycled…\n\nOverall, the process consists of eight main stages, …',
     minWords:150
   },
@@ -889,7 +1033,7 @@ Once the pulp is ready, the ink is removed from it. The pulp is then washed and 
   ],
   task:{
     intro:'【実戦】20分で次の地図問題をフルで書いてください（150語以上・過去形＋受動態）。',
-    prompt:'The maps below show the changes in the town of Riverton between 1990 and 2020.<br><br>【1990年】町の北部：農地が広がる／中心部：小さな商店街と教会／南部：住宅地と小学校／川が町の東側を流れ、橋は1本<br>【2020年】北部：農地→ショッピングモールと駐車場に／中心部：商店街は歩行者天国に改装、教会はそのまま／南部：住宅地が2倍に拡大、小学校は取り壊されて総合病院に／川に新しい橋が2本追加',
+    prompt:'The maps below show the changes in the town of Riverton between 1990 and 2020.<div class="chartbox" data-chart="d13"></div>',
     placeholder:'The two maps illustrate how the town of Riverton changed over a 30-year period…\n\nOverall, …',
     minWords:150
   },
@@ -935,7 +1079,7 @@ The south of the town also saw significant changes. The residential area doubled
   ],
   task:{
     intro:'【実戦】20分で次の複合問題をフルで書いてください（150〜180語目標）。',
-    prompt:'The bar chart below shows the number of international students in four countries in 2022, and the pie chart shows the subjects they studied.<br><br>【棒グラフ：留学生数（万人）】アメリカ 95 ／ イギリス 60 ／ オーストラリア 44 ／ カナダ 40<br>【円グラフ：専攻分野】ビジネス 32%・工学 25%・IT 18%・人文科学 14%・その他 11%',
+    prompt:'The bar chart below shows the number of international students in four countries in 2022, and the pie chart shows the subjects they studied.<div class="chartbox" data-chart="d14"></div><div class="chartbox" data-chart="d14b"></div>',
     placeholder:'The bar chart illustrates how many international students chose four English-speaking countries in 2022, while the pie chart shows…\n\nOverall, …',
     minWords:150
   },
@@ -980,11 +1124,11 @@ Turning to the pie chart, business clearly dominated students' choices, making u
   drills:[
     {q:'模試前の最終確認。6.0答案に「必ず」あるものは？', c:['難解な単語','Overall,で始まる概観文','5つ以上の段落'], a:1, fb:'Overviewの有無が6.0の生命線。今日の模試でも絶対に忘れないこと。'},
     {q:'見直し2分で優先してチェックすべきものは？', c:['もっと良い表現への書き換え','時制・三単現のs・単位の書き忘れ','段落構成の組み替え'], a:1, fb:'残り2分でできるのは機械的ミスの修正。大きな書き換えはかえって危険です。'},
-    {q:'語数が130語しか書けなかった場合、まず追加すべきは？', c:['自分の意見','Bodyへのデータの引用（比較や事件の一文）','結論のまとめ文'], a:1, fb:'意見はTask 1では減点。データの比較・逆転・ピークの一文を足すのが安全な増量法です。'}
+    {q:'語数が130語しか書けなかった場合、まず追加すべきは？', c:['自分の意見','Bodyへのデータの一文（比較・逆転・ピークの描写）','結論のまとめ文'], a:1, fb:'まだ書いていないデータの比較・逆転・ピークを1〜2文足すのが最も安全な増量法です。A（自分の意見）はTask 1では減点対象。C（結論のまとめ文）はTask 1では不要で、Overviewと内容が重複するだけなので語数を足してもスコアには貢献しません。'}
   ],
   task:{
     intro:'【模擬試験】タイマーを20分にセットして開始。辞書・翻訳は使わないこと。書き終えたら下のチェックリストで自己採点し、弱点をメモしてください。',
-    prompt:'The graph below shows the average number of hours per week that people in three age groups spent on social media between 2012 and 2024.<br><br>【データ】<br>・16〜24歳：2012年 8時間 → 2016年 15時間 → 2020年 22時間 → 2024年 20時間<br>・25〜44歳：2012年 4時間 → 2016年 8時間 → 2020年 14時間 → 2024年 16時間<br>・45〜64歳：2012年 1時間 → 2016年 2時間 → 2020年 6時間 → 2024年 9時間',
+    prompt:'The graph below shows the average number of hours per week that people in three age groups spent on social media between 2012 and 2024.<div class="chartbox" data-chart="d15"></div>',
     placeholder:'（20分タイマーをスタートしてから書き始めてください）',
     minWords:150
   },
@@ -1177,6 +1321,7 @@ function renderLesson(){
       </div>
     </div>`;
 
+  renderCharts();
   const ta = document.getElementById('writingArea');
   ta.addEventListener('input', ()=>{
     const words = ta.value.trim().split(/\s+/).filter(w=>w.match(/[a-zA-Z]/)).length;
