@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day1〜15 Task 1 学習サイト｜30 Days IELTS Writing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --main:#E31837; --main-dark:#B90F2B;
+    --accent:#003366; --accent-light:#0A4A8A;
+    --ink:#1e2430; --gray:#5f6b7a;
+    --bg:#f6f8fb; --line:#e4e9f0;
+    --ok:#0d7a4f; --ok-bg:#e8f5ee;
+    --ng:#c62828; --ng-bg:#fdecea;
+    --radius:14px; --shadow:0 8px 30px rgba(0,51,102,.10);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Noto Sans JP',sans-serif;color:var(--ink);background:var(--bg);line-height:1.85;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  .en{font-family:'Montserrat','Noto Sans JP',sans-serif}
+
+  /* ===== Header ===== */
+  header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--line)}
+  .header-inner{width:min(1200px,94%);margin-inline:auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:.98rem;color:var(--accent)}
+  .logo-mark{width:32px;height:32px;border-radius:8px;background:var(--main);color:#fff;display:grid;place-items:center;font-family:'Montserrat';font-weight:800;font-size:.72rem}
+  .header-right{display:flex;align-items:center;gap:14px}
+  .progress-pill{font-size:.78rem;font-weight:700;color:var(--accent);background:#eef3f9;padding:6px 14px;border-radius:999px}
+  .btn-ghost{font-size:.8rem;border:1.5px solid var(--line);border-radius:999px;padding:7px 16px;color:var(--gray);cursor:pointer;background:#fff;font-family:inherit}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* ===== Layout ===== */
+  .layout{width:min(1200px,94%);margin:28px auto 80px;display:grid;grid-template-columns:250px 1fr;gap:28px;align-items:start}
+
+  /* Sidebar */
+  aside{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;position:sticky;top:84px;max-height:calc(100vh - 110px);overflow-y:auto}
+  aside h2{font-size:.8rem;color:var(--gray);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+  .day-nav{list-style:none}
+  .day-nav li{margin-bottom:6px}
+  .day-nav button{
+    width:100%;text-align:left;background:none;border:0;cursor:pointer;font-family:inherit;
+    padding:9px 12px;border-radius:9px;font-size:.83rem;line-height:1.5;color:var(--ink);
+    display:flex;gap:10px;align-items:center;transition:background .15s;
+  }
+  .day-nav button:hover{background:#eef3f9}
+  .day-nav button.active{background:var(--accent);color:#fff}
+  .day-nav .num{font-family:'Montserrat';font-weight:800;font-size:.7rem;color:var(--main);flex-shrink:0;width:44px}
+  .day-nav button.active .num{color:#ffb3c0}
+  .day-nav .done-mark{margin-left:auto;color:var(--ok);font-weight:900}
+  .day-nav button.active .done-mark{color:#9fe8c8}
+  .progress-bar-wrap{margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+  .progress-bar{height:8px;background:#eef3f9;border-radius:999px;overflow:hidden}
+  .progress-bar > div{height:100%;background:var(--main);border-radius:999px;transition:width .4s}
+  .progress-text{font-size:.75rem;color:var(--gray);margin-top:6px;text-align:right}
+
+  /* Main */
+  main{min-width:0}
+  .lesson-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:40px;margin-bottom:24px}
+  .day-label{color:var(--main);font-family:'Montserrat';font-weight:800;font-size:.85rem;letter-spacing:.12em}
+  .lesson-title{font-size:clamp(1.25rem,2.6vw,1.6rem);font-weight:900;color:var(--accent);margin:4px 0 8px}
+  .time-badge{display:inline-block;font-size:.75rem;background:#eef3f9;color:var(--accent);border-radius:999px;padding:3px 12px;font-weight:700}
+
+  .goal-box{background:#fff8f9;border-left:4px solid var(--main);border-radius:0 10px 10px 0;padding:14px 18px;margin:22px 0;font-size:.93rem}
+  .goal-box strong{color:var(--main)}
+
+  .sec-h{display:flex;align-items:center;gap:10px;font-size:1.05rem;font-weight:900;color:var(--accent);margin:34px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+  .sec-h .tag{font-size:.68rem;background:var(--accent);color:#fff;border-radius:6px;padding:2px 9px;letter-spacing:.06em}
+
+  .lesson-body p{margin-bottom:12px;font-size:.94rem}
+  .lesson-body h4{color:var(--accent);font-size:.95rem;margin:20px 0 8px}
+  .lesson-body table{width:100%;border-collapse:collapse;font-size:.87rem;margin:12px 0}
+  .lesson-body th{background:var(--accent);color:#fff;padding:8px 12px;text-align:left;font-weight:700}
+  .lesson-body td{border:1px solid var(--line);padding:8px 12px;background:#fff}
+  .lesson-body tr:nth-child(even) td{background:#fafcfe}
+  .ex{background:#f2f6fb;border-radius:10px;padding:14px 18px;margin:12px 0;font-size:.92rem}
+  .ex .e{font-weight:700;color:var(--accent)}
+  .ex .j{font-size:.83rem;color:var(--gray)}
+  .ok-box,.ng-box{border-radius:10px;padding:14px 18px;margin:12px 0;font-size:.9rem}
+  .ok-box{background:var(--ok-bg);border-left:4px solid var(--ok)}
+  .ng-box{background:var(--ng-bg);border-left:4px solid var(--ng)}
+  .ok-box .h{color:var(--ok);font-weight:900;font-size:.8rem}
+  .ng-box .h{color:var(--ng);font-weight:900;font-size:.8rem}
+  .tip{background:#fffbe8;border-left:4px solid #e0a800;border-radius:0 10px 10px 0;padding:12px 16px;margin:12px 0;font-size:.88rem}
+  .tip strong{color:#9a7400}
+
+  /* Drill */
+  .drill{border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:16px;background:#fff}
+  .drill .q{font-weight:700;font-size:.93rem;margin-bottom:12px}
+  .drill .q .qnum{color:var(--main);font-family:'Montserrat';font-weight:800;margin-right:8px}
+  .choices{display:grid;gap:8px}
+  .choice{
+    text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:9px;
+    padding:10px 14px;cursor:pointer;font-family:inherit;font-size:.9rem;transition:border-color .15s;
+  }
+  .choice:hover{border-color:var(--accent)}
+  .choice.correct{background:var(--ok-bg);border-color:var(--ok);font-weight:700}
+  .choice.wrong{background:var(--ng-bg);border-color:var(--ng)}
+  .drill .fb{display:none;margin-top:12px;font-size:.85rem;background:#f2f6fb;border-radius:8px;padding:10px 14px}
+  .drill .fb.show{display:block}
+  .drill .fb .r{font-weight:900}
+  .drill .fb .r.ok{color:var(--ok)} .drill .fb .r.ng{color:var(--ng)}
+
+  /* Writing task */
+  .task-box{background:#f2f6fb;border-radius:12px;padding:22px;margin-bottom:16px;font-size:.92rem}
+  .task-box .prompt{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-top:10px;font-style:italic;font-size:.9rem}
+  textarea.writing{
+    width:100%;min-height:220px;border:1.5px solid var(--line);border-radius:12px;padding:16px;
+    font-family:inherit;font-size:.95rem;line-height:1.8;resize:vertical;background:#fff;
+  }
+  textarea.writing:focus{outline:none;border-color:var(--accent)}
+  .wc-row{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:.8rem;color:var(--gray)}
+  .wc strong{color:var(--accent);font-size:1rem}
+
+  /* Checklist */
+  .checklist{list-style:none;margin-top:10px}
+  .checklist li{margin-bottom:8px}
+  .checklist label{
+    display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+    border-radius:9px;padding:10px 14px;font-size:.88rem;cursor:pointer;font-weight:400;
+  }
+  .checklist input{margin-top:5px;accent-color:var(--main)}
+
+  /* Model answer */
+  details.model-wrap{margin-top:10px;border:1.5px dashed var(--accent);border-radius:12px;background:#f7fafd;overflow:hidden}
+  details.model-wrap summary{cursor:pointer;padding:14px 18px;font-weight:700;color:var(--accent);font-size:.9rem;list-style:none;display:flex;gap:10px;align-items:center;user-select:none}
+  details.model-wrap summary::-webkit-details-marker{display:none}
+  details.model-wrap summary::before{content:'▶';font-size:.65rem;transition:transform .2s}
+  details.model-wrap[open] summary::before{transform:rotate(90deg)}
+  .model-body{padding:0 20px 20px;font-size:.92rem}
+  .model-body .m-en{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;line-height:1.9;margin:10px 0;white-space:pre-line}
+  .model-body .m-note{font-size:.84rem;background:#fffbe8;border-left:4px solid #e0a800;padding:10px 14px;border-radius:0 8px 8px 0;margin-top:10px}
+  .model-body .m-note strong{color:#9a7400}
+
+  /* Complete */
+  .complete-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:30px;padding-top:24px;border-top:1px solid var(--line)}
+  .btn-complete{
+    background:var(--main);color:#fff;border:0;cursor:pointer;border-radius:999px;
+    padding:13px 34px;font-size:.95rem;font-weight:700;font-family:inherit;transition:background .2s;
+  }
+  .btn-complete:hover{background:var(--main-dark)}
+  .btn-complete.done{background:var(--ok)}
+  .nav-row{display:flex;justify-content:space-between;margin-top:20px;gap:12px}
+  .btn-nav{background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:11px 24px;font-size:.88rem;font-weight:700;color:var(--accent);cursor:pointer;font-family:inherit}
+  .btn-nav:hover{border-color:var(--accent)}
+  .btn-nav:disabled{opacity:.35;cursor:default}
+
+  /* ===== Gate ===== */
+  #gate{
+    position:fixed;inset:0;background:var(--accent);z-index:1000;
+    display:flex;align-items:center;justify-content:center;padding:20px;
+  }
+  .gate-card{background:#fff;border-radius:var(--radius);padding:44px 36px;max-width:420px;width:100%;text-align:center;box-shadow:var(--shadow)}
+  .gate-card .lock{font-size:2.4rem}
+  .gate-card h1{font-size:1.15rem;color:var(--accent);margin:10px 0 6px}
+  .gate-card p{font-size:.85rem;color:var(--gray);margin-bottom:20px}
+  .gate-card input{
+    width:100%;padding:13px 16px;border:1.5px solid var(--line);border-radius:10px;
+    font-family:inherit;font-size:.95rem;background:var(--bg);margin-bottom:12px;
+  }
+  .gate-card input:focus{outline:none;border-color:var(--accent);background:#fff}
+  .gate-card button{
+    width:100%;background:var(--main);color:#fff;border:0;cursor:pointer;border-radius:999px;
+    padding:13px;font-size:.95rem;font-weight:700;font-family:inherit;
+  }
+  .gate-card button:hover{background:var(--main-dark)}
+  .gate-card .err{display:none;color:var(--ng);font-size:.82rem;font-weight:700;margin-top:10px}
+  .gate-card .back{display:inline-block;margin-top:18px;font-size:.8rem;color:var(--gray);text-decoration:underline}
+
+  /* Intro page */
+  .goal-list{list-style:none;margin:12px 0}
+  .goal-list li{
+    display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+    border-radius:10px;padding:13px 16px;margin-bottom:9px;font-size:.92rem;
+  }
+  .goal-list .gnum{
+    flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--main);color:#fff;
+    display:grid;place-items:center;font-family:'Montserrat';font-weight:800;font-size:.72rem;margin-top:2px;
+  }
+  .phase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
+  .phase{background:#f2f6fb;border-radius:12px;padding:18px;border-top:4px solid var(--accent)}
+  .phase .p-label{font-family:'Montserrat';font-weight:800;font-size:.7rem;color:var(--main);letter-spacing:.1em}
+  .phase h5{color:var(--accent);font-size:.92rem;margin:4px 0 8px}
+  .phase p{font-size:.82rem;color:var(--gray);margin:0}
+  .voice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:14px 0}
+  .voice-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;font-size:.88rem}
+  .voice-card .stars{color:#e0a800;letter-spacing:2px;font-size:.85rem}
+  .voice-card .who{font-weight:700;color:var(--accent);font-size:.82rem;margin-top:10px}
+  .voice-card .score{display:inline-block;background:var(--ok-bg);color:var(--ok);font-weight:900;font-size:.75rem;border-radius:6px;padding:2px 10px;margin-top:6px}
+  .start-cta{
+    display:block;text-align:center;background:var(--main);color:#fff;border:0;cursor:pointer;
+    border-radius:999px;padding:16px;font-size:1.05rem;font-weight:700;font-family:inherit;
+    width:100%;max-width:420px;margin:28px auto 0;transition:background .2s;
+  }
+  .start-cta:hover{background:var(--main-dark)}
+  @media (max-width:900px){
+    .phase-grid,.voice-grid{grid-template-columns:1fr}
+  }
+
+  /* Mobile day selector */
+  .mobile-select{display:none;margin-bottom:16px}
+  .mobile-select select{
+    width:100%;padding:13px 16px;border:1.5px solid var(--line);border-radius:10px;
+    font-family:inherit;font-size:.92rem;background:#fff;font-weight:700;color:var(--accent);
+  }
+
+  @media (max-width:900px){
+    .layout{grid-template-columns:1fr;margin-top:16px}
+    aside{display:none}
+    .mobile-select{display:block}
+    .lesson-card{padding:26px 20px}
+    .header-inner .course-name{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Password gate ===== -->
+<div id="gate">
+  <div class="gate-card">
+    <div class="lock">🔒</div>
+    <h1>受講生専用 学習サイト</h1>
+    <p>PART 1｜Task 1（Day 1〜15）<br>ご購入時にお知らせしたパスワードを入力してください。</p>
+    <form id="gateForm">
+      <input type="password" id="gatePass" placeholder="パスワード" autocomplete="off">
+      <button type="submit">ログイン</button>
+      <p class="err" id="gateErr">パスワードが違います。</p>
+    </form>
+    <a class="back" href="index.html">← トップページへ戻る</a>
+  </div>
+</div>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark en">30D</span>
+      <span class="course-name">30 Days IELTS Writing｜<span style="color:var(--main)">PART 1</span> Task 1</span>
+    </a>
+    <div class="header-right">
+      <span class="progress-pill" id="headerProgress">0 / 15 完了</span>
+      <button class="btn-ghost" id="logoutBtn">ログアウト</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside>
+    <h2>Day 1 – 15｜Task 1</h2>
+    <ul class="day-nav" id="dayNav"></ul>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar"><div id="progressFill" style="width:0%"></div></div>
+      <p class="progress-text" id="progressText">0% 完了</p>
+    </div>
+  </aside>
+
+  <main>
+    <div class="mobile-select">
+      <select id="mobileSelect"></select>
+    </div>
+    <div id="lessonContainer"></div>
+  </main>
+</div>
+
+<script>
+/* =========================================================
+   デモ用の簡易認証。本番ではサーバー側認証に置き換えてください。
+   ========================================================= */
+const PASSWORD = 'ielts2026';
+const AUTH_KEY = 'ielts30_auth';
+const PROG_KEY = 'ielts30_progress_p1';
+
+function store(k,v){ try{localStorage.setItem(k,v)}catch(e){} }
+function load(k){ try{return localStorage.getItem(k)}catch(e){return null} }
+function removeStore(k){ try{localStorage.removeItem(k)}catch(e){} }
+
+const gate = document.getElementById('gate');
+if (load(AUTH_KEY) === 'ok') gate.style.display = 'none';
+
+document.getElementById('gateForm').addEventListener('submit', e => {
+  e.preventDefault();
+  if (document.getElementById('gatePass').value === PASSWORD) {
+    store(AUTH_KEY,'ok');
+    gate.style.display = 'none';
+  } else {
+    document.getElementById('gateErr').style.display = 'block';
+  }
+});
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  removeStore(AUTH_KEY);
+  location.reload();
+});
+
+/* =========================================================
+   Day 1-15 コンテンツ
+   ========================================================= */
+const DAYS = [
+/* ---------- DAY 1 ---------- */
+{
+  title:'Task 1の全体像と採点基準',
+  time:'約25分',
+  goal:'Task 1のルール（150語・20分）と4つの採点基準を理解し、6.0答案の「形」がわかる。',
+  lesson:`
+    <h4>Task 1とは</h4>
+    <p>アカデミック・ライティングのTask 1では、グラフ・表・プロセス図・地図などの<strong>視覚情報を150語以上で客観的に描写</strong>します。制限時間の目安は20分。自分の意見や理由は書きません。</p>
+    <h4>4つの採点基準（各25%）</h4>
+    <table>
+      <tr><th>基準</th><th>見られること</th><th>6.0のポイント</th></tr>
+      <tr><td><strong>TA</strong>（課題の達成）</td><td>設問に答えているか、主要な特徴を選べているか</td><td>Overview（概観文）が必須</td></tr>
+      <tr><td><strong>CC</strong>（一貫性と結束性）</td><td>情報の整理、段落分け、接続語</td><td>論理的な段落構成＋適切な接続語</td></tr>
+      <tr><td><strong>LR</strong>（語彙力）</td><td>言い換え、話題に合った語彙</td><td>設問の丸写しをしない</td></tr>
+      <tr><td><strong>GRA</strong>（文法の幅と正確さ）</td><td>複文の使用、ミスの少なさ</td><td>複文を使い、意味が伝わるミスに抑える</td></tr>
+    </table>
+    <h4>6.0答案の基本4部構成</h4>
+    <table>
+      <tr><th>パート</th><th>役割</th><th>目安</th></tr>
+      <tr><td>① Introduction</td><td>設問の言い換え（何のデータか）</td><td>1〜2文</td></tr>
+      <tr><td>② Overview</td><td>最大の特徴を2つ、数字なしでまとめる</td><td>1〜2文</td></tr>
+      <tr><td>③ Body 1</td><td>特徴グループAの詳細（数字あり）</td><td>3〜4文</td></tr>
+      <tr><td>④ Body 2</td><td>特徴グループBの詳細（数字あり）</td><td>3〜4文</td></tr>
+    </table>
+    <div class="tip"><strong>時間配分の目安：</strong>図表の分析3分 → Introduction＋Overview 5分 → Body 10分 → 見直し2分</div>
+    <div class="ng-box"><span class="h">5.5に落ちる典型パターン</span><br>・Overviewがない ・全データを羅列して整理がない ・150語未満 ・設問文の丸写し</div>
+    <div class="ok-box"><span class="h">6.0答案の共通点</span><br>・Overviewで「全体で何が起きたか」が一目でわかる ・数字は代表的なものだけ引用 ・段落の役割が明確</div>
+  `,
+  drills:[
+    {q:'Task 1で「書いてはいけない」ものはどれ？', c:['主要な特徴のまとめ','自分の意見や理由','具体的な数値の引用'], a:1, fb:'Task 1は客観的な描写のみ。「I think」「This is because」などの意見・考察はTask 2で使います。'},
+    {q:'6.0を取るためにTA（課題の達成）で最も重要な要素は？', c:['すべてのデータに触れること','Overview（概観文）を書くこと','難しい単語を使うこと'], a:1, fb:'採点基準上、明確なOverviewがないとTAは6.0に届きません。全データの羅列はむしろ逆効果です。'},
+    {q:'Task 1の語数と時間の目安として正しいのは？', c:['100語以上・15分','150語以上・20分','250語以上・40分'], a:1, fb:'150語未満は減点対象。250語・40分はTask 2の目安です。'}
+  ],
+  task:{
+    intro:'下の6.0モデル答案を読み、4部構成（Introduction / Overview / Body 1 / Body 2）がどこで切り替わるかを意識しながら、各パートの役割を自分の言葉で1行ずつメモしてください。',
+    prompt:'The graph below shows average monthly temperatures in Tokyo and Sydney over one year.<br><br>【モデル答案】The line graph compares the average temperature each month in Tokyo and Sydney. Overall, the two cities show opposite patterns over the year, with Tokyo peaking in summer months while Sydney reaches its highest figures in December and January. In Tokyo, temperatures start at around 5°C in January and climb steadily to a peak of approximately 27°C in August. They then fall sharply towards December. Sydney, by contrast, begins the year at about 23°C, declines to roughly 12°C in July, and recovers by the end of the year.',
+    placeholder:'例）1文目＝Introduction。設問文をcompares/average temperature each monthと言い換えている…',
+    minWords:0
+  },
+  checklist:['4部構成それぞれの役割を説明できる','Overviewに数字が使われていない理由がわかる','150語・20分のルールを覚えた'],
+  model:`<div class="m-en">・第1文＝<strong>Introduction</strong>：設問のshows→compares、average monthly temperatures→the average temperature each monthと言い換えている
+・第2文＝<strong>Overview</strong>：Overall,で開始。「2都市が正反対のパターン」という最大の特徴を、具体的な数字を使わずにまとめている
+・第3〜4文＝<strong>Body 1</strong>：東京の詳細。始点（約5°C）→ピーク（約27°C・8月）→下降、と数字つきで時系列に描写
+・第5文＝<strong>Body 2</strong>：By contrastで転換してシドニーの詳細へ。「年初23°C→7月に12°C→年末に回復」と対になる構成</div>
+  <div class="m-note"><strong>確認ポイント：</strong>Overviewだけ数字がないこと、BodyはOverviewで述べた特徴の「証拠」として数字を出していることに気づけていれば完璧です。</div>`
+},
+/* ---------- DAY 2 ---------- */
+{
+  title:'Introduction：設問のパラフレーズ',
+  time:'約30分',
+  goal:'設問文を自分の言葉に言い換えて、Introductionを1〜2文で書ける。',
+  lesson:`
+    <p>Introductionの役割はシンプルで、<strong>「この図表が何を示しているか」を設問文とは違う表現で1〜2文にする</strong>ことです。設問文の丸写しは語数にカウントされず、LR（語彙力）の減点につながります。</p>
+    <h4>パラフレーズ3つの技術</h4>
+    <table>
+      <tr><th>技術</th><th>例</th></tr>
+      <tr><td>① 同義語に置き換える</td><td>shows → illustrates / compares<br>proportion → percentage<br>from 2000 to 2020 → over a period of 20 years</td></tr>
+      <tr><td>② 品詞を変える</td><td>the consumption of fish → how much fish was consumed</td></tr>
+      <tr><td>③ 文の構造を変える</td><td>The chart shows X → Information about X is presented in the chart</td></tr>
+    </table>
+    <h4>頻出の言い換えペア</h4>
+    <table>
+      <tr><th>設問の語</th><th>言い換え候補</th></tr>
+      <tr><td>shows</td><td>illustrates, compares, gives information about</td></tr>
+      <tr><td>the number of</td><td>the figure for, how many</td></tr>
+      <tr><td>the proportion of</td><td>the percentage of, the share of</td></tr>
+      <tr><td>people in the UK</td><td>British people, UK residents</td></tr>
+      <tr><td>between 1990 and 2010</td><td>over a 20-year period, from 1990 to 2010</td></tr>
+    </table>
+    <div class="ex"><span class="e">設問：</span>The graph shows the number of tourists visiting Japan between 2010 and 2020.<br>
+    <span class="e">言い換え：</span>The line graph illustrates how many tourists travelled to Japan over a ten-year period from 2010.<br>
+    <span class="j">shows→illustrates、the number of→how many、between…→over a ten-year period と3か所変えている</span></div>
+    <div class="tip"><strong>注意：</strong>グラフの種類（line graph, bar chart, pie chart, table）や固有名詞・年号はそのまま使ってOK。無理にすべてを言い換える必要はありません。</div>
+  `,
+  drills:[
+    {q:'「The chart shows the proportion of…」の下線部の言い換えとして最も自然なのは？', c:['the percentage of','the amount of','the reason for'], a:0, fb:'proportion＝percentage（割合）。amountは不可算名詞の「量」、reasonは意味が変わってしまいます。'},
+    {q:'設問文を丸写しすると何が起きる？', c:['特に問題ない','その部分は語数に数えられず、語彙の評価も下がる','文法点だけ下がる'], a:1, fb:'試験官は丸写し部分を語数から除外します。150語に届かなくなるリスクもあり、二重に不利です。'},
+    {q:'「between 2005 and 2015」の言い換えとして正しいのは？', c:['over a period of 15 years','over a ten-year period from 2005','during 2005'], a:1, fb:'2005〜2015は10年間。期間の計算ミスは事実の誤りとしてTAの減点になるので注意。'}
+  ],
+  task:{
+    intro:'次の設問文3つを、それぞれ2か所以上言い換えてIntroduction（1文）を書いてください。目安：各5分。',
+    prompt:'1. The graph below shows the number of people using public transport in Melbourne between 2000 and 2020.<br>2. The pie charts show the proportion of energy produced from different sources in a European country in 1995 and 2015.<br>3. The table shows the percentage of households with internet access in five countries from 2010 to 2022.',
+    placeholder:'1. The line graph illustrates how many people…\n2. …\n3. …',
+    minWords:0
+  },
+  checklist:['3文とも設問の動詞を言い換えた','the number of / the proportion of を言い換えた','期間の表現を言い換えた（年数の計算も確認した）'],
+  model:`<div class="m-en">1. The line graph illustrates how many people travelled on public transport in Melbourne over a 20-year period from 2000.
+
+2. The pie charts compare the percentage of energy generated from various sources in one European country in 1995 and 2015.
+
+3. The table illustrates the share of homes with an internet connection in five countries between 2010 and 2022.</div>
+  <div class="m-note"><strong>言い換え箇所：</strong>1は shows→illustrates／the number of→how many／using→travelled on／between 2000 and 2020→over a 20-year period。2は show→compare／proportion→percentage／produced→generated／different→various。3は percentage→share／households→homes／internet access→an internet connection。あなたの答案と違う言い換えでも、意味が変わっていなければ正解です。</div>`
+},
+/* ---------- DAY 3 ---------- */
+{
+  title:'Overview（概観文）の書き方',
+  time:'約30分',
+  goal:'図表を見て「最大の特徴2つ」を数字を使わずに1〜2文でまとめられる。',
+  lesson:`
+    <p>Overviewは<strong>6.0達成の最重要ポイント</strong>です。細部を読む前の「遠くから見た景色」を書きます。</p>
+    <h4>Overviewのルール</h4>
+    <p>① <strong>Overall,</strong> で始める（試験官がひと目で見つけられる）　② 最も目立つ特徴を<strong>2つ</strong>選ぶ　③ <strong>具体的な数字は書かない</strong>　④ Introductionの直後に置く</p>
+    <h4>「最大の特徴」の見つけ方</h4>
+    <table>
+      <tr><th>図表タイプ</th><th>着目ポイント</th></tr>
+      <tr><td>時系列グラフ</td><td>全体は増えた？減った？／最初と最後で順位は入れ替わった？</td></tr>
+      <tr><td>比較（棒・円・表）</td><td>何が最大で何が最小か／グループ間の大きな差</td></tr>
+      <tr><td>プロセス図</td><td>全部で何段階か／人工的か自然のサイクルか</td></tr>
+      <tr><td>地図</td><td>最も大きな変化は何か（住宅化・商業化・近代化など）</td></tr>
+    </table>
+    <div class="ex"><span class="e">例：</span>Overall, car ownership rose significantly in all three countries, with Country A consistently recording the highest figures.<br>
+    <span class="j">「全体として増えた」＋「Aが常に最大」という2つの特徴。数字はゼロ。</span></div>
+    <div class="ng-box"><span class="h">NG例</span><br>Overall, car ownership in Country A increased from 2.1 million in 2000 to 4.8 million in 2020, while Country B…<br>→ 具体的な数字が入っている＝Overviewではなく詳細（Body）になっている。</div>
+    <div class="ok-box"><span class="h">便利な型</span><br>Overall, [最大の特徴], while/with [2つ目の特徴].<br>例：Overall, meat consumption declined steadily, while demand for vegetables almost doubled.</div>
+  `,
+  drills:[
+    {q:'Overviewに含めてよいものはどれ？', c:['最も目立つ全体的な傾向','具体的な数値','自分の推測（原因の分析）'], a:0, fb:'Overviewは「数字なしの全体傾向」。数値はBodyで、原因分析はTask 1では書きません。'},
+    {q:'Overviewを置く位置として最も推奨されるのは？', c:['答案の最後','Introductionの直後','Body 1とBody 2の間'], a:1, fb:'文末でも減点はされませんが、時間切れで書き損ねるリスクを避けるためIntroduction直後が安全です。'},
+    {q:'「Overall, sales increased from $2m to $8m.」の問題点は？', c:['Overallで始めている点','具体的な数字を使っている点','増加に言及している点'], a:1, fb:'$2m→$8mという数字は詳細情報。「increased significantly / fourfold」のように数字なしで表現します。'}
+  ],
+  task:{
+    intro:'次の3つのデータ概要を読み、それぞれOverview（1〜2文）だけを書いてください。数字は使わないこと。',
+    prompt:'1.【折れ線】日本を訪れる観光客数：2010年 860万人 → 2019年 3,190万人まで毎年増加 → 2020年に410万人へ急落。<br>2.【円グラフ×2】ある国の発電源：1995年（石炭58%・ガス25%・再エネ5%・その他12%）→ 2015年（石炭30%・ガス35%・再エネ28%・その他7%）。<br>3.【表】5か国のインターネット利用率：全ての国で2010年から2022年にかけて上昇。最高は韓国（97%）、最低はインド（46%）だが、インドの伸び幅が最大。',
+    placeholder:'1. Overall, the number of visitors to Japan grew dramatically over the decade before falling sharply in the final year.\n2. …\n3. …',
+    minWords:0
+  },
+  checklist:['3つともOverall,で始めた','数字を1つも使っていない','それぞれ特徴を2つ入れた'],
+  model:`<div class="m-en">1. Overall, the number of visitors to Japan grew dramatically over the decade, before collapsing in the final year.
+
+2. Overall, the country moved away from coal towards gas and renewable energy, with renewables recording by far the most spectacular growth.
+
+3. Overall, internet access rose in every country over the period, and although South Korea remained the clear leader, India achieved the fastest growth.</div>
+  <div class="m-note"><strong>確認ポイント：</strong>3つとも「特徴①, 特徴②」の2段構えで、数字はゼロ。あなたの答案に 3,190万人・58%・97% などの数字が入っていたら、それはOverviewではなくBodyの内容です。</div>`
+},
+/* ---------- DAY 4 ---------- */
+{
+  title:'数字とデータの正確な表現',
+  time:'約30分',
+  goal:'割合・分数・概数を言い換えて、数字の羅列にならない描写ができる。',
+  lesson:`
+    <p>Bodyでは数字を引用しますが、<strong>「53%」を「53%」としか書けない」と語彙の評価が伸びません</strong>。概数・分数への言い換えでLRのスコアを引き上げます。</p>
+    <h4>割合の言い換え早見表</h4>
+    <table>
+      <tr><th>数値</th><th>言い換え</th></tr>
+      <tr><td>約25%</td><td>a quarter / one in four</td></tr>
+      <tr><td>約33%</td><td>a third / one in three</td></tr>
+      <tr><td>約50%</td><td>half / one in two</td></tr>
+      <tr><td>約66%</td><td>two thirds</td></tr>
+      <tr><td>約75%</td><td>three quarters</td></tr>
+      <tr><td>約80%</td><td>four in five / the vast majority</td></tr>
+    </table>
+    <h4>概数の表現</h4>
+    <table>
+      <tr><th>表現</th><th>意味</th><th>例</th></tr>
+      <tr><td>approximately / roughly / around</td><td>約〜</td><td>approximately 30%</td></tr>
+      <tr><td>just under / nearly / almost</td><td>〜弱</td><td>just under half（48%など）</td></tr>
+      <tr><td>just over / slightly more than</td><td>〜強</td><td>just over a third（35%など）</td></tr>
+      <tr><td>well over</td><td>〜を大きく超える</td><td>well over 80%</td></tr>
+    </table>
+    <div class="ex"><span class="e">Before：</span>48% of women and 23% of men did exercise.<br>
+    <span class="e">After：</span>Just under half of the women did exercise, compared with roughly a quarter of the men.<br>
+    <span class="j">数字を概数＋分数に変換し、compared withで比較の形にした</span></div>
+    <div class="tip"><strong>バランスが大事：</strong>すべてを言い換える必要はありません。正確な数字と概数表現を<strong>交互に使う</strong>と、正確さと語彙力を両方示せます。単位（%, million, kg）と年号の書き忘れは事実誤認の減点になるので必ず確認。</div>
+  `,
+  drills:[
+    {q:'「74%」の言い換えとして最も適切なのは？', c:['just under three quarters','a third','well over 90%'], a:0, fb:'74%は75%（three quarters）のわずかに下なので just under three quarters が最適です。'},
+    {q:'「52%」を表すのに不適切なのは？', c:['just over half','slightly more than 50%','a quarter'], a:2, fb:'a quarterは25%。52%は「半分を少し超える」なので just over half が自然です。'},
+    {q:'数字を引用するときの正しい姿勢は？', c:['全データを漏れなく書く','代表的な数字を選び、概数表現と組み合わせる','数字は一切書かない'], a:1, fb:'最大値・最小値・大きな変化点など「選んだ数字」を引用します。全部書くと整理力（TA・CC）が下がります。'}
+  ],
+  task:{
+    intro:'次の数値を、指定の形で英語に言い換えてください（各2通り）。',
+    prompt:'1. 26%（分数で／概数表現で）　2. 49%（分数系で／just系で）　3. 67%（分数で／概数で）　4. 81%（in系で／majority系で）　5. 「2010年の3,200万人」を文中で引用する形で1文（概数表現を使う）',
+    placeholder:'1. roughly a quarter / around 26 per cent\n2. …',
+    minWords:0
+  },
+  checklist:['分数表現（a third, three quartersなど）を5つ以上使った','just under / just overを正しく使い分けた','単位と年号を忘れずに書いた'],
+  model:`<div class="m-en">1. 26% → just over a quarter ／ roughly 25 per cent
+
+2. 49% → just under half ／ nearly 50 per cent
+
+3. 67% → two thirds ／ approximately 70 per cent
+
+4. 81% → four in five ／ the vast majority
+
+5. In 2010, approximately 32 million people visited the country. ／ The figure stood at just over 32 million in 2010.</div>
+  <div class="m-note"><strong>確認ポイント：</strong>49%にjust over half、67%にa quarterなど「方向」を間違えていないかチェック。5は million の書き忘れ（32だけ書く）が最も多いミスです。</div>`
+},
+/* ---------- DAY 5 ---------- */
+{
+  title:'増減を表すトレンド語彙',
+  time:'約30分',
+  goal:'上昇・下降・横ばい・変動を動詞と名詞の両方で表現できる。',
+  lesson:`
+    <h4>トレンド語彙マップ</h4>
+    <table>
+      <tr><th>動き</th><th>動詞</th><th>名詞</th></tr>
+      <tr><td>上昇 ↑</td><td>rise, increase, grow, climb</td><td>a rise, an increase, growth</td></tr>
+      <tr><td>急上昇 ↑↑</td><td>surge, soar, rocket</td><td>a surge, a boom</td></tr>
+      <tr><td>下降 ↓</td><td>fall, decrease, decline, drop</td><td>a fall, a decrease, a decline, a drop</td></tr>
+      <tr><td>急降下 ↓↓</td><td>plummet, plunge</td><td>a plunge, a sharp fall</td></tr>
+      <tr><td>横ばい →</td><td>remain stable, stay constant, level off</td><td>a plateau</td></tr>
+      <tr><td>変動 〜</td><td>fluctuate</td><td>a fluctuation</td></tr>
+      <tr><td>回復 ↷</td><td>recover, bounce back</td><td>a recovery</td></tr>
+      <tr><td>ピーク</td><td>peak at, reach a peak of</td><td>a peak</td></tr>
+      <tr><td>底</td><td>hit a low of, bottom out at</td><td>a low (point)</td></tr>
+    </table>
+    <h4>2つの文型を使い分ける</h4>
+    <div class="ex"><span class="e">動詞型：</span>Sales <strong>rose</strong> sharply between 2010 and 2015.<br>
+    <span class="e">名詞型：</span>There was <strong>a sharp rise in</strong> sales between 2010 and 2015.<br>
+    <span class="j">同じ内容を2通りで書けると、文のバリエーション（GRA・LR）が広がる</span></div>
+    <h4>前置詞に注意（頻出ミス）</h4>
+    <table>
+      <tr><th>正しい形</th><th>意味</th></tr>
+      <tr><td>an increase <strong>in</strong> sales</td><td>売上「における」増加（対象）</td></tr>
+      <tr><td>an increase <strong>of</strong> 20%</td><td>20%「分の」増加（増加量）</td></tr>
+      <tr><td>increase <strong>from</strong> 40 <strong>to</strong> 60</td><td>40から60へ増加</td></tr>
+      <tr><td>increase <strong>by</strong> 20</td><td>20だけ増加（差分）</td></tr>
+    </table>
+    <div class="ng-box"><span class="h">NG</span><br>The sales were increased. → 受動態は不要。The sales increased. が正解（increaseは自動詞で使う）。</div>
+  `,
+  drills:[
+    {q:'「There was a gradual ___ in the number of visitors.」に入るのは？', c:['decline','declined','declining'], a:0, fb:'There was a + 形容詞 + 名詞 の型。動詞ではなく名詞のdeclineが入ります。'},
+    {q:'「売上が40億から60億に増えた」の正しい前置詞は？', c:['increased by 4 billion to 6 billion','increased from 4 billion to 6 billion','increased in 4 billion of 6 billion'], a:1, fb:'起点from＋到達点to。byは増加量（この場合increased by 2 billion）に使います。'},
+    {q:'「数値が細かく上下し続けた」を表す動詞は？', c:['plummeted','fluctuated','levelled off'], a:1, fb:'fluctuate＝変動する。plummetは急落、level offは横ばいになる、です。'}
+  ],
+  task:{
+    intro:'次の折れ線グラフのデータを、区間ごとに1文ずつ（合計5文）描写してください。動詞型と名詞型の両方を使うこと。',
+    prompt:'あるカフェチェーンの店舗数：2000年 120店 → 2005年 180店（ゆるやかに増加）→ 2010年 400店（急増）→ 2015年 395店（ほぼ横ばい）→ 2018年 250店（急減）→ 2022年 310店（回復）',
+    placeholder:'The number of stores rose gradually from 120 in 2000 to 180 in 2005.\nThere was then a dramatic increase…',
+    minWords:40
+  },
+  checklist:['動詞型と名詞型を両方使った','from / to / by / in / of を正しく使い分けた','peak または low の表現を1回以上使った'],
+  model:`<div class="m-en">The number of stores rose from 120 in 2000 to 180 in 2005.
+
+There was then a surge in store numbers, with the figure reaching a peak of 400 in 2010.
+
+Between 2010 and 2015, the number remained almost stable at around 395.
+
+The chain then declined, and the total plummeted by 145 to hit a low of 250 in 2018.
+
+Finally, there was a recovery, with the number of stores climbing to 310 by 2022.</div>
+  <div class="m-note"><strong>確認ポイント：</strong>動詞型（rose, declined, plummeted, climbing）と名詞型（a surge, a recovery）が混在していること。前置詞は「rose <strong>from</strong> 120 <strong>to</strong> 180」「plummeted <strong>by</strong> 145（減少幅）」の使い分けができていればOKです。</div>`
+},
+/* ---------- DAY 6 ---------- */
+{
+  title:'程度とスピードを表す修飾語',
+  time:'約25分',
+  goal:'副詞・形容詞で変化の「大きさ」と「速さ」を描き分けられる。',
+  lesson:`
+    <p>Day 5の動詞に修飾語を組み合わせると、描写の精度が一気に上がります。<strong>「動詞＋副詞」「形容詞＋名詞」の正しいペア</strong>を作れることがGRA・LRの評価につながります。</p>
+    <h4>修飾語マップ</h4>
+    <table>
+      <tr><th>ニュアンス</th><th>副詞（動詞とセット）</th><th>形容詞（名詞とセット）</th></tr>
+      <tr><td>大きく・急に</td><td>sharply, dramatically, significantly, considerably</td><td>a sharp / dramatic / significant rise</td></tr>
+      <tr><td>着実に</td><td>steadily, consistently</td><td>a steady increase</td></tr>
+      <tr><td>ゆるやかに</td><td>gradually, moderately</td><td>a gradual / moderate decline</td></tr>
+      <tr><td>わずかに</td><td>slightly, marginally</td><td>a slight / marginal fall</td></tr>
+      <tr><td>急速に</td><td>rapidly, quickly</td><td>a rapid growth</td></tr>
+    </table>
+    <div class="ex"><span class="e">動詞＋副詞：</span>Prices fell <strong>slightly</strong> in 2020.<br>
+    <span class="e">形容詞＋名詞：</span>There was <strong>a slight fall</strong> in prices in 2020.<br>
+    <span class="j">slightly（副詞）とslight（形容詞）を混ぜないこと</span></div>
+    <div class="ng-box"><span class="h">頻出ミス</span><br>・increased sharp（×）→ increased sharply（○）<br>・a sharply rise（×）→ a sharp rise（○）<br>・very increased（×）→ increased significantly（○）※動詞をveryで修飾できない</div>
+    <div class="tip"><strong>使い分けの目安：</strong>2倍以上の変化＝dramatically／30〜50%程度＝significantly／10%前後＝moderately／数%＝slightly。データの実態に合わない大げさな修飾語は正確さ（TA）の減点になります。</div>
+  `,
+  drills:[
+    {q:'「There was a ___ increase in exports.」正しいのは？', c:['sharply','sharp','more sharply'], a:1, fb:'名詞increaseを修飾するのは形容詞sharp。sharplyは副詞なので動詞とセットで使います。'},
+    {q:'120→123（約2.5%増）の変化に合う表現は？', c:['rose dramatically','rose slightly','soared'], a:1, fb:'数%の変化はslightly。dramatically/soarは2倍規模の変化に使うと過剰表現でTA減点のリスク。'},
+    {q:'文法的に正しいのはどれ？', c:['The figure very increased.','The figure increased significantly.','The figure was significant increased.'], a:1, fb:'動詞＋副詞の正しい組み合わせ。veryは動詞を直接修飾できません。'}
+  ],
+  task:{
+    intro:'Day 5で書いた5文（カフェチェーンの描写）に、適切な副詞・形容詞を加えてアップグレードしてください。変化の大きさに合った修飾語を選ぶこと。',
+    prompt:'例）The number of stores rose from 120 to 180. → The number of stores rose <strong>steadily</strong> from 120 to 180, before <strong>surging dramatically</strong> to 400 by 2010.',
+    placeholder:'The number of stores rose steadily from 120 in 2000 to 180 in 2005.\n…',
+    minWords:40
+  },
+  checklist:['5文すべてに修飾語を入れた','副詞と形容詞を正しく使い分けた','変化の実態（%規模）に合った強さの語を選んだ'],
+  model:`<div class="m-en">The number of stores rose <strong>steadily</strong> from 120 in 2000 to 180 in 2005.（50%増＝着実な増加）
+
+There was then a <strong>dramatic</strong> surge, with the figure more than doubling to reach a peak of 400 in 2010.（2倍超＝dramatic）
+
+Between 2010 and 2015, the number remained <strong>virtually</strong> unchanged at around 395.（±1%＝ほぼ横ばい）
+
+The chain then contracted <strong>sharply</strong>, and the total fell to 250 in 2018.（約37%減＝sharply）
+
+Finally, there was a <strong>moderate</strong> recovery, with the number of stores climbing to 310 by 2022.（約24%増＝moderate）</div>
+  <div class="m-note"><strong>確認ポイント：</strong>形容詞＋名詞（a dramatic surge / a moderate recovery）と動詞＋副詞（rose steadily / contracted sharply）が正しくペアになっているか。「a sharply fall」のような品詞ミスがなければ合格です。</div>`
+},
+/* ---------- DAY 7 ---------- */
+{
+  title:'時制の使い分け',
+  time:'約25分',
+  goal:'図表の年号を見て、過去形・現在完了・未来表現を正しく選べる。',
+  lesson:`
+    <h4>時制の判断は「年号」で決まる</h4>
+    <table>
+      <tr><th>図表の期間</th><th>時制</th><th>例</th></tr>
+      <tr><td>過去のみ（2000〜2020年）</td><td>過去形</td><td>Sales <strong>increased</strong> between 2000 and 2020.</td></tr>
+      <tr><td>過去〜現在（2010年〜現在）</td><td>現在完了</td><td>Sales <strong>have increased</strong> since 2010.</td></tr>
+      <tr><td>未来を含む（2020〜2040年）</td><td>will / 予測表現</td><td>Sales <strong>will rise</strong> / <strong>are expected to rise</strong> by 2040.</td></tr>
+      <tr><td>年号なし（プロセス図など）</td><td>現在形</td><td>The water <strong>is heated</strong> and then <strong>flows</strong> into the tank.</td></tr>
+    </table>
+    <h4>未来予測のバリエーション</h4>
+    <div class="ex">
+    <span class="e">will reach</span> … 最も基本<br>
+    <span class="e">is expected to reach / is predicted to double</span> … 「予測されている」<br>
+    <span class="e">is projected to fall</span> … 統計・グラフの予測値に最適<br>
+    <span class="e">is forecast to remain stable</span> … 横ばい予測<br>
+    <span class="j">予測データはwillだけで押し切らず、expected/projectedを混ぜると語彙の幅が出る</span></div>
+    <div class="ng-box"><span class="h">頻出ミス</span><br>・In 2010, sales have increased.（×）→ 過去の一時点はhave増加不可。increased（○）<br>・By 2030, the figure will reached…（×）→ will＋動詞原形。will reach（○）</div>
+    <div class="tip"><strong>ミックス型に注意：</strong>「2000〜2030年」のように過去と未来が混在するグラフでは、<strong>実績部分は過去形、予測部分はis expected to等</strong>と、文ごとに切り替えます。ここが正確にできると時制の評価が安定します。</div>
+  `,
+  drills:[
+    {q:'グラフの期間が「1990〜2010年」。正しい文は？', c:['The population has grown between 1990 and 2010.','The population grew between 1990 and 2010.','The population grows between 1990 and 2010.'], a:1, fb:'完結した過去の期間は過去形。since 1990（現在まで）なら現在完了を使います。'},
+    {q:'2035年の予測値を描写する表現として不適切なのは？', c:['is projected to reach','reached','is expected to reach'], a:1, fb:'reachedは過去形。未来の予測値には使えません。'},
+    {q:'年号のないプロセス図で使う時制は？', c:['過去形','現在形（受動態を含む）','未来形'], a:1, fb:'一般的な工程・サイクルは時間に縛られないため現在形。受動態（is collected など）が多用されます。'}
+  ],
+  task:{
+    intro:'次のデータ（実績＋予測）を4〜5文で描写してください。過去形と予測表現を正しく切り替えること。',
+    prompt:'ある国の電気自動車保有台数：2010年 5万台 → 2015年 30万台 → 2020年 120万台（ここまで実績）→ 2030年 600万台（予測）→ 2040年 1,500万台（予測）',
+    placeholder:'The number of electric vehicles rose from just 50,000 in 2010 to 300,000 in 2015.\n…By 2040, the figure is projected to…',
+    minWords:50
+  },
+  checklist:['実績（2010〜2020）は過去形で書いた','予測（2030〜2040）はis expected/projected toを使った','willとexpected系を両方使った'],
+  model:`<div class="m-en">The number of electric vehicles in the country rose from just 50,000 in 2010 to 300,000 in 2015. Growth then accelerated sharply, and by 2020 the total had reached 1.2 million. This upward trend is expected to continue over the following decades: the figure is projected to increase fivefold to 6 million by 2030. By 2040, there will be approximately 15 million electric vehicles on the road, according to the forecast.</div>
+  <div class="m-note"><strong>確認ポイント：</strong>2010〜2020年は過去形（rose / had reached）、2030年以降は is expected to / is projected to / will と切り替わっているか。「In 2015, the number has increased」のような現在完了の誤用がなければOKです。</div>`
+},
+/* ---------- DAY 8 ---------- */
+{
+  title:'比較の表現',
+  time:'約30分',
+  goal:'比較級・最上級・倍数表現で、項目間の差を正確に描写できる。',
+  lesson:`
+    <h4>基本の比較3点セット</h4>
+    <table>
+      <tr><th>型</th><th>例</th></tr>
+      <tr><td>比較級</td><td>Coffee was <strong>more popular than</strong> tea. / significantly <strong>higher than</strong></td></tr>
+      <tr><td>最上級</td><td>China had <strong>the highest</strong> figure, <strong>while</strong> India recorded <strong>the lowest</strong>.</td></tr>
+      <tr><td>同等比較</td><td>The figure for men was <strong>almost as high as</strong> that for women.</td></tr>
+    </table>
+    <h4>倍数表現（6.0の差がつくポイント）</h4>
+    <div class="ex">
+    <span class="e">twice as high as</span> … 2倍の高さ<br>
+    <span class="e">three times as many as / three times more than</span> … 3倍<br>
+    <span class="e">half the amount of</span> … 半分<br>
+    <span class="e">doubled / tripled</span> … 2倍・3倍になった（動詞）<br>
+    <span class="j">例：Sales in Tokyo were twice as high as those in Osaka. ／ The figure doubled over the decade.</span></div>
+    <h4>対比の接続語</h4>
+    <div class="ex">
+    <span class="e">while / whereas</span> … 一方で（文中）：Men preferred driving, <strong>whereas</strong> women chose public transport.<br>
+    <span class="e">In contrast / By contrast</span> … 対照的に（文頭）<br>
+    <span class="e">compared with / in comparison with</span> … 〜と比べて</div>
+    <div class="ng-box"><span class="h">頻出ミス</span><br>・more higher（×）→ higher（○）比較級の二重化<br>・the figure of Tokyo was higher than Osaka（×）→ higher than <strong>that of</strong> Osaka（○）「数値」同士を比べる<br>・two times as high（△）→ twice as high（○）が自然</div>
+  `,
+  drills:[
+    {q:'「東京の数値は大阪の2倍だった」正しいのは？', c:['Tokyo was twice as high as Osaka.','The figure for Tokyo was twice as high as that for Osaka.','Tokyo was two double of Osaka.'], a:1, fb:'比べるのは都市ではなく「数値」。that for（＝the figure for）で受けるのがポイントです。'},
+    {q:'文法的に正しいのは？', c:['Coffee was more popular than tea.','Coffee was more popularer than tea.','Coffee was popular than tea.'], a:0, fb:'popularは長い形容詞なのでmore popular。比較級の二重化（more popularer）は典型ミスです。'},
+    {q:'「男性は車を好んだ。一方、女性は電車を選んだ」をつなぐ語は？', c:['because','whereas','so'], a:1, fb:'対比はwhereas/while。because/soは因果関係で、Task 1の比較描写ではあまり使いません。'}
+  ],
+  task:{
+    intro:'次の棒グラフのデータから、比較の文を8つ書いてください。比較級・最上級・倍数・whereasをすべて1回以上使うこと。',
+    prompt:'【2023年・1人あたり年間コーヒー消費量（杯）】フィンランド 1,200 ／ 日本 400 ／ アメリカ 600 ／ ブラジル 810 ／ インド 30',
+    placeholder:'Finland had the highest coffee consumption, at 1,200 cups per person.\nThe figure for Finland was twice as high as that for the US.\n…',
+    minWords:60
+  },
+  checklist:['最上級（highest / lowest）を使った','倍数表現（twice as / three times…）を2回以上使った','that for / those in で「数値同士」を比較した','whereas または while を使った'],
+  model:`<div class="m-en">1. Finland had the highest coffee consumption of the five countries, at 1,200 cups per person.
+
+2. India recorded by far the lowest figure, at just 30 cups.
+
+3. The figure for Finland was twice as high as that for the US.
+
+4. Finns drank three times as much coffee as Japanese people.
+
+5. Consumption in Brazil was considerably higher than in the US.
+
+6. Americans consumed twenty times as many cups as Indians.
+
+7. The Japanese figure was less than half that of Brazil.
+
+8. People in Finland drank enormous quantities of coffee, whereas it remained far less popular in India.</div>
+  <div class="m-note"><strong>確認ポイント：</strong>3・7のように「国」ではなく「数値（the figure / that of）」を比較できているかが最大のチェックポイント。倍数は 1,200÷600＝twice、1,200÷400＝three times、600÷30＝twenty times と、データから正確に計算できているかも確認しましょう。</div>`
+},
+/* ---------- DAY 9 ---------- */
+{
+  title:'折れ線グラフの攻略',
+  time:'約40分',
+  goal:'時系列データをグルーピングして、折れ線グラフ1題を20分で書き切れる。',
+  lesson:`
+    <p>今日からは実戦編。これまでの基礎（パラフレーズ・Overview・トレンド語彙・時制・比較）を組み合わせて、図表タイプ別の「型」を身につけます。</p>
+    <h4>折れ線グラフの手順（分析3分）</h4>
+    <p>① 軸を確認（何を・どの単位で・いつからいつまで）<br>② 各線の「始点→終点」だけを見る（上がった？下がった？）<br>③ <strong>線をグルーピング</strong>する（上昇組 vs 下降組／高い組 vs 低い組）<br>④ 交差・逆転・ピークなど「事件」を探す</p>
+    <h4>段落構成の型</h4>
+    <table>
+      <tr><th>段落</th><th>内容</th></tr>
+      <tr><td>Introduction</td><td>設問のパラフレーズ（Day 2）</td></tr>
+      <tr><td>Overview</td><td>グループごとの大きな傾向＋順位の変化（Day 3）</td></tr>
+      <tr><td>Body 1</td><td>グループA（例：上昇した線）の詳細。始点→変化→終点を数字つきで</td></tr>
+      <tr><td>Body 2</td><td>グループB（例：下降した線）の詳細＋交差などの「事件」</td></tr>
+    </table>
+    <div class="tip"><strong>線が4本あっても怖くない：</strong>1本ずつ順番に書くのではなく、「AとBは上昇、CとDは下降」とグループで書くと、CC（情報の整理）の評価が上がり語数も節約できます。</div>
+    <div class="ok-box"><span class="h">Bodyで使う「事件」の表現</span><br>・overtake（追い抜く）：Online sales overtook in-store sales in 2018.<br>・reach a peak of（ピークに達する）／ hit a low of（底を打つ）<br>・the gap widened / narrowed（差が開いた／縮まった）</div>
+  `,
+  drills:[
+    {q:'折れ線グラフの分析で最初にやることは？', c:['細かい数値をすべてメモする','軸（単位・期間）と各線の始点→終点を確認する','いきなり書き始める'], a:1, fb:'まず全体像。始点→終点の確認だけでOverviewの材料（上がった線・下がった線）が揃います。'},
+    {q:'線が4本あるとき、Bodyの構成として最適なのは？', c:['1本につき1段落、計4段落','傾向が似た線を2グループに分けて2段落','全部まとめて1段落'], a:1, fb:'グルーピングが整理力の証明になります。4段落は冗長、1段落は未整理と判断されます。'},
+    {q:'「2018年にオンラインが店舗売上を追い抜いた」に最適な動詞は？', c:['overtook','increased','remained'], a:0, fb:'overtake（追い抜く）は交差・逆転を1語で表せる高得点語彙です。'}
+  ],
+  task:{
+    intro:'【実戦】タイマーを20分にセットして、次の折れ線グラフの問題をフルで書いてください（150語以上・4部構成）。',
+    prompt:'The graph below shows the percentage of households with access to three types of technology in one country between 2000 and 2020.<br><br>【データ】<br>・Internet：2000年 10% → 2005年 35% → 2010年 60% → 2015年 80% → 2020年 92%<br>・Smartphone：2000年 0% → 2010年 25% → 2015年 70% → 2020年 88%<br>・Landline（固定電話）：2000年 90% → 2010年 75% → 2015年 55% → 2020年 30%',
+    placeholder:'The line graph illustrates how the proportion of homes with…\n\nOverall, …',
+    minWords:150
+  },
+  checklist:['150語以上書いた（語数カウンターで確認）','Overviewで「上昇2つ vs 下降1つ」の構図を示した','InternetとSmartphoneをグループとして扱った','逆転（SmartphoneがLandlineを追い抜く）に触れた','時制はすべて過去形にした'],
+  model:`<div class="m-en">The line graph illustrates the proportion of homes in one country that had access to the internet, smartphones and landline telephones between 2000 and 2020.
+
+Overall, access to the two newer technologies grew dramatically over the period, whereas landline ownership declined steadily. By the end of the period, the internet and smartphones had both overtaken the landline, which had been by far the most common technology in 2000.
+
+In 2000, 90% of households had a landline, while only one in ten had internet access and smartphones did not yet exist. Internet access then climbed rapidly, reaching 60% in 2010 and 92% by 2020. Smartphone ownership followed a similar but even steeper path, soaring from 25% in 2010 to 88% a decade later.
+
+By contrast, the figure for landlines fell throughout the period. It declined moderately to 75% in 2010, before dropping sharply to just 30% in 2020, having been overtaken first by the internet and then by smartphones.（約165語）</div>
+  <div class="m-note"><strong>この答案の構造：</strong>Body 1＝上昇グループ（Internet＋Smartphone）、Body 2＝下降グループ（Landline）＋逆転という「事件」。1本ずつではなくグループで書いている点、one in ten（10%）などの言い換え、whereas/before -ing の複文が6.0超えのポイントです。</div>`
+},
+/* ---------- DAY 10 ---------- */
+{
+  title:'棒グラフ・円グラフの攻略',
+  time:'約40分',
+  goal:'比較中心のデータを構成し、円グラフ特有の表現を使って1題書き切れる。',
+  lesson:`
+    <h4>棒グラフ・円グラフは「比較」の問題</h4>
+    <p>時系列の折れ線と違い、棒・円グラフの多くは<strong>項目間の比較</strong>が主役です。Day 8の比較表現をフル活用します。年号が2つある場合（1995年と2015年の円グラフなど）は「比較＋変化」の両方を書きます。</p>
+    <h4>円グラフ特有の表現</h4>
+    <div class="ex">
+    <span class="e">account for</span> … 〜を占める：Coal <strong>accounted for</strong> 58% of energy production.<br>
+    <span class="e">make up / constitute</span> … 〜を構成する：Renewables <strong>made up</strong> just 5%.<br>
+    <span class="e">the largest / smallest share</span> … 最大／最小の割合<br>
+    <span class="e">the remaining 12%</span> … 残りの12%<br>
+    <span class="j">%のデータはaccount for / make upを使うと「割合の描写」らしくなる</span></div>
+    <h4>構成の考え方</h4>
+    <table>
+      <tr><th>パターン</th><th>Body 1</th><th>Body 2</th></tr>
+      <tr><td>円グラフ×2（年比較）</td><td>1つ目の年の内訳（大きい順）</td><td>2つ目の年＋何が増えて何が減ったか</td></tr>
+      <tr><td>棒グラフ（多項目）</td><td>上位グループの比較</td><td>下位グループ＋特徴的な差</td></tr>
+    </table>
+    <div class="tip"><strong>書く順番は「大きい順」が基本：</strong>円グラフの内訳は最大シェアから書き始めると、読み手が図をイメージしやすくCCの評価につながります。</div>
+  `,
+  drills:[
+    {q:'「石炭が発電量の58%を占めた」の自然な英訳は？', c:['Coal accounted for 58% of energy production.','Coal was 58%.','Coal occupied 58% energy.'], a:0, fb:'account forが割合描写の定番。was 58%も文法的には可能ですが単調になります。'},
+    {q:'2つの年の円グラフを比較する問題で、必ず書くべきことは？', c:['円の大きさ','何のシェアが増え、何が減ったかという変化','円の色の違い'], a:1, fb:'2時点の円グラフは「変化」が出題意図。increased/declined/doubledなどで変化を明示します。'},
+    {q:'「残りの12%はその他のエネルギー源だった」は？', c:['The remaining 12% came from other sources.','The rest 12% was other.','Other was 12% remain.'], a:0, fb:'the remaining＋数値は端数処理の便利表現。答案の締めに使いやすいです。'}
+  ],
+  task:{
+    intro:'【実戦】20分で次の円グラフ問題をフルで書いてください（150語以上）。',
+    prompt:'The pie charts below show the sources of electricity generated in one country in 1995 and 2015.<br><br>【1995年】石炭 58%・天然ガス 25%・再生可能エネルギー 5%・原子力 12%<br>【2015年】石炭 30%・天然ガス 35%・再生可能エネルギー 28%・原子力 7%',
+    placeholder:'The pie charts compare how electricity was produced in…\n\nOverall, …',
+    minWords:150
+  },
+  checklist:['account for / make up を使った','Overviewで「石炭の減少と再エネの急増」に触れた','数字を分数・概数でも言い換えた（Day 4）','2時点の変化をdeclined / rose / almost sixfoldなどで表現した'],
+  model:`<div class="m-en">The pie charts show how electricity was generated in one country in 1995 and 2015.
+
+Overall, the country's reliance on coal fell dramatically over the 20-year period, while renewable energy expanded to become a major source. Natural gas grew moderately and had overtaken coal as the single largest source by 2015.
+
+In 1995, coal was by far the most important fuel, accounting for well over half of all electricity produced (58%). Natural gas made up a quarter of the total, while nuclear power contributed 12%. Renewables were almost negligible, at just 5%.
+
+By 2015, the picture had changed considerably. The share of coal had almost halved to 30%, and nuclear power had also declined, to 7%. In contrast, renewable energy rose more than fivefold to 28%, nearly equalling coal. Gas increased its share from a quarter to 35%, making it the largest source of electricity in the later year.（約160語）</div>
+  <div class="m-note"><strong>この答案の構造：</strong>Body 1＝1995年の内訳（大きい順）、Body 2＝2015年＋変化。account for / make up / contribute の言い換え、a quarter・well over half の分数表現、halved・fivefold の変化表現が得点ポイントです。</div>`
+},
+/* ---------- DAY 11 ---------- */
+{
+  title:'表（Table）の攻略と情報の取捨選択',
+  time:'約40分',
+  goal:'数字が多い表から「書くべきデータ」を選び、1題書き切れる。',
+  lesson:`
+    <h4>表は「全部書かない勇気」の試験</h4>
+    <p>表には20〜30個の数値が並ぶことがありますが、<strong>全部書くと確実に6.0を割ります</strong>（整理力がないと判断される）。選ぶ基準を持ちましょう。</p>
+    <h4>書くデータを選ぶ4つの基準</h4>
+    <table>
+      <tr><th>基準</th><th>例</th></tr>
+      <tr><td>① 最大値・最小値</td><td>「韓国が最高の97%、インドが最低の46%」</td></tr>
+      <tr><td>② 大きな変化</td><td>「インドは12%→46%と4倍近くに」</td></tr>
+      <tr><td>③ 例外・逆行</td><td>「唯一減少したのはX国」</td></tr>
+      <tr><td>④ 共通傾向</td><td>「5か国すべてで上昇」→ Overviewの材料</td></tr>
+    </table>
+    <div class="tip"><strong>目安：</strong>表の数値のうち、答案で直接引用するのは<strong>3分の1程度</strong>。残りはグループとしてまとめて言及します（例：The other three countries showed similar moderate growth.）。</div>
+    <h4>行で見る？列で見る？</h4>
+    <p>表は「行ごと（国ごと）」と「列ごと（年ごと）」の2方向で読めます。<strong>変化が主役なら行ごと、比較が主役なら列ごと</strong>にグルーピングすると段落が作りやすくなります。</p>
+    <div class="ok-box"><span class="h">まとめて言及する表現</span><br>・The figures for the remaining countries were broadly similar.<br>・All five countries followed the same upward trend.<br>・With the exception of X, every category saw an increase.</div>
+  `,
+  drills:[
+    {q:'表の問題で6.0を取るために正しい方針は？', c:['すべての数値に言及する','最大・最小・大きな変化・例外を選んで書く','数値は書かず傾向だけ書く'], a:1, fb:'選択と整理がTA・CCの評価対象。数値ゼロも「詳細の欠如」で減点です。'},
+    {q:'「X国を除いて全カテゴリーが増加した」は？', c:['With the exception of X, every category saw an increase.','Except X is increase all.','X is only not increase.'], a:0, fb:'with the exception of は例外処理の定番表現。see an increaseという無生物主語も便利です。'},
+    {q:'似た数値の3か国をまとめて処理する一文として適切なのは？', c:['A was 45%. B was 46%. C was 44%.','The figures for A, B and C were broadly similar, at around 45%.','A, B, C are same.'], a:1, fb:'1文に圧縮すると語数を節約しつつ整理力を示せます。broadly similar＋at around＋代表値が型です。'}
+  ],
+  task:{
+    intro:'【実戦】20分で次の表の問題をフルで書いてください（150語以上）。全数値の3分の1程度だけ引用すること。',
+    prompt:'The table below shows the percentage of people who worked from home in five countries in 2010, 2015 and 2022.<br><br><table style="width:100%"><tr><th></th><th>2010</th><th>2015</th><th>2022</th></tr><tr><td>カナダ</td><td>8%</td><td>12%</td><td>34%</td></tr><tr><td>イギリス</td><td>10%</td><td>14%</td><td>38%</td></tr><tr><td>日本</td><td>3%</td><td>4%</td><td>21%</td></tr><tr><td>ブラジル</td><td>5%</td><td>7%</td><td>18%</td></tr><tr><td>インド</td><td>2%</td><td>4%</td><td>25%</td></tr></table>',
+    placeholder:'The table illustrates the proportion of remote workers in…\n\nOverall, …',
+    minWords:150
+  },
+  checklist:['最大値・最小値に言及した','2022年の急増（共通傾向）をOverviewに入れた','似た国をグループとしてまとめた','引用した数値は全体の3分の1程度に抑えた'],
+  model:`<div class="m-en">The table illustrates the proportion of employees who worked remotely in five countries in 2010, 2015 and 2022.
+
+Overall, the percentage of people working from home rose in every country, with by far the most dramatic growth occurring between 2015 and 2022. The UK consistently recorded the highest figures, while Japan and India started from the lowest bases.
+
+In 2010, remote working was relatively uncommon everywhere. The UK led with 10%, followed closely by Canada at 8%, whereas the figures for Japan and India were minimal, at 3% and 2% respectively. Five years later, these numbers had risen only modestly, with no country exceeding 14%.
+
+The final period, however, saw a sharp acceleration in all five countries. The UK reached 38% and Canada 34%, roughly triple their 2015 levels. The most striking changes occurred in India and Japan, where the figures jumped around fivefold to 25% and 21%. Brazil, despite growing steadily, remained the lowest in 2022, at 18%.（約165語）</div>
+  <div class="m-note"><strong>この答案の構造：</strong>引用する数値を「最大（UK）・最小（India/Japan）・急増（2022年）・停滞（2015年）」に絞っていることに注目。respectively（それぞれ）、with no country exceeding 14%、despite growing steadily などのまとめ表現で、数字の羅列を回避しつつ全体をカバーしています。</div>`
+},
+/* ---------- DAY 12 ---------- */
+{
+  title:'プロセス図の攻略',
+  time:'約40分',
+  goal:'受動態と順序の接続語を使って、工程図を1題書き切れる。',
+  lesson:`
+    <h4>プロセス図はルールが違う</h4>
+    <p>数値グラフと違い、プロセス図（製造工程・自然サイクル）には数字がありません。評価されるのは<strong>①受動態 ②順序の接続語 ③段階の整理</strong>です。時制は現在形。</p>
+    <h4>受動態が主役</h4>
+    <div class="ex">
+    <span class="e">能動：</span>Workers collect the bottles. → <span class="e">受動：</span>The bottles <strong>are collected</strong>.<br>
+    <span class="e">例：</span>The plastic <strong>is heated</strong> to 200°C and <strong>is then moulded</strong> into new products.<br>
+    <span class="j">「誰がやるか」より「何がされるか」。製造工程は8割受動態になる</span></div>
+    <h4>順序の接続語セット</h4>
+    <table>
+      <tr><th>段階</th><th>表現</th></tr>
+      <tr><td>最初</td><td>First / To begin with / At the first stage,</td></tr>
+      <tr><td>途中</td><td>Next / Then / After that / Subsequently / At the following stage,</td></tr>
+      <tr><td>同時・条件</td><td>Once the mixture has cooled, … / When the process is complete, …</td></tr>
+      <tr><td>最後</td><td>Finally / At the final stage, … / The finished product is then delivered…</td></tr>
+    </table>
+    <h4>Overviewはどう書く？</h4>
+    <div class="ok-box"><span class="h">プロセス図のOverviewの型</span><br>Overall, the process consists of <strong>[数]</strong> main stages, beginning with <strong>[最初の工程]</strong> and ending with <strong>[最後の工程]</strong>.<br>＋（あれば）whether the process is natural or man-made／cyclical or linear（循環か直線か）</div>
+    <div class="ng-box"><span class="h">頻出ミス</span><br>・The bottles are collect（×）→ are collected（○）過去分詞にする<br>・all stages listed in one sentence（×）→ 2〜3工程ごとに文を区切る</div>
+  `,
+  drills:[
+    {q:'プロセス図の描写で最も多用する文法は？', c:['過去形','現在形の受動態','未来形'], a:1, fb:'年号のない一般的工程は現在形＋受動態（is heated, are transported）が基本です。'},
+    {q:'「混合物が冷めたら、型に流し込まれる」は？', c:['Once the mixture has cooled, it is poured into a mould.','The mixture cool then pour mould.','After the mixture is cool, pour it.'], a:0, fb:'Once＋完了＋受動態。従属節を使った複文はGRA 6.0の評価ポイントでもあります。'},
+    {q:'プロセス図のOverviewに入れるべき情報は？', c:['各工程の詳細','全体の工程数と始点・終点','工程にかかる費用の予想'], a:1, fb:'「全部で6段階、原料投入に始まり出荷で終わる」のような俯瞰がOverviewの役割です。'}
+  ],
+  task:{
+    intro:'【実戦】20分で次のプロセス図の問題をフルで書いてください（150語以上・現在形・受動態中心）。',
+    prompt:'The diagram below shows how recycled paper is made.<br><br>【工程】1. 使用済みの紙が家庭から回収される → 2. 工場へトラックで運ばれる → 3. 種類ごとに選別される → 4. 水と薬品と混ぜてパルプ状にする → 5. インクを除去する → 6. パルプを洗浄・漂白する → 7. ローラーで薄く伸ばして乾燥させる → 8. 新しい紙としてロール状に巻き取られ、出荷される',
+    placeholder:'The diagram illustrates the process by which used paper is recycled…\n\nOverall, the process consists of eight main stages, …',
+    minWords:150
+  },
+  checklist:['Overviewに工程数と始点・終点を入れた','受動態を6回以上使った','順序の接続語を4種類以上使った','Once / After などの従属節を1回以上使った'],
+  model:`<div class="m-en">The diagram illustrates the process by which used paper is turned into new paper.
+
+Overall, recycling paper is a man-made, linear process consisting of eight main stages, which begins with the collection of waste paper from households and ends with the delivery of finished paper rolls.
+
+At the first stage, used paper is collected from homes, after which it is transported to a recycling plant by truck. There, the paper is sorted into different types. Next, the sorted paper is mixed with water and chemicals so that it breaks down into pulp.
+
+Once the pulp is ready, the ink is removed from it. The pulp is then washed and bleached to make it clean and white. At the following stage, it is spread into thin sheets by rollers and dried. Finally, the finished paper is wound onto large rolls, which are then dispatched to customers as recycled paper.（約150語）</div>
+  <div class="m-note"><strong>この答案の構造：</strong>受動態が9回（is collected, is transported, is sorted, is mixed, is removed, is washed and bleached, is spread, is wound, are dispatched）。順序語はAt the first stage / Next / Once / then / At the following stage / Finally の6種類。Body 1＝前半4工程、Body 2＝後半4工程と半分で割るのが定石です。</div>`
+},
+/* ---------- DAY 13 ---------- */
+{
+  title:'地図問題の攻略',
+  time:'約40分',
+  goal:'位置と変化の表現を使って、2時点の地図比較を1題書き切れる。',
+  lesson:`
+    <h4>地図問題は「位置」×「変化」</h4>
+    <p>典型パターンは「ある町の1990年と現在の地図」。<strong>どこが（位置）・どう変わったか（変化）</strong>を過去形＋受動態で描写します。</p>
+    <h4>位置の表現</h4>
+    <table>
+      <tr><th>表現</th><th>意味</th></tr>
+      <tr><td>in the north / south of the town</td><td>町の北部／南部に</td></tr>
+      <tr><td>to the east of the river</td><td>川の東側に（外側）</td></tr>
+      <tr><td>next to / adjacent to</td><td>〜の隣に</td></tr>
+      <tr><td>opposite / across from</td><td>〜の向かいに</td></tr>
+      <tr><td>on the coast / along the main road</td><td>海岸沿いに／幹線道路沿いに</td></tr>
+      <tr><td>in the centre / on the outskirts</td><td>中心部に／郊外に</td></tr>
+    </table>
+    <h4>変化の表現（過去形＋受動態）</h4>
+    <div class="ex">
+    <span class="e">was converted into</span> … 〜に転用された：The farmland <strong>was converted into</strong> a housing estate.<br>
+    <span class="e">was demolished / was knocked down</span> … 取り壊された<br>
+    <span class="e">was replaced by</span> … 〜に置き換えられた<br>
+    <span class="e">was constructed / was built / was added</span> … 建設された<br>
+    <span class="e">was extended / was expanded</span> … 拡張された<br>
+    <span class="e">remained unchanged</span> … 変わらなかった（重要！変わらない場所も1つ書く）</div>
+    <div class="ok-box"><span class="h">地図のOverviewの型</span><br>Overall, the town became significantly more <strong>modernised / residential / commercial</strong>, with most of the changes taking place <strong>in the north（場所）</strong>.<br><span class="j">「全体として何化したか」＋「変化が集中した場所」</span></div>
+    <div class="tip"><strong>書く順番：</strong>方角ごと（北→南）または要素ごと（住宅→商業→交通）に整理。地図を無秩序に飛び回ると CC が下がります。</div>
+  `,
+  drills:[
+    {q:'「農地が住宅地に転用された」は？', c:['The farmland was converted into a housing estate.','The farmland converted a housing estate.','The farmland was become houses.'], a:0, fb:'be converted into が地図問題の最頻出表現。能動のconvertedだけでは受動の意味になりません。'},
+    {q:'「川の東側に」を表すのは？', c:['in the east of the river','to the east of the river','on the east river'], a:1, fb:'to the east of＝〜の東側（外側）。in the east of は「〜の東部（内側）」で、川には使えません。'},
+    {q:'地図問題で「変化しなかった場所」は？', c:['書かなくてよい','remained unchangedなどで1つは言及すると良い','Overviewにだけ書く'], a:1, fb:'「教会だけは変わらず残った」のような一文は、対比を生み構成に深みが出ます。'}
+  ],
+  task:{
+    intro:'【実戦】20分で次の地図問題をフルで書いてください（150語以上・過去形＋受動態）。',
+    prompt:'The maps below show the changes in the town of Riverton between 1990 and 2020.<br><br>【1990年】町の北部：農地が広がる／中心部：小さな商店街と教会／南部：住宅地と小学校／川が町の東側を流れ、橋は1本<br>【2020年】北部：農地→ショッピングモールと駐車場に／中心部：商店街は歩行者天国に改装、教会はそのまま／南部：住宅地が2倍に拡大、小学校は取り壊されて総合病院に／川に新しい橋が2本追加',
+    placeholder:'The two maps illustrate how the town of Riverton changed over a 30-year period…\n\nOverall, …',
+    minWords:150
+  },
+  checklist:['Overviewで「何化したか＋変化の中心」を示した','was converted / was demolished / was added などを使った','位置表現（in the north, adjacent toなど）を4回以上使った','変わらなかったもの（教会）に触れた'],
+  model:`<div class="m-en">The two maps illustrate how the town of Riverton changed over a 30-year period between 1990 and 2020.
+
+Overall, the town became considerably more developed and commercialised, with the most dramatic transformation taking place in the north, while the church in the centre was the only major feature to remain untouched.
+
+In 1990, the northern part of the town consisted entirely of farmland. By 2020, this land had been converted into a large shopping mall with an adjacent car park. In the centre, the small shopping street was redeveloped as a pedestrian zone, although the church next to it remained unchanged.
+
+The south of the town also saw significant changes. The residential area doubled in size, and the primary school was demolished and replaced by a general hospital. In addition, crossings over the river, which flows along the eastern side of the town, were improved, with two new bridges being added to the original single one.（約160語）</div>
+  <div class="m-note"><strong>この答案の構造：</strong>北→中心→南と方角順に整理し、最後に川（交通）でまとめています。was converted into / was redeveloped / was demolished and replaced by / being added の受動態、in the north / adjacent / next to / along the eastern side の位置表現、そして「教会だけは不変」の対比が得点ポイントです。</div>`
+},
+/* ---------- DAY 14 ---------- */
+{
+  title:'複合図表とデータのグルーピング',
+  time:'約40分',
+  goal:'2つの図表を1つの答案に統合し、150〜180語に収められる。',
+  lesson:`
+    <h4>複合問題（2つの図表）の考え方</h4>
+    <p>「棒グラフ＋円グラフ」「表＋折れ線」のように2つの図表が出たら、<strong>両方に必ず言及</strong>します。片方しか書かないとTAが大きく下がります。</p>
+    <h4>構成はシンプルに割り切る</h4>
+    <table>
+      <tr><th>段落</th><th>内容</th></tr>
+      <tr><td>Introduction</td><td>2つの図表をまとめて言い換え（The bar chart shows X, while the pie chart illustrates Y.）</td></tr>
+      <tr><td>Overview</td><td>それぞれの図表から特徴を1つずつ</td></tr>
+      <tr><td>Body 1</td><td>図表①の詳細</td></tr>
+      <tr><td>Body 2</td><td>図表②の詳細＋（可能なら）2つの図表の関連づけ</td></tr>
+    </table>
+    <h4>2つの図表をつなぐ表現</h4>
+    <div class="ex">
+    <span class="e">Turning to the second chart, …</span> … 2つ目の図表に移ると<br>
+    <span class="e">This pattern is reflected in …</span> … この傾向は〜にも表れている<br>
+    <span class="e">A similar trend can be seen in …</span> … 同様の傾向が〜にも見られる<br>
+    <span class="j">関連づけの一文が書けると、単なる「2つの要約の羅列」を超えられる</span></div>
+    <div class="tip"><strong>語数管理が勝負：</strong>情報量が倍になるので、細部を書きすぎると20分で終わりません。各図表から引用する数字は<strong>3〜4個まで</strong>と決めて、150〜180語に収めます。</div>
+    <div class="ng-box"><span class="h">頻出ミス</span><br>・図表①だけで130語使い、②が2文で終わる → バランス崩壊。Body 1と2はほぼ同じ長さに。<br>・2つの図表を1文ごとに行き来する → 読み手が混乱。図表ごとに段落を分ける。</div>
+  `,
+  drills:[
+    {q:'複合問題で片方の図表に触れないとどうなる？', c:['特に影響はない','TA（課題の達成）が大きく下がる','語数が少なければ問題ない'], a:1, fb:'設問は「両方を要約せよ」なので、片方の欠落は課題未達成。6.0はほぼ不可能になります。'},
+    {q:'2つ目の図表への転換に使う自然な表現は？', c:['Turning to the second chart, …','Second chart is, …','Next I talk pie chart.'], a:0, fb:'Turning to… は段落の切り替えを明示する定番表現。CCの評価につながります。'},
+    {q:'複合問題の語数戦略として正しいのは？', c:['情報が多いので250語書く','各図表の数字引用は3〜4個に絞り150〜180語に収める','図表①だけ詳しく書く'], a:1, fb:'20分の制約は同じ。書きすぎはミスの増加と時間切れを招きます。'}
+  ],
+  task:{
+    intro:'【実戦】20分で次の複合問題をフルで書いてください（150〜180語目標）。',
+    prompt:'The bar chart below shows the number of international students in four countries in 2022, and the pie chart shows the subjects they studied.<br><br>【棒グラフ：留学生数（万人）】アメリカ 95 ／ イギリス 60 ／ オーストラリア 44 ／ カナダ 40<br>【円グラフ：専攻分野】ビジネス 32%・工学 25%・IT 18%・人文科学 14%・その他 11%',
+    placeholder:'The bar chart illustrates how many international students chose four English-speaking countries in 2022, while the pie chart shows…\n\nOverall, …',
+    minWords:150
+  },
+  checklist:['Introductionで両方の図表に言及した','Overviewに各図表の特徴を1つずつ入れた','Body 1とBody 2の長さがほぼ同じ','Turning to などの転換表現を使った','180語前後に収めた'],
+  model:`<div class="m-en">The bar chart illustrates how many international students studied in four English-speaking countries in 2022, while the pie chart shows the fields they chose to study.
+
+Overall, the United States hosted far more foreign students than any other country, and business was the most popular subject, accounting for around a third of all enrolments.
+
+According to the bar chart, 950,000 international students chose the US, a figure well over twice as high as that for Canada, which received 400,000. The UK attracted the second largest number, at 600,000, while Australia hosted 440,000 students.
+
+Turning to the pie chart, business clearly dominated students' choices, making up 32% of the total. Engineering and IT followed, at 25% and 18% respectively, which means that these three practical fields together accounted for three quarters of all international students. By contrast, the humanities attracted only 14%, and the remaining 11% studied other subjects.（約155語）</div>
+  <div class="m-note"><strong>この答案の構造：</strong>Introductionで2つの図表を1文にまとめ（…, while…）、Overviewから特徴を1つずつ。Body 1＝棒グラフ、Body 2＝円グラフでほぼ同じ長さ。Turning to の転換、「3分野合計で4分の3」という計算による統合が加点ポイントです。</div>`
+},
+/* ---------- DAY 15 ---------- */
+{
+  title:'Task 1 模擬試験＋セルフ添削',
+  time:'約50分',
+  goal:'初見の問題を20分で書き切り、6.0チェックリストで自己添削できる。',
+  lesson:`
+    <h4>本番と同じ条件で</h4>
+    <p>今日は模擬試験です。<strong>タイマー20分・辞書なし・書き直し最小限</strong>で、下の問題に取り組んでください。終わったら6.0チェックリストで採点します。</p>
+    <h4>本番の動き方（リマインド）</h4>
+    <table>
+      <tr><th>時間</th><th>やること</th></tr>
+      <tr><td>0〜3分</td><td>軸・単位・期間の確認 → グルーピング → Overviewの材料をメモ</td></tr>
+      <tr><td>3〜8分</td><td>Introduction（パラフレーズ）＋ Overview</td></tr>
+      <tr><td>8〜18分</td><td>Body 1 → Body 2（数字は選んで引用）</td></tr>
+      <tr><td>18〜20分</td><td>見直し：三単現のs・時制・単位・スペル</td></tr>
+    </table>
+    <h4>セルフ添削のやり方</h4>
+    <p>書き終えたら、下のチェックリストを<strong>1項目ずつ答案と照合</strong>してください。チェックがつかない項目が、あなたの弱点＝復習すべきDayです。</p>
+    <table>
+      <tr><th>チェックが付かない項目</th><th>復習するDay</th></tr>
+      <tr><td>パラフレーズ</td><td>Day 2</td></tr>
+      <tr><td>Overview</td><td>Day 3</td></tr>
+      <tr><td>数字の表現・トレンド語彙</td><td>Day 4〜6</td></tr>
+      <tr><td>時制</td><td>Day 7</td></tr>
+      <tr><td>比較</td><td>Day 8</td></tr>
+    </table>
+    <div class="tip"><strong>次のステップ：</strong>PART 2（Day 16〜30）ではTask 2のエッセイに進みます。Task 1は週1回、初見の問題を解いて感覚を維持しましょう。</div>
+  `,
+  drills:[
+    {q:'模試前の最終確認。6.0答案に「必ず」あるものは？', c:['難解な単語','Overall,で始まる概観文','5つ以上の段落'], a:1, fb:'Overviewの有無が6.0の生命線。今日の模試でも絶対に忘れないこと。'},
+    {q:'見直し2分で優先してチェックすべきものは？', c:['もっと良い表現への書き換え','時制・三単現のs・単位の書き忘れ','段落構成の組み替え'], a:1, fb:'残り2分でできるのは機械的ミスの修正。大きな書き換えはかえって危険です。'},
+    {q:'語数が130語しか書けなかった場合、まず追加すべきは？', c:['自分の意見','Bodyへのデータの引用（比較や事件の一文）','結論のまとめ文'], a:1, fb:'意見はTask 1では減点。データの比較・逆転・ピークの一文を足すのが安全な増量法です。'}
+  ],
+  task:{
+    intro:'【模擬試験】タイマーを20分にセットして開始。辞書・翻訳は使わないこと。書き終えたら下のチェックリストで自己採点し、弱点をメモしてください。',
+    prompt:'The graph below shows the average number of hours per week that people in three age groups spent on social media between 2012 and 2024.<br><br>【データ】<br>・16〜24歳：2012年 8時間 → 2016年 15時間 → 2020年 22時間 → 2024年 20時間<br>・25〜44歳：2012年 4時間 → 2016年 8時間 → 2020年 14時間 → 2024年 16時間<br>・45〜64歳：2012年 1時間 → 2016年 2時間 → 2020年 6時間 → 2024年 9時間',
+    placeholder:'（20分タイマーをスタートしてから書き始めてください）',
+    minWords:150
+  },
+  checklist:['【TA】150語以上ある','【TA】Overall,で始まるOverviewがあり、数字を含んでいない','【TA】3グループすべてに言及した','【CC】4部構成（Intro/Overview/Body1/Body2）になっている','【LR】設問の丸写しがない（shows→illustratesなど言い換えた）','【LR】トレンド語彙を5種類以上使った','【GRA】while/whereas/althoughなどの複文が2文以上ある','【GRA】時制ミスがない（全体は過去形、2024年時点はまだ過去形でOK）','若年層の2020→2024の減少（例外的な動き）に触れた'],
+  model:`<div class="m-en">The line graph illustrates the average number of hours per week that three age groups in one country devoted to social media between 2012 and 2024.
+
+Overall, social media use rose substantially in all three groups, although the youngest users consistently spent the most time online. Notably, the 16–24 age group was the only one whose usage declined towards the end of the period.
+
+In 2012, people aged 16 to 24 spent eight hours a week on social media, double the figure for 25–44-year-olds and eight times that of the oldest group. Usage among the youngest then climbed steeply, peaking at 22 hours in 2020 before dipping slightly to 20 hours in 2024.
+
+The two older groups, by contrast, showed uninterrupted growth. Weekly hours for 25–44-year-olds quadrupled over the period, from four to 16, narrowing the gap with the youngest users. Meanwhile, the figure for those aged 45 to 64 grew from just one hour to nine, the fastest rate of increase, albeit from a very low base.（約175語）</div>
+  <div class="m-note"><strong>採点の目でもう一度：</strong>この回答例をチェックリストに当てはめると、全項目が満たされていることが確認できます（Overview＝数字なしで「全体増＋若年層のみ減少」、複文＝although / whose / before -ing / albeit、倍数＝double / eight times / quadrupled）。自分の答案でチェックがつかなかった項目に対応するDayを、明日から復習しましょう。</div>`
+}
+];
+
+/* =========================================================
+   はじめに（イントロページ）
+   ========================================================= */
+function renderIntro(){
+  container.innerHTML = `
+    <div class="lesson-card">
+      <span class="day-label en">WELCOME</span>
+      <h1 class="lesson-title">はじめに — この15日間で目指すこと</h1>
+      <div class="goal-box"><strong>ようこそ！</strong>ここはIELTSアカデミック・ライティング Task 1を15日間でマスターするコースです。1日20〜40分、順番に進めるだけで、バンド6.0の答案を書く力が身につくよう設計されています。</div>
+
+      <div class="sec-h"><span class="tag">GOAL</span>15日後、あなたはこうなっています</div>
+      <div class="lesson-body">
+        <ul class="goal-list">
+          <li><span class="gnum">1</span><span>初見のグラフ・表・プロセス図・地図を見て、<strong>3分で「何を書くか」の設計図</strong>（グルーピングとOverviewの材料）が作れる</span></li>
+          <li><span class="gnum">2</span><span><strong>20分・150語以上</strong>で、Introduction→Overview→Body×2 の4部構成の答案を書き切れる</span></li>
+          <li><span class="gnum">3</span><span>6.0と5.5を分けるポイント（Overviewの有無・データの取捨選択・時制と比較の正確さ）を<strong>自分の答案の中で自分でチェックできる</strong></span></li>
+          <li><span class="gnum">4</span><span>トレンド語彙・概数表現・受動態など、Task 1で必要な表現の「型」が<strong>考えなくても手が動くレベル</strong>で定着している</span></li>
+        </ul>
+        <p style="font-size:.88rem;color:var(--gray)">つまり、「グラフを前に何を書けばいいかわからず固まる」状態から、「どんな図表が来ても手順どおりに処理できる」状態への変化がこの15日間のゴールです。</p>
+
+        <div class="sec-h"><span class="tag">WHY</span>なぜこの構成なのか？</div>
+        <p>このコースはIELTSの<strong>4つの採点基準（TA・CC・LR・GRA）から逆算</strong>して作られています。やみくもに過去問を解くのではなく、「6.0に必要な部品」を1日1つずつ積み上げてから実戦に入る3段階構成です。</p>
+        <div class="phase-grid">
+          <div class="phase">
+            <span class="p-label en">PHASE 1｜DAY 1-3</span>
+            <h5>答案の「骨格」を作る</h5>
+            <p>採点基準・パラフレーズ・Overview。特にOverviewは6.0の生命線なので、最初の3日で徹底的に固めます。</p>
+          </div>
+          <div class="phase">
+            <span class="p-label en">PHASE 2｜DAY 4-8</span>
+            <h5>描写の「部品」を揃える</h5>
+            <p>数字の言い換え・トレンド語彙・修飾語・時制・比較。Bodyを書くための表現を毎日1テーマずつ装備します。</p>
+          </div>
+          <div class="phase">
+            <span class="p-label en">PHASE 3｜DAY 9-15</span>
+            <h5>図表タイプ別の「実戦」</h5>
+            <p>折れ線・円グラフ・表・プロセス・地図・複合問題を1日1題フルで書き、Day 15の模試で仕上げます。</p>
+          </div>
+        </div>
+        <p style="font-size:.88rem">部品が揃ってから実戦に入るので、Day 9以降は「習ったことを組み合わせるだけ」。<strong>書けない日が発生しにくい</strong>のがこの順番の狙いです。また、毎日のドリルとセルフチェックリストで「書いて終わり」を防ぎ、自分で答案を改善できる力を育てます。</p>
+
+        <div class="sec-h"><span class="tag">VOICE</span>先輩受講生の変化</div>
+        <div class="voice-grid">
+          <div class="voice-card">
+            <span class="stars">★★★★★</span>
+            <p>「Overviewという概念を知らずに何度も5.5を取っていました。Day 3で書き方を知って、Day 9からの実戦で毎日使ううちに当たり前になり、次の受験でライティング6.0。もっと早く知りたかったです。」</p>
+            <p class="who">M.K.さん（29歳・メーカー勤務／カナダ大学院進学準備）</p>
+            <span class="score">Writing 5.5 → 6.0</span>
+          </div>
+          <div class="voice-card">
+            <span class="stars">★★★★★</span>
+            <p>「仕事後に机に向かえるのは30分だけ。1日1テーマで区切られているので挫折せず、15日間で初めて教材を最後までやり切れました。20分で150語書き切れた日は自分でも驚きました。」</p>
+            <p class="who">A.S.さん（31歳・IT企業勤務／イギリス留学準備）</p>
+            <span class="score">Task 1が時間内に書き切れるように</span>
+          </div>
+          <div class="voice-card">
+            <span class="stars">★★★★☆</span>
+            <p>「表の問題で全部の数字を書こうとしてパンクするタイプでした。Day 11の『3分の1だけ引用する』という基準で一気に楽になり、本番でも落ち着いて処理できました。」</p>
+            <p class="who">Y.T.さん（27歳・公務員／オーストラリア留学準備）</p>
+            <span class="score">Writing 5.0 → 6.0（2回の受験で）</span>
+          </div>
+          <div class="voice-card">
+            <span class="stars">★★★★★</span>
+            <p>「英語より『何をどの順番で書くか』が問題だったと気づかせてくれた教材です。セルフチェックリストは本番直前の見直しにもそのまま使えました。」</p>
+            <p class="who">R.N.さん（33歳・看護師／海外就労のため受験）</p>
+            <span class="score">初受験でWriting 6.0</span>
+          </div>
+        </div>
+
+        <div class="sec-h"><span class="tag">HOW</span>学習の進め方（3つの約束）</div>
+        <ul class="goal-list">
+          <li><span class="gnum">1</span><span><strong>1日1Day、順番どおりに。</strong>後のDayは前のDayの内容を前提に作られています。飛ばさないでください。</span></li>
+          <li><span class="gnum">2</span><span><strong>ライティング課題は必ず「書く」。</strong>読むだけでは書けるようになりません。下手でもいいので毎日手を動かすことが6.0への最短ルートです。</span></li>
+          <li><span class="gnum">3</span><span><strong>セルフチェックをしてから完了ボタンを。</strong>チェックがつかない項目こそ、あなたの伸びしろです。</span></li>
+        </ul>
+        <p style="font-size:.85rem;color:var(--gray)">1日サボっても大丈夫。翌日に続きから再開すればOKです（進捗は自動で保存されます）。それでは、Day 1から始めましょう！</p>
+      </div>
+      <button class="start-cta" onclick="goTo(0)">Day 1 を始める →</button>
+    </div>`;
+  window.scrollTo({top:0});
+}
+
+/* =========================================================
+   レンダリング
+   ========================================================= */
+let current = -1; /* -1 = はじめに */
+let progress = {};
+try{ progress = JSON.parse(load(PROG_KEY) || '{}') }catch(e){ progress = {} }
+
+const dayNav = document.getElementById('dayNav');
+const mobileSelect = document.getElementById('mobileSelect');
+const container = document.getElementById('lessonContainer');
+
+function doneCount(){ return Object.values(progress).filter(Boolean).length }
+
+function renderNav(){
+  dayNav.innerHTML = `
+    <li><button class="${current===-1?'active':''}" onclick="goTo(-1)">
+      <span class="num en">INTRO</span><span>はじめに</span>
+    </button></li>` +
+    DAYS.map((d,i)=>`
+    <li><button class="${i===current?'active':''}" onclick="goTo(${i})">
+      <span class="num en">DAY ${i+1}</span><span>${d.title}</span>
+      ${progress[i]?'<span class="done-mark">✓</span>':''}
+    </button></li>`).join('');
+  mobileSelect.innerHTML = `<option value="-1" ${current===-1?'selected':''}>はじめに｜この講座の使い方</option>` +
+    DAYS.map((d,i)=>
+    `<option value="${i}" ${i===current?'selected':''}>Day ${i+1}｜${d.title} ${progress[i]?'✓':''}</option>`).join('');
+  const pct = Math.round(doneCount()/DAYS.length*100);
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressText').textContent = pct+'% 完了';
+  document.getElementById('headerProgress').textContent = doneCount()+' / 15 完了';
+}
+
+function renderLesson(){
+  if(current === -1){ renderIntro(); return; }
+  const d = DAYS[current];
+  const drillsHtml = d.drills.map((dr,di)=>`
+    <div class="drill">
+      <p class="q"><span class="qnum en">Q${di+1}</span>${dr.q}</p>
+      <div class="choices">
+        ${dr.c.map((c,ci)=>`<button class="choice" onclick="answer(${di},${ci},this)">${String.fromCharCode(65+ci)}. ${c}</button>`).join('')}
+      </div>
+      <div class="fb" id="fb-${di}"></div>
+    </div>`).join('');
+
+  const checklistHtml = d.checklist.map((c,ci)=>`
+    <li><label><input type="checkbox"> ${c}</label></li>`).join('');
+
+  container.innerHTML = `
+    <div class="lesson-card">
+      <span class="day-label en">DAY ${current+1} / 15</span>
+      <h1 class="lesson-title">${d.title}</h1>
+      <span class="time-badge">⏱ 学習時間の目安：${d.time}</span>
+      <div class="goal-box"><strong>今日のゴール：</strong>${d.goal}</div>
+
+      <div class="sec-h"><span class="tag">LESSON</span>レッスン</div>
+      <div class="lesson-body">${d.lesson}</div>
+
+      <div class="sec-h"><span class="tag">DRILL</span>確認ドリル</div>
+      ${drillsHtml}
+
+      <div class="sec-h"><span class="tag">WRITING</span>ライティング課題</div>
+      <div class="task-box">
+        <p>${d.task.intro}</p>
+        <div class="prompt">${d.task.prompt}</div>
+      </div>
+      <textarea class="writing" id="writingArea" placeholder="${d.task.placeholder}"></textarea>
+      <div class="wc-row">
+        <span>${d.task.minWords ? '目標語数：'+d.task.minWords+'語以上' : '語数は自由（メモ形式でOK）'}</span>
+        <span class="wc">語数：<strong id="wordCount">0</strong></span>
+      </div>
+
+      <div class="sec-h"><span class="tag">CHECK</span>セルフチェック</div>
+      <ul class="checklist">${checklistHtml}</ul>
+
+      <div class="sec-h"><span class="tag">MODEL</span>回答例</div>
+      <p style="font-size:.85rem;color:var(--gray)">必ず自分で書き終えてから開いてください。答えではなく「自分の答案に何が足りないか」を見つけるために使いましょう。</p>
+      <details class="model-wrap">
+        <summary>回答例を表示する</summary>
+        <div class="model-body">${d.model || ''}</div>
+      </details>
+
+      <div class="complete-row">
+        <button class="btn-complete ${progress[current]?'done':''}" id="completeBtn" onclick="toggleComplete()">
+          ${progress[current]?'✓ 完了しました':'このDayを完了にする'}
+        </button>
+        <span style="font-size:.82rem;color:var(--gray)">課題を書き終えてセルフチェックを済ませたら完了！</span>
+      </div>
+      <div class="nav-row">
+        <button class="btn-nav" onclick="goTo(${current-1})">← ${current===0?'はじめに':'Day '+current}</button>
+        ${current===DAYS.length-1
+          ? '<button class="btn-nav" style="background:var(--main);color:#fff;border-color:var(--main)" onclick="location.href=\'day16-30.html\'">PART 2（Day 16〜）へ進む →</button>'
+          : '<button class="btn-nav" onclick="goTo('+(current+1)+')">Day '+(current+2)+' →</button>'}
+      </div>
+    </div>`;
+
+  const ta = document.getElementById('writingArea');
+  ta.addEventListener('input', ()=>{
+    const words = ta.value.trim().split(/\s+/).filter(w=>w.match(/[a-zA-Z]/)).length;
+    document.getElementById('wordCount').textContent = words;
+  });
+  window.scrollTo({top:0});
+}
+
+window.goTo = function(i){
+  if(i<-1||i>=DAYS.length) return;
+  current = i;
+  renderNav(); renderLesson();
+};
+window.answer = function(di,ci,btn){
+  const d = DAYS[current].drills[di];
+  const fb = document.getElementById('fb-'+di);
+  const choices = btn.parentElement.querySelectorAll('.choice');
+  choices.forEach((c,i)=>{
+    c.classList.remove('correct','wrong');
+    if(i===d.a) c.classList.add('correct');
+  });
+  if(ci!==d.a) btn.classList.add('wrong');
+  fb.className = 'fb show';
+  fb.innerHTML = (ci===d.a
+    ? '<span class="r ok">✓ 正解！</span> '
+    : '<span class="r ng">✗ 不正解。正解は '+String.fromCharCode(65+d.a)+'</span> ') + d.fb;
+};
+window.toggleComplete = function(){
+  progress[current] = !progress[current];
+  store(PROG_KEY, JSON.stringify(progress));
+  renderNav();
+  const btn = document.getElementById('completeBtn');
+  btn.className = 'btn-complete ' + (progress[current]?'done':'');
+  btn.textContent = progress[current]?'✓ 完了しました':'このDayを完了にする';
+};
+mobileSelect.addEventListener('change', e=>goTo(Number(e.target.value)));
+
+renderNav(); renderLesson();
+</script>
+</body>
+</html>

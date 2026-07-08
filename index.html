@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>30 Days IELTS Writing｜30日でIELTSライティングの基礎を習得</title>
+<meta name="description" content="1日1テーマ×30日でIELTSライティング6.0の基礎を習得。留学を目指す社会人のためのオンライン自習コース。月額2,900円。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --main:#E31837;
+    --main-dark:#B90F2B;
+    --accent:#003366;
+    --accent-light:#0A4A8A;
+    --ink:#1e2430;
+    --gray:#5f6b7a;
+    --bg:#ffffff;
+    --bg-soft:#f6f8fb;
+    --line:#e4e9f0;
+    --radius:14px;
+    --shadow:0 8px 30px rgba(0,51,102,.10);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans JP',sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.8;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%}
+  a{text-decoration:none;color:inherit}
+  .container{width:min(1080px,92%);margin-inline:auto}
+  .en{font-family:'Montserrat','Noto Sans JP',sans-serif}
+
+  /* ===== Header ===== */
+  header{
+    position:sticky;top:0;z-index:100;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.05rem;color:var(--accent)}
+  .logo-mark{
+    width:36px;height:36px;border-radius:9px;
+    background:var(--main);
+    color:#fff;display:grid;place-items:center;
+    font-family:'Montserrat';font-weight:800;font-size:.8rem;letter-spacing:.02em;
+  }
+  nav ul{display:flex;gap:28px;list-style:none;align-items:center}
+  nav a{font-size:.92rem;font-weight:500;color:var(--ink);transition:color .2s}
+  nav a:hover{color:var(--main)}
+  .btn-member{
+    background:var(--accent);color:#fff;padding:9px 20px;border-radius:999px;
+    font-size:.88rem;font-weight:700;transition:background .2s;
+  }
+  .btn-member:hover{background:var(--accent-light);color:#fff}
+  .hamburger{display:none;background:none;border:0;cursor:pointer;padding:8px}
+  .hamburger span{display:block;width:24px;height:2px;background:var(--accent);margin:5px 0;transition:.3s}
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;overflow:hidden;color:#fff;
+    background:var(--accent);
+    padding:96px 0 110px;
+  }
+  .hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+  .hero-badge{
+    display:inline-block;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);
+    padding:6px 16px;border-radius:999px;font-size:.82rem;font-weight:500;margin-bottom:20px;letter-spacing:.05em;
+  }
+  .hero h1{font-size:clamp(1.7rem,4.2vw,2.9rem);font-weight:900;line-height:1.4;letter-spacing:.01em}
+  .hero h1 .red{color:#ff5c73}
+  .hero p.lead{margin:18px 0 32px;font-size:clamp(.95rem,1.6vw,1.05rem);color:rgba(255,255,255,.85);max-width:34em}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .btn-cta{
+    display:inline-block;background:var(--main);color:#fff;
+    padding:16px 40px;border-radius:999px;font-weight:700;font-size:1.05rem;
+    box-shadow:0 10px 24px rgba(227,24,55,.4);transition:transform .2s,box-shadow .2s;
+  }
+  .btn-cta:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(227,24,55,.5)}
+  .cta-note{font-size:.82rem;color:rgba(255,255,255,.75)}
+  .hero-card{
+    background:rgba(255,255,255,.96);color:var(--ink);border-radius:var(--radius);
+    padding:28px;box-shadow:var(--shadow);
+  }
+  .hero-card h3{color:var(--accent);font-size:1rem;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+  .hero-card ul{list-style:none}
+  .hero-card li{
+    display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px dashed var(--line);font-size:.92rem;
+  }
+  .hero-card li:last-child{border-bottom:0}
+  .check{color:var(--main);font-weight:900;flex-shrink:0}
+
+  /* ===== Sections common ===== */
+  section{padding:88px 0}
+  .sec-label{
+    text-align:center;color:var(--main);font-weight:800;font-size:.85rem;
+    letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px;
+  }
+  .sec-title{text-align:center;font-size:clamp(1.4rem,3vw,1.9rem);font-weight:900;color:var(--accent);margin-bottom:14px}
+  .sec-desc{text-align:center;color:var(--gray);max-width:38em;margin:0 auto 52px;font-size:.95rem}
+
+  /* ===== Features ===== */
+  .features{background:var(--bg-soft)}
+  .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .feature{
+    background:#fff;border-radius:var(--radius);padding:36px 28px;text-align:center;
+    box-shadow:var(--shadow);border-top:4px solid var(--main);
+    transition:transform .25s;
+  }
+  .feature:hover{transform:translateY(-6px)}
+  .feature .icon{
+    width:72px;height:72px;margin:0 auto 20px;border-radius:50%;
+    background:#eef3f9;
+    display:grid;place-items:center;
+  }
+  .feature .icon svg{width:34px;height:34px;stroke:var(--accent)}
+  .feature h3{font-size:1.08rem;color:var(--accent);margin-bottom:12px;font-weight:700}
+  .feature p{font-size:.9rem;color:var(--gray);text-align:left}
+
+  /* ===== Price strip ===== */
+  .price-strip{
+    background:var(--accent);color:#fff;
+    padding:56px 0;text-align:center;
+  }
+  .price-strip .price{font-size:clamp(2rem,5vw,2.8rem);font-weight:900}
+  .price-strip .price small{font-size:.5em;font-weight:500}
+  .price-strip p{color:rgba(255,255,255,.8);font-size:.92rem;margin-top:6px}
+
+  /* ===== Contact ===== */
+  .contact-box{
+    max-width:640px;margin:0 auto;background:#fff;border:1px solid var(--line);
+    border-radius:var(--radius);padding:40px;box-shadow:var(--shadow);
+  }
+  .form-group{margin-bottom:22px}
+  label{display:block;font-weight:700;font-size:.9rem;margin-bottom:8px;color:var(--accent)}
+  label .req{color:var(--main);font-size:.75rem;margin-left:6px}
+  input[type=text],input[type=email],input[type=password],textarea{
+    width:100%;padding:13px 16px;border:1.5px solid var(--line);border-radius:10px;
+    font-family:inherit;font-size:.95rem;background:var(--bg-soft);transition:border-color .2s,background .2s;
+  }
+  input:focus,textarea:focus{outline:none;border-color:var(--accent);background:#fff}
+  textarea{min-height:130px;resize:vertical}
+  .btn-submit{
+    display:block;width:100%;background:var(--main);color:#fff;border:0;cursor:pointer;
+    padding:15px;border-radius:999px;font-size:1rem;font-weight:700;font-family:inherit;
+    transition:background .2s;
+  }
+  .btn-submit:hover{background:var(--main-dark)}
+  .form-msg{display:none;text-align:center;color:var(--accent);font-weight:700;margin-top:16px}
+
+  /* ===== Members (gated) ===== */
+  .members{background:var(--bg-soft)}
+  .gate-box{
+    max-width:480px;margin:0 auto;background:#fff;border-radius:var(--radius);
+    padding:40px;box-shadow:var(--shadow);text-align:center;border-top:4px solid var(--accent);
+  }
+  .gate-box .lock{font-size:2.2rem;margin-bottom:10px}
+  .gate-box p{font-size:.9rem;color:var(--gray);margin-bottom:20px}
+  .gate-error{display:none;color:var(--main);font-size:.85rem;font-weight:700;margin-top:12px}
+  .member-area{display:none}
+  .member-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:28px}
+  .member-head h3{color:var(--accent);font-size:1.2rem}
+  .btn-logout{background:none;border:1.5px solid var(--line);border-radius:999px;padding:8px 18px;font-size:.82rem;cursor:pointer;color:var(--gray);font-family:inherit}
+  .day-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .day-card{
+    background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px;
+    font-size:.8rem;transition:border-color .2s,transform .2s;cursor:pointer;
+  }
+  .day-card:hover{border-color:var(--main);transform:translateY(-3px)}
+  .day-card .d{font-family:'Montserrat';font-weight:800;color:var(--main);font-size:.75rem;letter-spacing:.05em}
+  .day-card .t{font-weight:700;color:var(--ink);line-height:1.45;margin-top:4px}
+  .part-label{grid-column:1/-1;font-weight:900;color:var(--accent);font-size:.95rem;margin-top:14px}
+
+  /* ===== Footer ===== */
+  footer{background:#001d3a;color:rgba(255,255,255,.75);padding:48px 0 32px}
+  .footer-inner{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:24px}
+  .footer-logo{color:#fff;font-weight:900;display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  footer ul{list-style:none;display:flex;gap:24px;flex-wrap:wrap}
+  footer a{font-size:.85rem;transition:color .2s}
+  footer a:hover{color:#fff}
+  .copyright{text-align:center;font-size:.78rem;margin-top:36px;color:rgba(255,255,255,.5)}
+
+  /* ===== Responsive ===== */
+  @media (max-width:860px){
+    .hero-inner{grid-template-columns:1fr;gap:36px}
+    .feature-grid{grid-template-columns:1fr;max-width:460px;margin-inline:auto}
+    .hamburger{display:block}
+    nav{
+      position:fixed;inset:68px 0 auto 0;background:#fff;border-bottom:1px solid var(--line);
+      transform:translateY(-130%);transition:transform .3s;box-shadow:0 16px 30px rgba(0,0,0,.08);
+    }
+    nav.open{transform:translateY(0)}
+    nav ul{flex-direction:column;gap:0;padding:12px 0}
+    nav li{width:100%;text-align:center}
+    nav a{display:block;padding:14px}
+    .btn-member{display:inline-block;margin:10px 0}
+    section{padding:64px 0}
+    .contact-box{padding:28px 20px}
+    .gate-box{padding:32px 22px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== 1. Header ===== -->
+<header>
+  <div class="container header-inner">
+    <a href="#top" class="logo">
+      <span class="logo-mark en">30D</span>
+      <span>30 Days <span style="color:var(--main)">IELTS</span> Writing</span>
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="nav">
+      <ul>
+        <li><a href="#about">会社概要</a></li>
+        <li><a href="#service">サービス</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+        <li><a href="#members" class="btn-member">会員ログイン</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== 2. Main Visual ===== -->
+<div class="hero" id="top">
+  <div class="container hero-inner">
+    <div>
+      <span class="hero-badge">留学を目指す社会人のためのオンライン自習コース</span>
+      <h1>30日で<span class="red">IELTSライティング</span>の<br>基礎を習得！</h1>
+      <p class="lead">1日1テーマ、20〜40分。仕事と両立しながら、Task 1・Task 2それぞれ15の必須スキルを積み上げて、バンド6.0の土台を確実につくる自習プログラムです。</p>
+      <div class="cta-row">
+        <a href="#contact" class="btn-cta">今すぐ始める</a>
+        <span class="cta-note">月額2,900円（税込）／ いつでも解約OK</span>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>✍️ このコースで身につくこと</h3>
+      <ul>
+        <li><span class="check">✓</span>Task 1：図表を150語・20分で正確に描写する型</li>
+        <li><span class="check">✓</span>Task 2：250語エッセイの4段落構成と設問タイプ別攻略</li>
+        <li><span class="check">✓</span>採点基準（TA・CC・LR・GRA）に沿ったセルフ添削力</li>
+        <li><span class="check">✓</span>Day15・Day30の模擬試験で成長を実感</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 3. Service / Features ===== -->
+<section class="features" id="service">
+  <div class="container">
+    <p class="sec-label">Service</p>
+    <h2 class="sec-title">選ばれる3つの理由</h2>
+    <p class="sec-desc">忙しい社会人が、遠回りせずにライティング6.0の基礎へ。カリキュラムはIELTSの4つの採点基準から逆算して設計しています。</p>
+    <div class="feature-grid">
+      <div class="feature">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 15l2 2 4-4"/></svg>
+        </div>
+        <h3>1日1テーマ×30日の設計</h3>
+        <p>Day1〜15でTask 1、Day16〜30でTask 2。パラフレーズやOverviewなどの基礎から図表タイプ別・エッセイタイプ別の実戦まで、迷わず順番に進むだけ。1日20〜40分で完結します。</p>
+      </div>
+      <div class="feature">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>
+        </div>
+        <h3>バンド6.0から逆算した内容</h3>
+        <p>「Overviewを書く」「一貫した立場を保つ」「複文を正確に使う」——6.0と5.5を分けるポイントに絞って学習。模範解答とNG例の比較で、何が減点されるのかが具体的にわかります。</p>
+      </div>
+      <div class="feature">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <h3>書いて終わりにしない添削設計</h3>
+        <p>毎日のライティング課題には採点基準に沿ったセルフチェックリスト付き。自動採点ドリルで語彙と文法を定着させ、自分の答案を自分で改善できる力を育てます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Price strip ===== -->
+<div class="price-strip">
+  <div class="container">
+    <p class="sec-label" style="color:#ff8fa0">Price</p>
+    <div class="price en">¥2,900<small> / 月（税込）</small></div>
+    <p>全30日分のレッスン・ドリル・模範解答・進捗管理をすべて利用できます。</p>
+    <div style="margin-top:26px"><a href="#contact" class="btn-cta">今すぐ始める</a></div>
+  </div>
+</div>
+
+<!-- ===== 4. Contact ===== -->
+<section id="contact">
+  <div class="container">
+    <p class="sec-label">Contact</p>
+    <h2 class="sec-title">お問い合わせ・お申し込み</h2>
+    <p class="sec-desc">受講のお申し込み、コース内容のご質問など、お気軽にご連絡ください。2営業日以内にご返信します。</p>
+    <div class="contact-box">
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name">お名前<span class="req">必須</span></label>
+          <input type="text" id="name" name="name" placeholder="山田 花子" required>
+        </div>
+        <div class="form-group">
+          <label for="email">メールアドレス<span class="req">必須</span></label>
+          <input type="email" id="email" name="email" placeholder="example@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="message">お問い合わせ内容</label>
+          <textarea id="message" name="message" placeholder="受講を希望します／コースについて質問があります など"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">送信する</button>
+        <p class="form-msg" id="formMsg">✓ 送信しました。ご連絡ありがとうございます！</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 6. Members (password-gated) ===== -->
+<section class="members" id="members">
+  <div class="container">
+    <p class="sec-label">Members Only</p>
+    <h2 class="sec-title">受講生専用ページ</h2>
+    <p class="sec-desc">ご購入後にお知らせするパスワードを入力すると、Day1〜30の学習コンテンツにアクセスできます。</p>
+
+    <!-- Gate -->
+    <div class="gate-box" id="gateBox">
+      <div class="lock">🔒</div>
+      <p>パスワードを入力してください</p>
+      <form id="gateForm">
+        <div class="form-group">
+          <input type="password" id="gatePass" placeholder="パスワード" autocomplete="off">
+        </div>
+        <button type="submit" class="btn-submit" style="background:var(--accent)">ログイン</button>
+        <p class="gate-error" id="gateError">パスワードが違います。ご確認のうえ再度お試しください。</p>
+      </form>
+    </div>
+
+    <!-- Member area -->
+    <div class="member-area" id="memberArea">
+      <div class="member-head">
+        <h3>📚 学習コンテンツ（Day 1〜30）</h3>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <a href="day1-15.html" class="btn-cta" style="padding:11px 26px;font-size:.9rem">▶ Day1〜15（Task 1）へ</a>
+          <a href="day16-30.html" class="btn-cta" style="padding:11px 26px;font-size:.9rem;background:var(--accent)">▶ Day16〜30（Task 2）へ</a>
+          <button class="btn-logout" id="logoutBtn">ログアウト</button>
+        </div>
+      </div>
+      <div class="day-grid" id="dayGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5. Footer ===== -->
+<footer id="about">
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">
+          <span class="logo-mark en">30D</span> 30 Days IELTS Writing
+        </div>
+        <p style="font-size:.82rem;max-width:30em">留学を目指す社会人のためのIELTSライティング自習プログラム。1日1テーマ、30日でバンド6.0の基礎を。</p>
+      </div>
+      <ul>
+        <li><a href="#about">会社概要</a></li>
+        <li><a href="#service">サービス</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+        <li><a href="#">特定商取引法に基づく表記</a></li>
+        <li><a href="#">プライバシーポリシー</a></li>
+      </ul>
+    </div>
+    <p class="copyright">&copy; 2026 30 Days IELTS Writing. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // ----- Mobile nav -----
+  const hamburger = document.getElementById('hamburger');
+  const nav = document.getElementById('nav');
+  hamburger.addEventListener('click', () => nav.classList.toggle('open'));
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+  // ----- Contact form (demo) -----
+  document.getElementById('contactForm').addEventListener('submit', e => {
+    e.preventDefault();
+    document.getElementById('formMsg').style.display = 'block';
+    e.target.reset();
+  });
+
+  // ----- Password gate -----
+  // ※デモ用の簡易ゲートです。本番では必ずサーバー側認証（会員システム）に置き換えてください。
+  const PASSWORD = 'ielts2026';
+  const gateBox = document.getElementById('gateBox');
+  const memberArea = document.getElementById('memberArea');
+  const gateError = document.getElementById('gateError');
+
+  document.getElementById('gateForm').addEventListener('submit', e => {
+    e.preventDefault();
+    if (document.getElementById('gatePass').value === PASSWORD) {
+      gateBox.style.display = 'none';
+      memberArea.style.display = 'block';
+      gateError.style.display = 'none';
+      renderDays();
+    } else {
+      gateError.style.display = 'block';
+    }
+  });
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    memberArea.style.display = 'none';
+    gateBox.style.display = 'block';
+    document.getElementById('gatePass').value = '';
+  });
+
+  // ----- Day 1-30 curriculum -----
+  const task1 = [
+    'Task 1の全体像と採点基準','設問のパラフレーズ','Overview（概観文）の書き方','数字とデータの正確な表現','増減を表すトレンド語彙',
+    '程度とスピードを表す修飾語','時制の使い分け','比較の表現','折れ線グラフの攻略','棒グラフ・円グラフの攻略',
+    '表（Table）の攻略','プロセス図の攻略','地図問題の攻略','複合図表とグルーピング','Task 1 模擬試験＋セルフ添削'
+  ];
+  const task2 = [
+    'Task 2の全体像と採点基準','設問分析とアイデア出し','4段落テンプレート','Introductionの書き方','トピックセンテンス',
+    '理由と具体例の展開','Conclusionの書き方','接続表現と論理の流れ','Opinion型攻略','Discussion型攻略',
+    'Advantage/Disadvantage型攻略','Problem/Solution型攻略','複文で書く（GRA対策）','頻出語彙＋よくあるミス','Task 2 模擬試験＋総まとめ'
+  ];
+  function renderDays(){
+    const grid = document.getElementById('dayGrid');
+    if (grid.childElementCount) return;
+    let html = '<div class="part-label">PART 1｜Task 1（図表描写）</div>';
+    task1.forEach((t,i) => html += `<div class="day-card"><div class="d en">DAY ${i+1}</div><div class="t">${t}</div></div>`);
+    html += '<div class="part-label">PART 2｜Task 2（エッセイ）</div>';
+    task2.forEach((t,i) => html += `<div class="day-card"><div class="d en">DAY ${i+16}</div><div class="t">${t}</div></div>`);
+    grid.innerHTML = html;
+  }
+</script>
+</body>
+</html>

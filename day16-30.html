@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day16〜30 Task 2 学習サイト｜30 Days IELTS Writing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --main:#E31837; --main-dark:#B90F2B;
+    --accent:#003366; --accent-light:#0A4A8A;
+    --ink:#1e2430; --gray:#5f6b7a;
+    --bg:#f6f8fb; --line:#e4e9f0;
+    --ok:#0d7a4f; --ok-bg:#e8f5ee;
+    --ng:#c62828; --ng-bg:#fdecea;
+    --radius:14px; --shadow:0 8px 30px rgba(0,51,102,.10);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Noto Sans JP',sans-serif;color:var(--ink);background:var(--bg);line-height:1.85;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  .en{font-family:'Montserrat','Noto Sans JP',sans-serif}
+
+  header{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--line)}
+  .header-inner{width:min(1200px,94%);margin-inline:auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:.98rem;color:var(--accent)}
+  .logo-mark{width:32px;height:32px;border-radius:8px;background:var(--main);color:#fff;display:grid;place-items:center;font-family:'Montserrat';font-weight:800;font-size:.72rem}
+  .header-right{display:flex;align-items:center;gap:14px}
+  .progress-pill{font-size:.78rem;font-weight:700;color:var(--accent);background:#eef3f9;padding:6px 14px;border-radius:999px}
+  .btn-ghost{font-size:.8rem;border:1.5px solid var(--line);border-radius:999px;padding:7px 16px;color:var(--gray);cursor:pointer;background:#fff;font-family:inherit}
+  .btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+  .layout{width:min(1200px,94%);margin:28px auto 80px;display:grid;grid-template-columns:250px 1fr;gap:28px;align-items:start}
+
+  aside{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;position:sticky;top:84px;max-height:calc(100vh - 110px);overflow-y:auto}
+  aside h2{font-size:.8rem;color:var(--gray);letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+  .day-nav{list-style:none}
+  .day-nav li{margin-bottom:6px}
+  .day-nav button{
+    width:100%;text-align:left;background:none;border:0;cursor:pointer;font-family:inherit;
+    padding:9px 12px;border-radius:9px;font-size:.83rem;line-height:1.5;color:var(--ink);
+    display:flex;gap:10px;align-items:center;transition:background .15s;
+  }
+  .day-nav button:hover{background:#eef3f9}
+  .day-nav button.active{background:var(--accent);color:#fff}
+  .day-nav .num{font-family:'Montserrat';font-weight:800;font-size:.7rem;color:var(--main);flex-shrink:0;width:44px}
+  .day-nav button.active .num{color:#ffb3c0}
+  .day-nav .done-mark{margin-left:auto;color:var(--ok);font-weight:900}
+  .day-nav button.active .done-mark{color:#9fe8c8}
+  .progress-bar-wrap{margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+  .progress-bar{height:8px;background:#eef3f9;border-radius:999px;overflow:hidden}
+  .progress-bar > div{height:100%;background:var(--main);border-radius:999px;transition:width .4s}
+  .progress-text{font-size:.75rem;color:var(--gray);margin-top:6px;text-align:right}
+
+  main{min-width:0}
+  .lesson-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:40px;margin-bottom:24px}
+  .day-label{color:var(--main);font-family:'Montserrat';font-weight:800;font-size:.85rem;letter-spacing:.12em}
+  .lesson-title{font-size:clamp(1.25rem,2.6vw,1.6rem);font-weight:900;color:var(--accent);margin:4px 0 8px}
+  .time-badge{display:inline-block;font-size:.75rem;background:#eef3f9;color:var(--accent);border-radius:999px;padding:3px 12px;font-weight:700}
+
+  .goal-box{background:#fff8f9;border-left:4px solid var(--main);border-radius:0 10px 10px 0;padding:14px 18px;margin:22px 0;font-size:.93rem}
+  .goal-box strong{color:var(--main)}
+
+  .sec-h{display:flex;align-items:center;gap:10px;font-size:1.05rem;font-weight:900;color:var(--accent);margin:34px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+  .sec-h .tag{font-size:.68rem;background:var(--accent);color:#fff;border-radius:6px;padding:2px 9px;letter-spacing:.06em}
+
+  .lesson-body p{margin-bottom:12px;font-size:.94rem}
+  .lesson-body h4{color:var(--accent);font-size:.95rem;margin:20px 0 8px}
+  .lesson-body table{width:100%;border-collapse:collapse;font-size:.87rem;margin:12px 0}
+  .lesson-body th{background:var(--accent);color:#fff;padding:8px 12px;text-align:left;font-weight:700}
+  .lesson-body td{border:1px solid var(--line);padding:8px 12px;background:#fff}
+  .lesson-body tr:nth-child(even) td{background:#fafcfe}
+  .ex{background:#f2f6fb;border-radius:10px;padding:14px 18px;margin:12px 0;font-size:.92rem}
+  .ex .e{font-weight:700;color:var(--accent)}
+  .ex .j{font-size:.83rem;color:var(--gray)}
+  .ok-box,.ng-box{border-radius:10px;padding:14px 18px;margin:12px 0;font-size:.9rem}
+  .ok-box{background:var(--ok-bg);border-left:4px solid var(--ok)}
+  .ng-box{background:var(--ng-bg);border-left:4px solid var(--ng)}
+  .ok-box .h{color:var(--ok);font-weight:900;font-size:.8rem}
+  .ng-box .h{color:var(--ng);font-weight:900;font-size:.8rem}
+  .tip{background:#fffbe8;border-left:4px solid #e0a800;border-radius:0 10px 10px 0;padding:12px 16px;margin:12px 0;font-size:.88rem}
+  .tip strong{color:#9a7400}
+
+  .drill{border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:16px;background:#fff}
+  .drill .q{font-weight:700;font-size:.93rem;margin-bottom:12px}
+  .drill .q .qnum{color:var(--main);font-family:'Montserrat';font-weight:800;margin-right:8px}
+  .choices{display:grid;gap:8px}
+  .choice{
+    text-align:left;background:var(--bg);border:1.5px solid var(--line);border-radius:9px;
+    padding:10px 14px;cursor:pointer;font-family:inherit;font-size:.9rem;transition:border-color .15s;
+  }
+  .choice:hover{border-color:var(--accent)}
+  .choice.correct{background:var(--ok-bg);border-color:var(--ok);font-weight:700}
+  .choice.wrong{background:var(--ng-bg);border-color:var(--ng)}
+  .drill .fb{display:none;margin-top:12px;font-size:.85rem;background:#f2f6fb;border-radius:8px;padding:10px 14px}
+  .drill .fb.show{display:block}
+  .drill .fb .r{font-weight:900}
+  .drill .fb .r.ok{color:var(--ok)} .drill .fb .r.ng{color:var(--ng)}
+
+  .task-box{background:#f2f6fb;border-radius:12px;padding:22px;margin-bottom:16px;font-size:.92rem}
+  .task-box .prompt{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-top:10px;font-style:italic;font-size:.9rem}
+  textarea.writing{
+    width:100%;min-height:220px;border:1.5px solid var(--line);border-radius:12px;padding:16px;
+    font-family:inherit;font-size:.95rem;line-height:1.8;resize:vertical;background:#fff;
+  }
+  textarea.writing:focus{outline:none;border-color:var(--accent)}
+  .wc-row{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:.8rem;color:var(--gray)}
+  .wc strong{color:var(--accent);font-size:1rem}
+
+  .checklist{list-style:none;margin-top:10px}
+  .checklist li{margin-bottom:8px}
+  .checklist label{
+    display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+    border-radius:9px;padding:10px 14px;font-size:.88rem;cursor:pointer;font-weight:400;
+  }
+  .checklist input{margin-top:5px;accent-color:var(--main)}
+
+  details.model-wrap{margin-top:10px;border:1.5px dashed var(--accent);border-radius:12px;background:#f7fafd;overflow:hidden}
+  details.model-wrap summary{cursor:pointer;padding:14px 18px;font-weight:700;color:var(--accent);font-size:.9rem;list-style:none;display:flex;gap:10px;align-items:center;user-select:none}
+  details.model-wrap summary::-webkit-details-marker{display:none}
+  details.model-wrap summary::before{content:'▶';font-size:.65rem;transition:transform .2s}
+  details.model-wrap[open] summary::before{transform:rotate(90deg)}
+  .model-body{padding:0 20px 20px;font-size:.92rem}
+  .model-body .m-en{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;line-height:1.9;margin:10px 0;white-space:pre-line}
+  .model-body .m-note{font-size:.84rem;background:#fffbe8;border-left:4px solid #e0a800;padding:10px 14px;border-radius:0 8px 8px 0;margin-top:10px}
+  .model-body .m-note strong{color:#9a7400}
+
+  .complete-row{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-top:30px;padding-top:24px;border-top:1px solid var(--line)}
+  .btn-complete{
+    background:var(--main);color:#fff;border:0;cursor:pointer;border-radius:999px;
+    padding:13px 34px;font-size:.95rem;font-weight:700;font-family:inherit;transition:background .2s;
+  }
+  .btn-complete:hover{background:var(--main-dark)}
+  .btn-complete.done{background:var(--ok)}
+  .nav-row{display:flex;justify-content:space-between;margin-top:20px;gap:12px}
+  .btn-nav{background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:11px 24px;font-size:.88rem;font-weight:700;color:var(--accent);cursor:pointer;font-family:inherit}
+  .btn-nav:hover{border-color:var(--accent)}
+  .btn-nav:disabled{opacity:.35;cursor:default}
+
+  #gate{
+    position:fixed;inset:0;background:var(--accent);z-index:1000;
+    display:flex;align-items:center;justify-content:center;padding:20px;
+  }
+  .gate-card{background:#fff;border-radius:var(--radius);padding:44px 36px;max-width:420px;width:100%;text-align:center;box-shadow:var(--shadow)}
+  .gate-card .lock{font-size:2.4rem}
+  .gate-card h1{font-size:1.15rem;color:var(--accent);margin:10px 0 6px}
+  .gate-card p{font-size:.85rem;color:var(--gray);margin-bottom:20px}
+  .gate-card input{
+    width:100%;padding:13px 16px;border:1.5px solid var(--line);border-radius:10px;
+    font-family:inherit;font-size:.95rem;background:var(--bg);margin-bottom:12px;
+  }
+  .gate-card input:focus{outline:none;border-color:var(--accent);background:#fff}
+  .gate-card button{
+    width:100%;background:var(--main);color:#fff;border:0;cursor:pointer;border-radius:999px;
+    padding:13px;font-size:.95rem;font-weight:700;font-family:inherit;
+  }
+  .gate-card button:hover{background:var(--main-dark)}
+  .gate-card .err{display:none;color:var(--ng);font-size:.82rem;font-weight:700;margin-top:10px}
+  .gate-card .back{display:inline-block;margin-top:18px;font-size:.8rem;color:var(--gray);text-decoration:underline}
+
+  .goal-list{list-style:none;margin:12px 0}
+  .goal-list li{
+    display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+    border-radius:10px;padding:13px 16px;margin-bottom:9px;font-size:.92rem;
+  }
+  .goal-list .gnum{
+    flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--main);color:#fff;
+    display:grid;place-items:center;font-family:'Montserrat';font-weight:800;font-size:.72rem;margin-top:2px;
+  }
+  .phase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0}
+  .phase{background:#f2f6fb;border-radius:12px;padding:18px;border-top:4px solid var(--accent)}
+  .phase .p-label{font-family:'Montserrat';font-weight:800;font-size:.7rem;color:var(--main);letter-spacing:.1em}
+  .phase h5{color:var(--accent);font-size:.92rem;margin:4px 0 8px}
+  .phase p{font-size:.82rem;color:var(--gray);margin:0}
+  .voice-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:14px 0}
+  .voice-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;font-size:.88rem}
+  .voice-card .stars{color:#e0a800;letter-spacing:2px;font-size:.85rem}
+  .voice-card .who{font-weight:700;color:var(--accent);font-size:.82rem;margin-top:10px}
+  .voice-card .score{display:inline-block;background:var(--ok-bg);color:var(--ok);font-weight:900;font-size:.75rem;border-radius:6px;padding:2px 10px;margin-top:6px}
+  .start-cta{
+    display:block;text-align:center;background:var(--main);color:#fff;border:0;cursor:pointer;
+    border-radius:999px;padding:16px;font-size:1.05rem;font-weight:700;font-family:inherit;
+    width:100%;max-width:420px;margin:28px auto 0;transition:background .2s;
+  }
+  .start-cta:hover{background:var(--main-dark)}
+
+  .mobile-select{display:none;margin-bottom:16px}
+  .mobile-select select{
+    width:100%;padding:13px 16px;border:1.5px solid var(--line);border-radius:10px;
+    font-family:inherit;font-size:.92rem;background:#fff;font-weight:700;color:var(--accent);
+  }
+
+  @media (max-width:900px){
+    .layout{grid-template-columns:1fr;margin-top:16px}
+    aside{display:none}
+    .mobile-select{display:block}
+    .lesson-card{padding:26px 20px}
+    .header-inner .course-name{display:none}
+    .phase-grid,.voice-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <div class="gate-card">
+    <div class="lock">🔒</div>
+    <h1>受講生専用 学習サイト</h1>
+    <p>PART 2｜Task 2（Day 16〜30）<br>ご購入時にお知らせしたパスワードを入力してください。</p>
+    <form id="gateForm">
+      <input type="password" id="gatePass" placeholder="パスワード" autocomplete="off">
+      <button type="submit">ログイン</button>
+      <p class="err" id="gateErr">パスワードが違います。</p>
+    </form>
+    <a class="back" href="index.html">← トップページへ戻る</a>
+  </div>
+</div>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark en">30D</span>
+      <span class="course-name">30 Days IELTS Writing｜<span style="color:var(--main)">PART 2</span> Task 2</span>
+    </a>
+    <div class="header-right">
+      <a href="day1-15.html" class="btn-ghost" style="text-decoration:none">PART 1へ</a>
+      <span class="progress-pill" id="headerProgress">0 / 15 完了</span>
+      <button class="btn-ghost" id="logoutBtn">ログアウト</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside>
+    <h2>Day 16 – 30｜Task 2</h2>
+    <ul class="day-nav" id="dayNav"></ul>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar"><div id="progressFill" style="width:0%"></div></div>
+      <p class="progress-text" id="progressText">0% 完了</p>
+    </div>
+  </aside>
+
+  <main>
+    <div class="mobile-select">
+      <select id="mobileSelect"></select>
+    </div>
+    <div id="lessonContainer"></div>
+  </main>
+</div>
+
+<script>
+/* デモ用の簡易認証。本番ではサーバー側認証に置き換えてください。 */
+const PASSWORD = 'ielts2026';
+const AUTH_KEY = 'ielts30_auth';
+const PROG_KEY = 'ielts30_progress_p2';
+
+function store(k,v){ try{localStorage.setItem(k,v)}catch(e){} }
+function load(k){ try{return localStorage.getItem(k)}catch(e){return null} }
+function removeStore(k){ try{localStorage.removeItem(k)}catch(e){} }
+
+const gate = document.getElementById('gate');
+if (load(AUTH_KEY) === 'ok') gate.style.display = 'none';
+document.getElementById('gateForm').addEventListener('submit', e => {
+  e.preventDefault();
+  if (document.getElementById('gatePass').value === PASSWORD) {
+    store(AUTH_KEY,'ok'); gate.style.display = 'none';
+  } else { document.getElementById('gateErr').style.display = 'block'; }
+});
+document.getElementById('logoutBtn').addEventListener('click', () => { removeStore(AUTH_KEY); location.reload(); });
+
+/* =========================================================
+   Day 16-30 コンテンツ
+   ========================================================= */
+const DAYS = [
+/* ---------- DAY 16 ---------- */
+{
+  title:'Task 2の全体像と採点基準',
+  time:'約30分',
+  goal:'Task 2のルール（250語・40分・配点2倍）と、6.0答案の条件がわかる。',
+  lesson:`
+    <h4>Task 2とは</h4>
+    <p>社会的なテーマについて<strong>250語以上のエッセイを40分で書く</strong>課題です。配点は<strong>Task 1の2倍</strong>。つまりライティングのスコアはTask 2で決まると言っても過言ではありません。</p>
+    <h4>4つの採点基準（各25%）</h4>
+    <table>
+      <tr><th>基準</th><th>見られること</th><th>6.0のポイント</th></tr>
+      <tr><td><strong>TR</strong>（課題への応答）</td><td>設問のすべてに答えたか、立場が明確か</td><td>一貫した立場＋関連するアイデア</td></tr>
+      <tr><td><strong>CC</strong>（一貫性と結束性）</td><td>段落構成、論理の流れ、接続語</td><td>1段落1アイデア＋明確な段落分け</td></tr>
+      <tr><td><strong>LR</strong>（語彙力）</td><td>話題に合った語彙、言い換え</td><td>繰り返しを避け、多少の背伸びをする</td></tr>
+      <tr><td><strong>GRA</strong>（文法）</td><td>複文の使用、正確さ</td><td>複文を使い、意味を壊すミスを減らす</td></tr>
+    </table>
+    <h4>設問タイプは主に4種類</h4>
+    <table>
+      <tr><th>タイプ</th><th>設問の合図</th><th>学ぶ日</th></tr>
+      <tr><td>① Opinion型</td><td>To what extent do you agree or disagree?</td><td>Day 24</td></tr>
+      <tr><td>② Discussion型</td><td>Discuss both views and give your own opinion.</td><td>Day 25</td></tr>
+      <tr><td>③ Advantage/Disadvantage型</td><td>Do the advantages outweigh the disadvantages?</td><td>Day 26</td></tr>
+      <tr><td>④ Problem/Solution型</td><td>What problems…? What solutions…?</td><td>Day 27</td></tr>
+    </table>
+    <h4>時間配分（40分）</h4>
+    <table>
+      <tr><th>時間</th><th>やること</th></tr>
+      <tr><td>0〜5分</td><td>設問分析＋アイデア出し＋アウトライン</td></tr>
+      <tr><td>5〜35分</td><td>執筆（Intro→Body1→Body2→Conclusion）</td></tr>
+      <tr><td>35〜40分</td><td>見直し（三単現・冠詞・スペル）</td></tr>
+    </table>
+    <div class="ng-box"><span class="h">5.5に落ちる典型パターン</span><br>・設問の一部にしか答えていない（both viewsなのに片方だけ等）・立場が途中でブレる・段落分けがない、または1文だけの段落・250語未満・暗記した定型文の丸出し</div>
+    <div class="ok-box"><span class="h">6.0答案の共通点</span><br>・最初から最後まで立場が一貫している・各段落の1文目を読むだけで全体の主張がわかる・完璧な英語ではないが、ミスがあっても意味が伝わる</div>
+  `,
+  drills:[
+    {q:'Task 2の配点はTask 1の何倍？', c:['同じ','2倍','3倍'], a:1, fb:'Task 2は2倍の重み。時間配分もTask 2に40分をしっかり確保するのが定石です。'},
+    {q:'TR（課題への応答）で6.0に最も重要なのは？', c:['難しい理論を展開すること','一貫した立場を保つこと','たくさんのアイデアを詰め込むこと'], a:1, fb:'アイデアは2つで十分。それより「賛成なのか反対なのか」が最後までブレないことが重要です。'},
+    {q:'「Discuss both views and give your own opinion.」で片方の意見しか書かないと？', c:['問題ない','TRが大きく下がる','語数が足りていればOK'], a:1, fb:'設問の要求に部分的にしか答えていないため、課題への応答が大幅減点。設問分析（Day 17）で防ぎます。'}
+  ],
+  task:{
+    intro:'下の6.0レベルのモデルエッセイを読み、①筆者の立場 ②理由（2つ）③具体例 がそれぞれどの文かを特定し、メモしてください。',
+    prompt:'Some people believe that children should play sport at school every day. To what extent do you agree or disagree?<br><br>【モデルエッセイ（抜粋構成）】<br>I completely agree that daily sport should be part of every school timetable. // Firstly, regular exercise keeps children healthy. Young people today spend many hours sitting in classrooms and looking at screens, so school may be the only place where they move their bodies. For example, in Japan, many elementary schools have daily physical activities, and childhood obesity rates there are among the lowest in developed countries. // Secondly, sport teaches important life skills. Through team games, children learn how to cooperate, how to lose gracefully and how to keep trying after failure. These lessons cannot be learned from textbooks. // In conclusion, I strongly support daily school sport because it protects children\'s health and builds their character.',
+    placeholder:'立場：第1文「I completely agree…」＝完全賛成\n理由1：…\n理由2：…\n具体例：…',
+    minWords:0
+  },
+  checklist:['筆者の立場を1文で特定できた','理由2つをそれぞれ特定できた','具体例がどの理由を支えているか説明できる','4タイプの設問の合図を言える'],
+  model:`<div class="m-en">立場：第1文 I completely agree that daily sport should be part of every school timetable.（完全賛成。エッセイ全体を貫く主張）
+
+理由1：Firstly, regular exercise keeps children healthy.（健康）
+　└ 説明：教室とスクリーンの時間が長く、学校が唯一運動する場所になりうる
+　└ 具体例：For example, in Japan…（日本の小学校の毎日の運動と低い肥満率）
+
+理由2：Secondly, sport teaches important life skills.（人生のスキル）
+　└ 説明：協力・負け方・再挑戦を学ぶ。教科書では学べない
+
+結論：In conclusion, I strongly support…（立場の再表明＋理由2つの要約）</div>
+  <div class="m-note"><strong>注目ポイント：</strong>各段落の1文目（トピックセンテンス）だけを拾い読みしても主張の骨格が完全にわかること。これがCC 6.0の構造です。あなたが今後書くエッセイも、この「1文目だけで伝わる」状態を目指します。</div>`
+},
+/* ---------- DAY 17 ---------- */
+{
+  title:'設問分析とアイデア出し',
+  time:'約35分',
+  goal:'設問を読んで1分でタイプを判定し、5分で立場と理由2つを出せる。',
+  lesson:`
+    <h4>ステップ1：設問タイプの判定（30秒）</h4>
+    <p>Day 16の表の「合図」を探します。<strong>agree or disagree → Opinion型</strong>、<strong>discuss both views → Discussion型</strong>、<strong>outweigh → A/D型</strong>、<strong>problems / solutions → P/S型</strong>。</p>
+    <h4>ステップ2：キーワードの特定（30秒）</h4>
+    <p>設問の限定語を見逃すと大減点です。</p>
+    <div class="ex"><span class="e">例：</span>Some people think <strong>children under 12</strong> should not use smartphones <strong>at school</strong>.<br>
+    <span class="j">「12歳未満」「学校で」という限定を無視して「スマホ一般論」を書くとTRが下がる</span></div>
+    <h4>ステップ3：アイデア出し（3〜4分）</h4>
+    <p>手順：<strong>①立場を仮決め（書きやすい方でよい）→ ②理由を2つ → ③各理由に例を1つ</strong>。本心である必要はありません。「英語で書きやすい立場」を選ぶのが試験の戦略です。</p>
+    <h4>アイデアが出ないときの「視点カード」</h4>
+    <table>
+      <tr><th>視点</th><th>問いかけ</th></tr>
+      <tr><td>💰 お金・経済</td><td>誰が得する？コストは？雇用は？</td></tr>
+      <tr><td>🏥 健康・安全</td><td>心身の健康にどう影響する？</td></tr>
+      <tr><td>⏰ 時間・効率</td><td>時間の使い方はどう変わる？</td></tr>
+      <tr><td>👥 人間関係・社会</td><td>家族・コミュニティにどう影響？公平か？</td></tr>
+      <tr><td>🌱 環境</td><td>環境への影響は？</td></tr>
+      <tr><td>📚 教育・成長</td><td>スキル・学び・将来にどう影響？</td></tr>
+    </table>
+    <div class="tip"><strong>2つで十分：</strong>理由は2つ＋例があれば250語書けます。4つも5つも出すと1つあたりの展開が浅くなり、かえって6.0から遠ざかります（深さ＞数）。</div>
+  `,
+  drills:[
+    {q:'「Do the advantages of working from home outweigh the disadvantages?」のタイプは？', c:['Opinion型','Advantage/Disadvantage型','Problem/Solution型'], a:1, fb:'outweighが合図。メリット・デメリットを比べて「どちらが上回るか」の判定を求められています。'},
+    {q:'アイデア出しで選ぶべき立場は？', c:['自分の本心','英語で理由と例を書きやすい立場','試験官が好みそうな立場'], a:1, fb:'エッセイは思想テストではありません。書きやすさで選んでOK。試験官は立場の中身ではなく論理の質を採点します。'},
+    {q:'設問「Some people think school uniforms should be compulsory in high schools.」で無視してはいけない限定語は？', c:['Some people','high schools','uniforms'], a:1, fb:'「高校で」という限定。小学生や会社の制服の話を書くと的外れ（off-topic）になります。'}
+  ],
+  task:{
+    intro:'次の5つの設問について、それぞれ「タイプ／自分の立場／理由2つ」をメモしてください（各5分以内）。文章にしなくてOK、単語メモで構いません。',
+    prompt:'1. Some people believe that university education should be free for all students. To what extent do you agree or disagree?<br>2. Some people think it is better to raise children in the countryside, while others believe cities are more suitable. Discuss both views and give your own opinion.<br>3. More and more people are using food delivery apps. Do the advantages outweigh the disadvantages?<br>4. Many young people today spend too much time on social media. What problems does this cause, and what solutions can you suggest?<br>5. Some people believe that companies should allow employees to work only four days per week. To what extent do you agree or disagree?',
+    placeholder:'1. Opinion型／反対／理由: ①税負担が大きい ②本気度が下がる…\n2. …',
+    minWords:0
+  },
+  checklist:['5問すべてタイプを正しく判定した','立場を1つに決めた（どちらつかずにしない）','理由はそれぞれ2つ出した','限定語（all students, four daysなど）に印をつけた'],
+  model:`<div class="m-en">1. Opinion型／（例）反対寄り／理由: ①財源は税金→教育の質低下や増税の恐れ ②無料だと学ぶ動機が弱い学生も入学し卒業率が下がる
+
+2. Discussion型／（例）都会派／田舎の利点: 自然・安全・のびのび／都会の利点: 教育・医療・多様な経験→自分は機会の多さで都会を支持
+
+3. A/D型／（例）メリット優勢／メリット: ①時間の節約 ②高齢者や忙しい人の助け／デメリット: 配達員の労働条件・ゴミ増加
+
+4. P/S型／問題: ①睡眠不足・集中力低下 ②比較による自己肯定感の低下／解決策: ①アプリの使用時間制限機能 ②学校でのメディアリテラシー教育
+
+5. Opinion型／（例）賛成／理由: ①生産性は時間でなく成果で決まる ②休息が増え心身の健康と定着率が向上</div>
+  <div class="m-note"><strong>確認ポイント：</strong>正解の立場はありません。チェックすべきは①タイプ判定が合っているか ②立場が明確か ③理由が立場をきちんと支えているか、の3点。理由が「賛成の理由なのに反対を支えてしまっている」ズレがないかを見てください。</div>`
+},
+/* ---------- DAY 18 ---------- */
+{
+  title:'エッセイの基本構成（4段落テンプレート）',
+  time:'約30分',
+  goal:'どのタイプでも使える4段落の設計図を持ち、5分でアウトラインが作れる。',
+  lesson:`
+    <h4>4段落テンプレート（語数配分つき）</h4>
+    <table>
+      <tr><th>段落</th><th>役割</th><th>目安語数</th></tr>
+      <tr><td>① Introduction</td><td>設問の言い換え＋自分の立場（thesis）</td><td>約40語（2〜3文）</td></tr>
+      <tr><td>② Body 1</td><td>理由1：トピックセンテンス→説明→例</td><td>約90語（4〜5文）</td></tr>
+      <tr><td>③ Body 2</td><td>理由2：トピックセンテンス→説明→例</td><td>約90語（4〜5文）</td></tr>
+      <tr><td>④ Conclusion</td><td>立場の再表明＋理由の要約</td><td>約40語（2文）</td></tr>
+    </table>
+    <p>合計約260語。<strong>この配分を守るだけで「250語不足」と「書きすぎて時間切れ」の両方を防げます</strong>。</p>
+    <h4>タイプ別のBodyの中身</h4>
+    <table>
+      <tr><th>タイプ</th><th>Body 1</th><th>Body 2</th></tr>
+      <tr><td>Opinion</td><td>理由1</td><td>理由2（または譲歩→反論）</td></tr>
+      <tr><td>Discussion</td><td>意見Aの言い分</td><td>意見Bの言い分＋自分の見解</td></tr>
+      <tr><td>A/D</td><td>デメリット</td><td>メリット（＝自分の判定側を後に）</td></tr>
+      <tr><td>P/S</td><td>問題点2つ</td><td>対応する解決策2つ</td></tr>
+    </table>
+    <h4>アウトラインは「1行メモ×4」</h4>
+    <div class="ex"><span class="e">例（動物園禁止に反対の場合）：</span><br>
+    Intro: 言い換え＋「禁止に反対」<br>
+    Body1: 絶滅危惧種の保護（例：パンダの繁殖プログラム）<br>
+    Body2: 子どもの教育（例：実物を見る体験は映像より記憶に残る）<br>
+    Concl: 反対＋理由2つの要約<br>
+    <span class="j">これだけ。5分以内。きれいに書く必要はない</span></div>
+    <div class="tip"><strong>アウトラインを書かずに書き始めると</strong>、途中で「次に何を書くか」を考えて手が止まり、立場がブレやすくなります。5分の投資が結局いちばん速い、が受験者の共通結論です。</div>
+  `,
+  drills:[
+    {q:'250語のエッセイでBody 1つあたりの適切な語数は？', c:['約40語','約90語','約150語'], a:1, fb:'40/90/90/40の配分。Bodyが40語しかないと展開不足、150語だとバランスが崩れ時間も足りなくなります。'},
+    {q:'A/D型で「メリットが上回る」と主張する場合のBodyの順番は？', c:['メリット→デメリット','デメリット→メリット','メリットのみ2段落'], a:1, fb:'自分の判定側（メリット）を後に置くと、結論に自然につながります。両方に触れることも必須です。'},
+    {q:'アウトライン作成にかけるべき時間は？', c:['作らず書き始める','5分','15分'], a:1, fb:'5分で1行×4のメモを作ります。15分かけると執筆時間が足りません。'}
+  ],
+  task:{
+    intro:'次の設問について、4段落のアウトライン（各段落1〜2行のメモ）を5分で作ってください。今日は本文を書かなくてOKです。',
+    prompt:'Many people believe that zoos should be closed because keeping animals in cages is cruel. To what extent do you agree or disagree?',
+    placeholder:'Intro: 言い換え＋立場（反対）\nBody1: …（例: …）\nBody2: …（例: …）\nConcl: …',
+    minWords:0
+  },
+  checklist:['5分以内に作れた','立場が明確（賛成か反対か）','Body 1・2にそれぞれ理由＋例のメモがある','結論は新しい話ではなく要約になっている'],
+  model:`<div class="m-en">【反対（動物園は残すべき）の例】
+Intro: 動物園閉鎖論を言い換え＋「檻の問題は認めるが閉鎖には反対」
+Body1: 絶滅危惧種の保護と繁殖（例: 繁殖プログラムで個体数が回復した種がある）
+Body2: 教育効果（例: 実物を見る体験が子どもの環境意識を育てる）
+Concl: 反対＋動物福祉の改善を条件に存続すべき
+
+【賛成（閉鎖すべき）の例】
+Intro: 言い換え＋「完全に賛成」
+Body1: 動物のストレスと異常行動（例: 狭い檻を往復し続ける動物）
+Body2: 現代は代替手段がある（例: ドキュメンタリー、サファリパーク、VR）
+Concl: 賛成＋保護は自然保護区で行うべき</div>
+  <div class="m-note"><strong>確認ポイント：</strong>どちらの立場でも成立します。大事なのは①理由2つが立場を支えているか ②例がメモされているか ③結論が「Body 1・2の要約」になっているか。あなたのアウトラインをこの3点で見直してください。</div>`
+},
+/* ---------- DAY 19 ---------- */
+{
+  title:'Introductionの書き方',
+  time:'約30分',
+  goal:'どんな設問でも「言い換え＋立場表明」の2〜3文で序論を書き出せる。',
+  lesson:`
+    <h4>Introductionの2つの部品</h4>
+    <p><strong>①背景文（設問のパラフレーズ）＋②thesis statement（自分の立場）</strong>。これだけです。Task 1のDay 2で学んだ言い換え技術がそのまま使えます。</p>
+    <div class="ex"><span class="e">設問：</span>Some people believe that university education should be free for all students. To what extent do you agree or disagree?<br>
+    <span class="e">①背景文：</span>It is sometimes argued that governments should make higher education free of charge for every student.<br>
+    <span class="e">②立場：</span>However, I disagree with this idea because free tuition would place a heavy burden on taxpayers and reduce students' motivation.<br>
+    <span class="j">believe→argued、university education→higher education、free→free of charge と言い換え、理由を2つ予告している</span></div>
+    <h4>タイプ別thesisテンプレート</h4>
+    <table>
+      <tr><th>タイプ</th><th>テンプレート</th></tr>
+      <tr><td>Opinion</td><td>I completely agree/disagree with this view because A and B. ／ While I accept X, I believe Y.（部分賛成）</td></tr>
+      <tr><td>Discussion</td><td>This essay will discuss both perspectives before explaining why I side with the latter view.</td></tr>
+      <tr><td>A/D</td><td>Although this trend has some drawbacks, I believe the benefits outweigh them.</td></tr>
+      <tr><td>P/S</td><td>This essay will examine the main problems of this situation and suggest some possible solutions.</td></tr>
+    </table>
+    <h4>背景文の書き出しパターン</h4>
+    <div class="ex">
+    <span class="e">It is often said/argued that…</span> … 〜だとよく言われる<br>
+    <span class="e">In recent years, … has become increasingly common.</span> … 近年〜が一般的になっている<br>
+    <span class="e">Whether … is a matter of ongoing debate.</span> … 〜かどうかは議論が続いている</div>
+    <div class="ng-box"><span class="h">NG例</span><br>・設問文の丸写し（LR減点＋語数不算入）<br>・Nowadays, with the development of society and technology…（どの設問にも貼れる暗記フレーズは試験官に見抜かれ、TRの評価が下がる）<br>・序論で理由を詳しく展開してしまう（Bodyですることが無くなる）</div>
+  `,
+  drills:[
+    {q:'Introductionに必要な要素は？', c:['言い換え＋立場表明','具体例＋統計','理由の詳しい説明'], a:0, fb:'序論は2部品だけ。例や詳しい説明はBodyの仕事です。'},
+    {q:'「Nowadays, with the development of society…」のような書き出しの問題点は？', c:['文法が間違っている','どの設問にも使える暗記フレーズで、設問に応答していないと判断される','長すぎる'], a:1, fb:'採点基準は「この設問への応答」を見ます。設問の内容を言い換えた背景文が安全です。'},
+    {q:'Opinion型のthesisとして最も明確なのは？', c:['This is a difficult question with many sides.','I completely agree with this view for two main reasons.','Some people agree and others disagree.'], a:1, fb:'立場＋理由の数を予告する形が最も明確。AとCは立場を表明していないためTRが下がります。'}
+  ],
+  task:{
+    intro:'次の3つの設問（タイプ別）のIntroductionだけを書いてください（各2〜3文、約40語）。',
+    prompt:'1.【Opinion】Some people think that all children should learn a musical instrument at school. To what extent do you agree or disagree?<br>2.【Discussion】Some people prefer to travel abroad, while others think domestic travel is better. Discuss both views and give your own opinion.<br>3.【A/D】An increasing number of people buy secondhand clothes. Do the advantages of this trend outweigh the disadvantages?',
+    placeholder:'1. It is sometimes argued that…. I completely agree with this view because….\n2. …\n3. …',
+    minWords:60
+  },
+  checklist:['3つとも設問を言い換えた（丸写しなし）','3つとも立場または方針を表明した','各40語前後・2〜3文に収めた','暗記調の万能フレーズを使っていない'],
+  model:`<div class="m-en">1. It is sometimes argued that learning a musical instrument should be a compulsory part of every child\'s schooling. I completely agree with this view, because music develops children\'s brains and gives them a lifelong source of enjoyment.
+
+2. While some people believe that travelling overseas is the best way to spend a holiday, others insist that exploring one\'s own country is more rewarding. This essay will discuss both views before explaining why I favour travelling abroad.
+
+3. Buying used clothing has become increasingly popular in recent years. Although this trend has some minor drawbacks, I believe its economic and environmental benefits clearly outweigh them.</div>
+  <div class="m-note"><strong>確認ポイント：</strong>1は理由2つの予告つき賛成、2は両論＋自分の側の予告、3は「デメリットも少しあるがメリット優勢」の判定。あなたの答案が「立場を読み取れる序論」になっているか、家族や友人に読んでもらうつもりでチェックしてください。</div>`
+},
+/* ---------- DAY 20 ---------- */
+{
+  title:'ボディ段落①：トピックセンテンス',
+  time:'約30分',
+  goal:'段落の主張を1文目で言い切るトピックセンテンスが書ける。',
+  lesson:`
+    <h4>トピックセンテンス＝段落の見出し文</h4>
+    <p>Body段落の1文目で<strong>「この段落で何を主張するか」を1文で言い切ります</strong>。試験官は各段落の1文目を特に注意して読むため、ここが曖昧だとCC・TRの両方が下がります。</p>
+    <h4>良いトピックセンテンスの条件</h4>
+    <table>
+      <tr><th>条件</th><th>説明</th></tr>
+      <tr><td>① 主張が1つ</td><td>1段落1アイデアの原則。2つ入れたら段落を分ける</td></tr>
+      <tr><td>② 抽象的すぎない</td><td>「教育は大事だ」ではなく「なぜ・どう大事か」まで踏み込む</td></tr>
+      <tr><td>③ 例や数字は入れない</td><td>詳細は2文目以降の仕事</td></tr>
+    </table>
+    <div class="ok-box"><span class="h">良い例</span><br>The main advantage of remote working is that employees can use their time far more efficiently.<br><span style="font-size:.82rem">→「在宅勤務の最大の利点＝時間効率」と主張が明確。この後に説明と例が続くことが予想できる</span></div>
+    <div class="ng-box"><span class="h">弱い例</span><br>・Remote working is very interesting and has many points.（何も主張していない）<br>・Remote working saves time, and it is also good for the environment, and companies can save money.（主張が3つ。段落が散らかる）</div>
+    <h4>便利な型</h4>
+    <div class="ex">
+    <span class="e">The main/first benefit of X is that S V.</span><br>
+    <span class="e">One major problem with X is that S V.</span><br>
+    <span class="e">Firstly, X allows people to V.</span><br>
+    <span class="e">Another reason to support X is its impact on Y.</span></div>
+  `,
+  drills:[
+    {q:'トピックセンテンスに入れてはいけないものは？', c:['段落の主張','具体的な統計や例','主張の方向性'], a:1, fb:'例・統計は2文目以降。1文目は主張だけを短く言い切ります。'},
+    {q:'「Fast food is bad.」の改善として最も良いのは？', c:['Fast food is very very bad.','Fast food is one of the most serious problems in the world today.','The heavy consumption of fast food is a major cause of childhood obesity.'], a:2, fb:'「なぜ・どう悪いか（→子どもの肥満の主因）」まで踏み込むと、続く説明の方向が決まります。'},
+    {q:'1つの段落に主張は何個入れるべき？', c:['1個','2〜3個','多いほど良い'], a:0, fb:'1段落1アイデア。主張が2つ浮かんだら、それは段落を2つに分けるサインです。'}
+  ],
+  task:{
+    intro:'次の6つの「段落で言いたいこと（日本語メモ）」を、英語のトピックセンテンス1文にしてください。',
+    prompt:'1. 週4日勤務は社員の心の健康に良い<br>2. 大学無償化は国の財政を圧迫する<br>3. 制服は家庭の経済格差を見えにくくする<br>4. オンライン学習は自己管理ができない学生には向かない<br>5. 都市の車を減らす最も効果的な方法は公共交通の改善だ<br>6. 動物園は絶滅危惧種の保護に重要な役割を果たす',
+    placeholder:'1. The greatest benefit of a four-day working week is its positive impact on employees\' mental health.\n2. …',
+    minWords:60
+  },
+  checklist:['6文すべて主張が1つに絞れている','例・統計を入れていない','The main benefit of… などの型を3種類以上使った'],
+  model:`<div class="m-en">1. The greatest benefit of a four-day working week is its positive impact on employees\' mental health.
+
+2. One major problem with free university education is that it places an enormous financial burden on the state.
+
+3. School uniforms help to hide economic differences between families.
+
+4. Online learning is unsuitable for students who lack self-discipline.
+
+5. The most effective way to reduce cars in city centres is to improve public transport.
+
+6. Zoos play a vital role in protecting endangered species.</div>
+  <div class="m-note"><strong>確認ポイント：</strong>どの文も「この後に説明と例が続くこと」が自然に予想できます。あなたの文が①主張1つ ②具体的な方向性あり ③例なし、の3条件を満たしているか照合してください。表現が違っても条件を満たしていれば正解です。</div>`
+},
+/* ---------- DAY 21 ---------- */
+{
+  title:'ボディ段落②：理由と具体例の展開',
+  time:'約35分',
+  goal:'トピックセンテンスをPoint→Explain→Exampleの型で90語の段落に展開できる。',
+  lesson:`
+    <h4>PEEの型（Point → Explain → Example）</h4>
+    <table>
+      <tr><th>部品</th><th>役割</th><th>目安</th></tr>
+      <tr><td><strong>P</strong>oint</td><td>トピックセンテンス（Day 20）</td><td>1文</td></tr>
+      <tr><td><strong>E</strong>xplain</td><td>なぜそう言えるのか、理屈を2〜3文で</td><td>2〜3文</td></tr>
+      <tr><td><strong>E</strong>xample</td><td>For example/For instanceで具体例</td><td>1〜2文</td></tr>
+    </table>
+    <div class="ex"><span class="e">P：</span>The greatest benefit of a four-day working week is its positive impact on employees' mental health.<br>
+    <span class="e">E：</span>An extra day off gives workers time to rest properly, exercise and spend time with their families. When people return to work well rested, they are less likely to suffer from stress or burnout.<br>
+    <span class="e">E：</span>For example, several companies that trialled a four-day week reported lower rates of sick leave and higher job satisfaction among staff.<br>
+    <span class="j">P1文＋E2文＋E1文＝約80語。これで1段落完成</span></div>
+    <h4>「例が思いつかない」ときの3つの引き出し</h4>
+    <table>
+      <tr><th>引き出し</th><th>使い方</th></tr>
+      <tr><td>① 一般例</td><td>「多くの企業では…」「日本では…」と一般的な傾向を例にする。<strong>正確な統計を暗記している必要はない</strong></td></tr>
+      <tr><td>② 身近な例の一般化</td><td>「私の友人が…」→「多くの若い社会人が…」と主語を一般化して使う</td></tr>
+      <tr><td>③ 仮想例</td><td>If a student has to work part-time, … と条件文で状況を描く</td></tr>
+    </table>
+    <div class="ng-box"><span class="h">注意</span><br>・「According to a 2019 study by Harvard University, exactly 73.5% of…」のような<strong>デッチ上げの精密統計</strong>は不自然で逆効果。「some studies suggest」「it is widely reported that」程度のぼかした形が安全です。<br>・例のない段落（理屈だけ）は6.0では「展開不十分」になりがち。必ず1つ入れましょう。</div>
+  `,
+  drills:[
+    {q:'PEEのExplainパートの役割は？', c:['主張を繰り返す','主張が正しい理屈を説明する','新しい主張を追加する'], a:1, fb:'「なぜPointが正しいと言えるのか」の理屈（メカニズム）を2〜3文で示します。'},
+    {q:'例として最も安全で効果的なのは？', c:['精密な数字入りのでっち上げ統計','一般的な傾向や身近な例を一般化したもの','例は書かない'], a:1, fb:'「For example, many companies now…」のような一般例で十分。精密な偽統計は不自然さで逆効果です。'},
+    {q:'90語の段落の理想的な文数は？', c:['1〜2文','4〜5文','8〜10文'], a:1, fb:'P1文＋E2〜3文＋E1〜2文＝4〜5文。8文以上は1文が短すぎて幼い印象になります。'}
+  ],
+  task:{
+    intro:'Day 20で書いたトピックセンテンスから2つ選び、それぞれPEEの型で90語前後の段落に展開してください。',
+    prompt:'おすすめ：「1. 週4日勤務」と「5. 公共交通」（例が出しやすい）。もちろん他の文でもOKです。',
+    placeholder:'The greatest benefit of a four-day working week is its positive impact on employees\' mental health. An extra day off…\n\n（2段落目）…',
+    minWords:160
+  },
+  checklist:['2段落ともP→E→Eの順になっている','Explainが2文以上ある','For example / For instance で例を入れた','各段落85〜100語に収まっている'],
+  model:`<div class="m-en">【段落例1】The greatest benefit of a four-day working week is its positive impact on employees\' mental health. An extra day off gives workers time to rest properly, exercise and spend time with their families. When people return to the office well rested, they are far less likely to suffer from stress or burnout, which also reduces long-term absence. For example, several companies that have trialled a four-day week reported lower rates of sick leave and noticeably higher job satisfaction among their staff.（約85語）
+
+【段落例2】The most effective way to reduce cars in city centres is to improve public transport. Most commuters drive not because they love driving, but because buses and trains are slow, crowded or unreliable. If cheap and frequent services were available, many drivers would happily leave their cars at home. For instance, cities with extensive underground networks, such as Tokyo and London, have far lower rates of car commuting than cities without them.（約75語）</div>
+  <div class="m-note"><strong>確認ポイント：</strong>両段落とも「主張→理屈（2〜3文）→For example/instance＋一般例」の流れ。段落例2の例は正確な統計ではなく「よく知られた一般的事実」であることに注目。この程度の具体性で十分に6.0の「展開」と認められます。</div>`
+},
+/* ---------- DAY 22 ---------- */
+{
+  title:'Conclusionの書き方',
+  time:'約25分',
+  goal:'新情報を入れずに、立場の再表明＋要約の2文で結論を書ける。',
+  lesson:`
+    <h4>Conclusionの仕事は2つだけ</h4>
+    <p><strong>①立場の再表明（序論と同じ立場を別の言葉で）＋②主要理由の要約</strong>。約40語・2文で十分です。</p>
+    <div class="ex"><span class="e">型：</span>In conclusion, I firmly believe that [立場の言い換え]. [理由1] and [理由2] make this the most sensible approach.<br>
+    <span class="e">例：</span>In conclusion, I firmly believe that a four-day working week should become the norm. Healthier employees and equal or better productivity make this change beneficial for both workers and employers.</div>
+    <h4>結論の書き出しバリエーション</h4>
+    <div class="ex">
+    <span class="e">In conclusion, …</span> … 最も標準的で安全<br>
+    <span class="e">To sum up, …</span> … ややカジュアル寄りだが可<br>
+    <span class="e">Overall, it seems clear that …</span> … こなれた印象</div>
+    <h4>やってはいけない3つ</h4>
+    <table>
+      <tr><th>NG</th><th>理由</th></tr>
+      <tr><td>新しい理由・例を出す</td><td>展開されないアイデアは「未消化」としてTR減点</td></tr>
+      <tr><td>立場を変える・弱める</td><td>「But of course, the other side is also right.」で一貫性が崩壊</td></tr>
+      <tr><td>結論を書かない（時間切れ）</td><td>構成の欠落として大きな減点。<strong>時間が無ければBodyを削ってでも結論を書く</strong></td></tr>
+    </table>
+    <div class="tip"><strong>時間切れ対策：</strong>残り3分になったら、Bodyの途中でもIn conclusion,に移ってください。「Body 2が短いが結論はある」答案の方が、「Bodyは完璧だが結論がない」答案よりスコアが出ます。</div>
+  `,
+  drills:[
+    {q:'Conclusionに入れてよいものは？', c:['新しい具体例','立場の再表明と理由の要約','新しい反対意見'], a:1, fb:'結論は要約の場。新情報はどんなに良いアイデアでも入れません。'},
+    {q:'残り3分でBody 2が書きかけ。正しい判断は？', c:['Body 2を完成させ結論を諦める','Body 2を途中で切り上げて結論を書く','最初から書き直す'], a:1, fb:'結論の欠落は構成全体の欠陥と見なされます。2文の結論を最優先で確保します。'},
+    {q:'序論で「完全に賛成」と書いた場合、結論では？', c:['同じ立場を別の言葉で再表明する','バランスを取るため反対意見に譲歩する','立場には触れない'], a:0, fb:'最後の一文まで同じ立場を貫きます。結論での譲歩は「立場のブレ」としてTRを下げる典型パターンです。'}
+  ],
+  task:{
+    intro:'①Day 21で書いた2つの段落を持つエッセイを想定し、その結論（2文・約40語）を書いてください。②さらに、Day 19の設問1（楽器学習）に賛成した場合の結論も書いてください。',
+    prompt:'ヒント：In conclusion, I firmly believe that…. の型に、Body 1と2の理由を圧縮して埋め込みます。',
+    placeholder:'① In conclusion, …\n② In conclusion, …',
+    minWords:60
+  },
+  checklist:['2つとも新情報ゼロ（理由の要約のみ）','立場が序論と一致している','各40語前後・2文に収めた'],
+  model:`<div class="m-en">① In conclusion, I firmly believe that a shorter working week combined with better public transport policies reflects the same principle: wellbeing drives productivity. Healthier, less stressful daily lives benefit workers, companies and cities alike.
+（※実際の試験では1エッセイ1結論です。ここでは2段落の主張をまとめる練習として書いています）
+
+② In conclusion, I fully support making musical education compulsory at school. The cognitive benefits of learning an instrument and the lifelong joy that music provides make it a valuable part of every child\'s development.</div>
+  <div class="m-note"><strong>確認ポイント：</strong>②の「cognitive benefits」と「lifelong joy」は、序論（Day 19の回答例）で予告した2つの理由の言い換えです。序論の理由→Body→結論の要約、が同じ2本の柱でつながっていることが「一貫性」の正体です。</div>`
+},
+/* ---------- DAY 23 ---------- */
+{
+  title:'接続表現と論理の流れ（CC対策）',
+  time:'約30分',
+  goal:'接続語を適切な量で使い分け、文と文を論理的につなげられる。',
+  lesson:`
+    <h4>用途別・接続表現マップ</h4>
+    <table>
+      <tr><th>用途</th><th>表現</th></tr>
+      <tr><td>順序</td><td>Firstly, Secondly, Finally</td></tr>
+      <tr><td>追加</td><td>Furthermore, Moreover, In addition, also</td></tr>
+      <tr><td>対比・譲歩</td><td>However, On the other hand, Although S V, Despite N</td></tr>
+      <tr><td>因果</td><td>As a result, Therefore, Consequently, This is because S V</td></tr>
+      <tr><td>例示</td><td>For example, For instance, such as N</td></tr>
+      <tr><td>結論</td><td>In conclusion, Overall</td></tr>
+    </table>
+    <h4>6.0の落とし穴：接続語の使いすぎ</h4>
+    <div class="ng-box"><span class="h">NG例（すべての文頭に接続語）</span><br>Firstly, exercise is healthy. Moreover, it reduces stress. Furthermore, it is fun. In addition, it is cheap. However, some people are busy. Therefore, they cannot exercise.<br>→ 機械的で不自然。バンド7の基準には「接続語を使いすぎない」ことが明記されています。</div>
+    <h4>接続語に頼らないつなぎ方</h4>
+    <table>
+      <tr><th>技術</th><th>例</th></tr>
+      <tr><td>代名詞で受ける</td><td>Exercise reduces stress. <strong>It</strong> also improves sleep quality.</td></tr>
+      <tr><td>指示語＋名詞で受ける</td><td>Many cities have introduced bike-sharing. <strong>This approach</strong> has cut traffic significantly.</td></tr>
+      <tr><td>関係詞でつなぐ</td><td>…reduces stress, <strong>which</strong> in turn improves productivity.</td></tr>
+    </table>
+    <div class="tip"><strong>適量の目安：</strong>90語の段落で文頭の接続語は<strong>2〜3個まで</strong>。残りは代名詞・指示語・関係詞でつなぐと自然な流れになります。</div>
+  `,
+  drills:[
+    {q:'「運動はストレスを減らす。その結果、生産性が上がる」に最適な接続は？', c:['However','As a result','For instance'], a:1, fb:'因果関係なのでAs a result / Therefore / Consequently。Howeverは逆接、For instanceは例示です。'},
+    {q:'接続語の使い方として最も評価が高いのは？', c:['すべての文頭に置く','段落に2〜3個に抑え、代名詞や指示語も併用する','一切使わない'], a:1, fb:'多すぎも少なすぎもNG。「This approach」「which」などの多様なつなぎ方がCC高評価の鍵です。'},
+    {q:'「Despite」の正しい使い方は？', c:['Despite it is expensive, …','Despite the high cost, …','Despite of the high cost, …'], a:1, fb:'Despite＋名詞。文をつなぐならAlthough it is expensive。despite ofは存在しない形です（頻出ミス）。'}
+  ],
+  task:{
+    intro:'次の「接続表現がすべて抜けた」段落に、適切な接続語・代名詞・指示語を補って書き直してください。（文頭接続語は3個まで。代名詞・指示語も使うこと）',
+    prompt:'Governments should invest in public transport. ___ cheap and reliable buses and trains encourage people to leave their cars at home. ___ reduces traffic jams and air pollution in city centres. ___ many cities in Europe have introduced low-cost monthly passes. ___ car use in ___ cities has fallen sharply. ___ public transport investment benefits both commuters and the environment.',
+    placeholder:'Governments should invest in public transport. This is because cheap and reliable…',
+    minWords:60
+  },
+  checklist:['文頭の接続語を3個以内に抑えた','This / It / these cities など代名詞・指示語を使った','因果（As a result等）と例示（For example等）を正しい場所に置いた'],
+  model:`<div class="m-en">Governments should invest in public transport. <strong>This is because</strong> cheap and reliable buses and trains encourage people to leave their cars at home, <strong>which</strong> reduces traffic jams and air pollution in city centres. <strong>For example,</strong> many cities in Europe have introduced low-cost monthly passes. <strong>As a result,</strong> car use in <strong>these</strong> cities has fallen sharply. <strong>Overall,</strong> public transport investment benefits both commuters and the environment.</div>
+  <div class="m-note"><strong>確認ポイント：</strong>文頭の接続語はFor example / As a result / Overallの3つに抑え、あとはThis is because（理由）、which（関係詞）、these cities（指示語＋名詞）でつないでいます。全文頭がFirstly/Moreover/Furthermore…になっていたら、今日のレッスンを読み直してください。</div>`
+},
+/* ---------- DAY 24 ---------- */
+{
+  title:'Opinion型（agree/disagree）攻略',
+  time:'約60分',
+  goal:'一貫した立場でOpinion型エッセイを40分・250語で書き切れる。',
+  lesson:`
+    <h4>Opinion型の3つの戦略</h4>
+    <table>
+      <tr><th>戦略</th><th>構成</th><th>おすすめ度</th></tr>
+      <tr><td>① 完全賛成/完全反対</td><td>Body1＝理由1、Body2＝理由2</td><td>★★★（6.0なら最も安全）</td></tr>
+      <tr><td>② 譲歩つき賛成/反対</td><td>Body1＝相手の言い分を認めて反論、Body2＝自分の理由</td><td>★★（書けると強いが難度高め）</td></tr>
+      <tr><td>③ 部分賛成（バランス型）</td><td>Body1＝賛成の面、Body2＝反対の面＋条件</td><td>★（立場がブレやすく6.0では危険）</td></tr>
+    </table>
+    <p><strong>6.0を目指す段階では戦略①を推奨します。</strong>「To what extent（どの程度）」と聞かれていても、completely agreeで答えて全く問題ありません。</p>
+    <h4>立場を貫くための言葉遣い</h4>
+    <div class="ex">
+    <span class="e">序論：</span>I completely agree with this idea for two main reasons.<br>
+    <span class="e">Body 1：</span>The first reason to support … is that …<br>
+    <span class="e">Body 2：</span>Furthermore, … / An additional benefit is that …<br>
+    <span class="e">結論：</span>In conclusion, I remain convinced that …<br>
+    <span class="j">全段落が「賛成」の方向を向いた表現で統一されている</span></div>
+    <div class="ng-box"><span class="h">立場がブレる典型文（書かないこと）</span><br>・However, the opposite opinion is also understandable and correct.<br>・It depends on the situation.（判定を放棄している）<br>譲歩するなら「Although some argue X, this problem can be solved by Y.」のように<strong>必ず反論とセット</strong>で。</div>
+    <h4>今日の流れ</h4>
+    <p>①5分でアウトライン（Day 17-18）→ ②30分で執筆（Day 19-22の部品を組み立てる）→ ③5分で見直し → ④回答例と比較。</p>
+  `,
+  drills:[
+    {q:'6.0を目指す場合、Opinion型で最も安全な戦略は？', c:['完全賛成または完全反対で理由2つ','賛成と反対を半分ずつ','立場を明示せず両論併記'], a:0, fb:'一方の立場＋理由2つが最も一貫性を保ちやすい構成です。両論併記はDiscussion型の書き方で、Opinion型では立場不明瞭になります。'},
+    {q:'「To what extent do you agree?」にcompletely agreeで答えるのは？', c:['不正解になる','全く問題ない','partlyと答えるのがルール'], a:1, fb:'to what extentは「あなたの賛成度を明示せよ」という意味。completely / stronglyはむしろ明確で高評価です。'},
+    {q:'譲歩（相手の言い分を認める）を入れる場合のルールは？', c:['認めるだけでよい','必ず反論とセットにする','結論に入れる'], a:1, fb:'Although some argue X, … と認めたら、必ず「しかしYだから問題ない」と自分の立場に引き戻します。'}
+  ],
+  task:{
+    intro:'【実戦】タイマー40分。アウトライン5分→執筆30分→見直し5分で、次のOpinion型エッセイを書いてください（250語以上）。',
+    prompt:'Some people believe that unpaid volunteer work should be a compulsory part of high school education. To what extent do you agree or disagree?',
+    placeholder:'（まず5分でアウトラインをメモしてから書き始めましょう）\nIntro:\nBody1:\nBody2:\nConcl:\n\n---\n\nIt is sometimes argued that…',
+    minWords:250
+  },
+  checklist:['250語以上ある','序論で立場を明示した（completely agree等）','Body 2つがそれぞれP→E→Eになっている','立場が最後までブレていない','結論は要約のみ（新情報なし）','40分以内に書き終えた'],
+  model:`<div class="m-en">It is sometimes argued that all high school students should be required to do unpaid volunteer work as part of their education. I completely agree with this idea, because volunteering builds character and strengthens the connection between young people and their communities.
+
+The first reason to support compulsory volunteering is its educational value. Skills such as responsibility, teamwork and empathy are difficult to teach in a classroom, but they develop naturally when students help real people with real needs. For example, a teenager who spends one afternoon a week assisting elderly residents at a care home learns patience and communication skills that no textbook can provide. These experiences also help students discover what kind of work suits them before they choose a career.
+
+Furthermore, compulsory volunteering benefits society as a whole. Schools exist within communities, yet many young people grow up with little contact with people outside their own generation or social group. If every student contributed a few hours a month, local charities, hospitals and environmental projects would receive an enormous amount of support. This is why several countries have already introduced community service programmes into their national curriculums, and such schemes are widely reported to increase civic participation in adulthood.
+
+Some may argue that forcing students to volunteer contradicts the spirit of volunteering. However, the purpose of education is to give young people experiences they would not choose by themselves, and many students who start reluctantly end up continuing by choice.
+
+In conclusion, I remain convinced that unpaid community service should be a required part of high school education, as it develops essential life skills and creates stronger communities.（約270語）</div>
+  <div class="m-note"><strong>この答案の構造：</strong>序論＝言い換え＋完全賛成＋理由2つの予告。Body1＝教育的価値（P→E→例：介護施設）、Body2＝社会への利益（P→E→例：各国の導入）。第4段落は「譲歩→反論」のセット（戦略②の部品）で、6.0段階では省略しても構いません。結論＝立場の再表明＋2本柱の要約。<strong>あなたの答案と比べるポイント：</strong>①立場の一貫性 ②各Bodyに例があるか ③結論が要約だけか。</div>`
+},
+/* ---------- DAY 25 ---------- */
+{
+  title:'Discussion型（discuss both views）攻略',
+  time:'約60分',
+  goal:'両論を公平に提示しつつ自分の意見も明示するエッセイが書ける。',
+  lesson:`
+    <h4>Discussion型の絶対ルール</h4>
+    <p>設問は「<strong>両方の意見を論じ、かつ自分の意見を述べよ</strong>」。つまり書くべきことは3つ：①意見Aの言い分 ②意見Bの言い分 ③自分はどちら側か。<strong>1つでも欠けるとTRが大幅減点</strong>です。</p>
+    <h4>推奨構成</h4>
+    <table>
+      <tr><th>段落</th><th>内容</th></tr>
+      <tr><td>Intro</td><td>両論の言い換え＋「両方論じた上で自分は後者を支持」と予告</td></tr>
+      <tr><td>Body 1</td><td>意見A側の言い分（自分と反対側を先に）＋なぜそう考える人がいるのか</td></tr>
+      <tr><td>Body 2</td><td>意見B側の言い分＋<strong>自分がこちらを支持する理由</strong></td></tr>
+      <tr><td>Conclusion</td><td>両論に触れつつ自分の立場を再表明</td></tr>
+    </table>
+    <div class="tip"><strong>自分と反対の意見を先に書く</strong>のがコツ。Body 2（自分側）→結論と流れが繋がり、説得力が増します。</div>
+    <h4>視点を切り替える表現</h4>
+    <div class="ex">
+    <span class="e">意見Aの紹介：</span>Those who support X argue that… / Proponents of X claim that… / On the one hand, some people believe…<br>
+    <span class="e">意見Bへの転換：</span>On the other hand, others insist that… / However, opponents point out that…<br>
+    <span class="e">自分の意見：</span>Personally, I side with the latter view because… / In my view, the second argument is more convincing.</div>
+    <div class="ng-box"><span class="h">頻出ミス</span><br>・両論を書いたのに自分の意見を書き忘れる（最頻出！）<br>・Body 1で意見Aを紹介した直後に「but this is wrong」と潰してしまう→Aの言い分をまず公平に説明し、反論は自分側の段落で<br>・「私はどちらも正しいと思う」→ 判定の放棄。どちら寄りかは必ず示す</div>
+  `,
+  drills:[
+    {q:'Discussion型で必ず書くべき3要素は？', c:['意見A・意見B・自分の意見','意見Aと意見Bのみ','自分の意見のみ'], a:0, fb:'both viewsの説明＋your own opinion。自分の意見の書き忘れが最も多い失点パターンです。'},
+    {q:'自分と反対側の意見はどう扱う？', c:['書かない','まず公平にその言い分を説明する','紹介と同時に否定する'], a:1, fb:'「なぜそう考える人がいるのか」を一度公平に説明できることが、このタイプの評価ポイントです。'},
+    {q:'「Those who support early education argue that…」この表現の機能は？', c:['自分の意見の表明','ある立場の人々の主張の紹介','例示'], a:1, fb:'主張を「その立場の人々」に帰属させる表現。自分の意見（Personally, I…）と区別して使い分けます。'}
+  ],
+  task:{
+    intro:'【実戦】タイマー40分で次のDiscussion型エッセイを書いてください（250語以上）。自分の意見を書き忘れないこと！',
+    prompt:'Some people think that children should start formal education at a very early age, while others believe they should not start school until the age of seven. Discuss both views and give your own opinion.',
+    placeholder:'（アウトライン5分：A側の言い分／B側の言い分／自分はどちら＋理由）\n\nWhile some parents believe that…',
+    minWords:250
+  },
+  checklist:['意見Aの言い分を公平に説明した','意見Bの言い分を説明した','自分の意見を明示した（Personally, I…など）','Those who… / On the other hand などの帰属表現を使った','250語以上・40分以内'],
+  model:`<div class="m-en">People disagree about the best age for children to begin formal schooling. While some parents believe that an early start gives children an academic advantage, others argue that formal lessons should not begin until around the age of seven. This essay will discuss both views before explaining why I largely support the second position.
+
+Those who support early formal education argue that young children absorb information remarkably quickly. In their view, starting to read, write and count at the age of three or four allows children to build a strong foundation before primary school, and this may be especially valuable for children whose parents cannot teach them at home. Early schooling can therefore be seen as a tool for reducing educational inequality.
+
+On the other hand, opponents point out that early childhood is primarily a time for play, and that play itself is how young children learn. Through games, children develop language, imagination and social skills at their own pace, without the stress of tests or targets. It is often noted that in Finland, where formal education begins at seven, students still achieve some of the best academic results in the world. This suggests that a later start does not harm, and may even help, long-term learning.
+
+Personally, I side with the second view. Forcing very young children to sit still and study risks damaging their natural curiosity, which is the engine of all later learning. A rich play-based environment, followed by formal schooling at around seven, seems the healthiest path.
+
+In conclusion, although early education may offer a head start, I believe that delaying formal lessons and protecting early childhood play produces more motivated and capable learners.（約270語）</div>
+  <div class="m-note"><strong>この答案の構造：</strong>序論で両論＋「後者支持」を予告。Body1＝A側（早期教育派）の言い分を公平に紹介（in their viewで距離を保つ）。Body2＝B側の言い分＋フィンランドの一般例。第4段落で自分の意見（Personally）。<strong>比較ポイント：</strong>①自分の意見を書いたか ②A側を紹介した段落で潰していないか ③帰属表現（Those who / opponents point out）を使えたか。</div>`
+},
+/* ---------- DAY 26 ---------- */
+{
+  title:'Advantage/Disadvantage型攻略',
+  time:'約60分',
+  goal:'メリット・デメリットを整理し、outweigh設問に明確な判定を下せる。',
+  lesson:`
+    <h4>outweigh設問は「判定」を求めている</h4>
+    <p>「Do the advantages outweigh the disadvantages?」は<strong>「メリットとデメリット、どちらが重い？」という判定質問</strong>です。両方を列挙するだけで判定を書かないと、TRが大きく下がります。<strong>書き始める前に判定を決めてください</strong>。</p>
+    <h4>推奨構成（メリット優勢と判定する場合）</h4>
+    <table>
+      <tr><th>段落</th><th>内容</th></tr>
+      <tr><td>Intro</td><td>言い換え＋「デメリットもあるがメリットが上回る」と判定を予告</td></tr>
+      <tr><td>Body 1</td><td>デメリット側（1〜2個）を先に。＋可能なら「ただし対処可能」と軽く反論</td></tr>
+      <tr><td>Body 2</td><td>メリット側（2個）。自分の判定側なので厚めに書く</td></tr>
+      <tr><td>Conclusion</td><td>判定の再表明</td></tr>
+    </table>
+    <h4>判定を伝える表現</h4>
+    <div class="ex">
+    <span class="e">序論：</span>Although this trend has certain drawbacks, I believe its benefits clearly outweigh them.<br>
+    <span class="e">Body 1→2の転換：</span>Despite these disadvantages, the positive effects are far more significant.<br>
+    <span class="e">結論：</span>In conclusion, while [デメリット] should not be ignored, the advantages of … outweigh the disadvantages.</div>
+    <h4>「重さ」を示すと説得力が出る</h4>
+    <div class="ok-box"><span class="h">単なる列挙を超えるコツ</span><br>・デメリットには「対処可能性」を添える：This problem, however, can be reduced by…<br>・メリットには「影響の大きさ・広さ」を添える：This benefits not only individuals but society as a whole.<br>→「数」ではなく「重み」で比較していることが伝わる</div>
+  `,
+  drills:[
+    {q:'outweigh設問で絶対に必要なものは？', c:['メリットとデメリットの完全なリスト','どちらが上回るかの明確な判定','中立的なまとめ'], a:1, fb:'判定こそが設問への答え。列挙だけの答案は「質問に答えていない」と見なされます。'},
+    {q:'「メリット優勢」と判定する場合、デメリットはどこに書く？', c:['書かない','Body 1（先）に書く','結論に書く'], a:1, fb:'反対側を先に書き、自分の判定側（メリット）を後に置くと結論へ自然に流れます。デメリット無視は「両面の検討不足」で減点です。'},
+    {q:'デメリットを書くときに説得力を上げる一言は？', c:['This problem can be reduced by…（対処可能）','This is a terrible problem.（強調）','I will not discuss this.（回避）'], a:0, fb:'「対処可能」と添えることで、デメリットを認めつつ判定（メリット優勢）を守れます。'}
+  ],
+  task:{
+    intro:'【実戦】タイマー40分で次のA/D型エッセイを書いてください（250語以上）。書く前に判定を決めること。',
+    prompt:'In many countries, an increasing number of employees work from home. Do the advantages of this trend outweigh the disadvantages?',
+    placeholder:'（判定を先に決める：メリット優勢？デメリット優勢？）\n\nWorking from home has become increasingly common…',
+    minWords:250
+  },
+  checklist:['序論で判定を予告した','デメリット→メリットの順で書いた（メリット優勢の場合）','デメリットに対処可能性を添えた','結論で判定を再表明した','250語以上・40分以内'],
+  model:`<div class="m-en">Working from home, once a rare privilege, has become a normal arrangement in many countries. Although remote work creates some genuine difficulties, I believe its advantages for both employees and employers clearly outweigh the disadvantages.
+
+The main drawback of home working is the loss of face-to-face contact. Employees who rarely meet their colleagues can feel isolated, and spontaneous conversations, which often produce new ideas, disappear. In addition, the boundary between work and private life can become blurred, with some people finding it hard to switch off in the evening. These problems, however, can largely be reduced by simple measures such as regular office days, video meetings and clear working-hour policies.
+
+In contrast, the benefits of remote work are substantial and far-reaching. Firstly, employees save enormous amounts of time and money by not commuting. A worker who previously spent two hours a day on crowded trains gains ten hours a week for family, exercise or rest, which improves both health and motivation. Secondly, companies benefit as well: they can reduce office costs and recruit talented staff regardless of where they live. This is particularly valuable for parents and people with disabilities, who were often excluded from traditional office jobs. Remote work therefore benefits not only individuals but the economy and society as a whole.
+
+In conclusion, while the lack of personal contact should not be ignored, it is a manageable problem. The huge savings in time, the wider access to jobs and the gains for businesses mean that the advantages of working from home decisively outweigh the disadvantages.（約255語）</div>
+  <div class="m-note"><strong>この答案の構造：</strong>序論で判定（メリット優勢）を予告→Body1でデメリット（孤立・境界の曖昧さ）＋「対処可能」→Body2でメリット2つ（通勤時間・企業と社会への利益）を厚めに→結論で判定を再表明。<strong>比較ポイント：</strong>①判定が序論・結論の両方にあるか ②デメリットにも触れたか ③In contrast / however で両面の切り替えが明確か。</div>`
+},
+/* ---------- DAY 27 ---------- */
+{
+  title:'Problem/Solution型攻略',
+  time:'約60分',
+  goal:'問題→解決策が対応したP/S型エッセイを書き切れる。',
+  lesson:`
+    <h4>P/S型の絶対ルール：問題と解決策を「対応」させる</h4>
+    <p>設問は「What problems? What solutions?」の2つの質問。<strong>挙げた問題に対応する解決策</strong>を書くことが重要です。問題A・Bを挙げたのに解決策がCの話をしていると、論理が切れて見えます。</p>
+    <h4>推奨構成</h4>
+    <table>
+      <tr><th>段落</th><th>内容</th></tr>
+      <tr><td>Intro</td><td>状況の言い換え＋「問題と解決策を論じる」と予告</td></tr>
+      <tr><td>Body 1</td><td>問題2つ（それぞれ説明つき）</td></tr>
+      <tr><td>Body 2</td><td>解決策2つ（<strong>Body 1の問題に対応させる</strong>）</td></tr>
+      <tr><td>Conclusion</td><td>問題は深刻だが対処可能、と要約</td></tr>
+    </table>
+    <h4>解決策の「主語」を工夫する</h4>
+    <table>
+      <tr><th>主体</th><th>できること・表現</th></tr>
+      <tr><td>政府</td><td>Governments should introduce/invest in/impose taxes on…</td></tr>
+      <tr><td>企業</td><td>Companies could offer/be required to…</td></tr>
+      <tr><td>個人</td><td>Individuals can choose to/make an effort to…</td></tr>
+      <tr><td>学校</td><td>Schools should educate children about…</td></tr>
+    </table>
+    <p>解決策2つの主語を変える（政府＋個人など）と、視野の広さを示せます。</p>
+    <div class="ex"><span class="e">問題と解決策をつなぐ表現：</span><br>
+    To tackle the first problem, … / One effective solution to … is … / This issue could be addressed by -ing / To prevent this, …</div>
+    <div class="ng-box"><span class="h">頻出ミス</span><br>・解決策が「みんなが気をつけるべき」のような精神論だけ→具体的な仕組み（税、規制、教育、技術）に落とす<br>・問題を3つ4つ挙げて解決策が書き切れない→<strong>問題2つ・解決策2つ</strong>が250語の適量</div>
+  `,
+  drills:[
+    {q:'P/S型で最も重要な構成上のルールは？', c:['問題をできるだけ多く挙げる','挙げた問題と解決策を対応させる','解決策だけを詳しく書く'], a:1, fb:'問題A→解決策A\'、問題B→解決策B\'の対応関係が論理性の核。数より対応です。'},
+    {q:'解決策の説得力を上げる工夫は？', c:['「みんなが頑張るべき」と書く','主体（政府・企業・個人）と具体的な仕組みを示す','解決策は1つに絞る'], a:1, fb:'「政府は〜を導入すべき」「学校は〜を教えるべき」と、誰が何をするかを明示します。'},
+    {q:'250語での適切な問題・解決策の数は？', c:['問題1つ・解決策1つ','問題2つ・解決策2つ','問題4つ・解決策4つ'], a:1, fb:'2＋2が展開の深さと網羅性のバランス最適点。4つ以上は必ず浅くなります。'}
+  ],
+  task:{
+    intro:'【実戦】タイマー40分で次のP/S型エッセイを書いてください（250語以上）。問題2つ→対応する解決策2つの構成で。',
+    prompt:'The number of private cars in cities continues to grow. What problems does this cause, and what measures could be taken to solve them?',
+    placeholder:'（アウトライン：問題①渋滞→解決①？／問題②大気汚染→解決②？）\n\nIn cities around the world, the number of private vehicles…',
+    minWords:250
+  },
+  checklist:['問題を2つ、説明つきで書いた','解決策2つが問題2つに対応している','解決策の主体（政府など）と仕組みが具体的','To tackle this problem などの対応表現を使った','250語以上・40分以内'],
+  model:`<div class="m-en">In cities around the world, the number of private vehicles on the roads is rising year after year. This trend causes serious problems for urban life, but effective measures exist to deal with them.
+
+The first major problem is chronic traffic congestion. When too many cars compete for limited road space, journeys that should take twenty minutes stretch into hours, wasting fuel and working time. The second, and more dangerous, problem is air pollution. Exhaust fumes contain harmful substances that damage residents\' health, and it is widely reported that respiratory diseases are more common in heavily congested cities. Children and elderly people are particularly vulnerable to this invisible threat.
+
+Fortunately, both problems can be addressed. To tackle congestion, governments should invest heavily in fast, affordable public transport while making city-centre driving less attractive, for example through congestion charges like the one introduced in London. When reliable alternatives exist, many drivers willingly give up their cars for daily commuting. To reduce air pollution, authorities could accelerate the shift to electric vehicles by subsidising their purchase and expanding charging networks, and individuals can also contribute by choosing bicycles or car-sharing for short journeys. These measures work best in combination: fewer cars overall, and cleaner cars among those that remain.
+
+In conclusion, the growth of private car use causes congestion that wastes time and pollution that damages health. However, a combination of better public transport, road pricing and cleaner vehicle technology can solve both problems, provided that governments act decisively.（約245語）</div>
+  <div class="m-note"><strong>この答案の構造：</strong>問題①渋滞→解決①公共交通＋ロンドン型課金、問題②大気汚染→解決②EV補助＋個人の行動、ときれいに対応。主体も政府・当局・個人と変化。結論は「問題→対処可能」の要約。<strong>比較ポイント：</strong>①問題と解決策が対応しているか ②解決策が精神論でなく仕組みか ③To tackle… などの対応表現があるか。※語数が245語とやや不足気味の例です。あなたの答案が250語を超えていればその点はこの回答例より優れています。</div>`
+},
+/* ---------- DAY 28 ---------- */
+{
+  title:'複文で書く（GRA 6.0対策）',
+  time:'約30分',
+  goal:'単文の羅列から抜け出し、従属節・関係詞を使った複文を正確に書ける。',
+  lesson:`
+    <h4>GRA 6.0の条件＝「複文を使い、ミスがあっても意味が伝わる」</h4>
+    <p>単文（S V. S V. S V.）だけの答案は、ミスがゼロでもGRA 5.5止まりです。<strong>複文への書き換えパターン</strong>を身につけましょう。</p>
+    <h4>複文を作る4つの道具</h4>
+    <table>
+      <tr><th>道具</th><th>例</th></tr>
+      <tr><td>① 従属接続詞<br>(although / because / if / when)</td><td>Many students work part-time. They are busy.<br>→ <strong>Because</strong> many students work part-time, they have little free time.</td></tr>
+      <tr><td>② 関係代名詞<br>(who / which / that)</td><td>Remote work suits parents. They have young children.<br>→ Remote work suits parents <strong>who</strong> have young children.</td></tr>
+      <tr><td>③ 分詞・動名詞</td><td>People exercise regularly. They sleep better.<br>→ People <strong>exercising regularly</strong> tend to sleep better. / <strong>By exercising regularly</strong>, people sleep better.</td></tr>
+      <tr><td>④ 名詞節<br>(that / whether)</td><td>Technology changes fast. This is clear.<br>→ It is clear <strong>that</strong> technology changes fast.</td></tr>
+    </table>
+    <h4>頻出ミスと直し方</h4>
+    <div class="ng-box"><span class="h">3大エラー</span><br>
+    ・<strong>断片文：</strong>Because it is cheap.（従属節だけで文にしている）→ 主節をつける<br>
+    ・<strong>コンマ切り：</strong>It is cheap, it is popular.（コンマで文をつなぐ）→ 接続詞かセミコロンを使う<br>
+    ・<strong>二重接続詞：</strong>Although it is cheap, but it is popular.→ althoughとbutはどちらか1つ</div>
+    <div class="tip"><strong>無理は禁物：</strong>1文にwhichとalthoughとifを詰め込んで意味が壊れるより、「複文1つ＋単文1つ」のリズムで正確に書く方がスコアは上です。<strong>正確さ＞複雑さ</strong>。目安は「段落に複文2〜3文」。</div>
+  `,
+  drills:[
+    {q:'文法的に正しいのは？', c:['Although it is expensive, but many people buy it.','Although it is expensive, many people buy it.','Although it is expensive. Many people buy it.'], a:1, fb:'althoughを使ったらbutは不要。Cはalthough節が断片文になっています。'},
+    {q:'「It is cheap, it is popular.」の誤りは？', c:['スペルミス','コンマだけで2つの文をつないでいる','時制の誤り'], a:1, fb:'comma splice（コンマ切り）。…cheap, so it is popular. か …cheap; it is popular. に直します。'},
+    {q:'GRAで最も評価が高い書き方は？', c:['全文を3重の複文にする','複文と単文を織り交ぜ、正確に書く','ミスを恐れて全文単文にする'], a:1, fb:'バンド6の記述は「複文を試み、ミスはあっても意味が伝わる」。全単文は評価の上限が下がり、過度な複雑化は意味が壊れます。'}
+  ],
+  task:{
+    intro:'次の単文ペア8組を、指定の道具（接続詞・関係詞など自由）で1つの複文に書き換えてください。',
+    prompt:'1. Social media is convenient. It can damage teenagers\' mental health.<br>2. Some students study abroad. They want to improve their language skills.<br>3. The government builds more parks. People will exercise more.<br>4. My city introduced a bike-sharing system. Traffic decreased.<br>5. Fast food is unhealthy. Millions of people eat it every day.<br>6. Employees work from home. They save commuting time.<br>7. Children play outside less than before. This worries many experts.<br>8. A company offers flexible hours. It attracts more talented workers.',
+    placeholder:'1. Although social media is convenient, it can damage teenagers\' mental health.\n2. …',
+    minWords:80
+  },
+  checklist:['8文すべて1文の複文になっている','接続詞・関係詞・分詞など2種類以上の道具を使った','断片文・コンマ切り・二重接続詞がない'],
+  model:`<div class="m-en">1. Although social media is convenient, it can damage teenagers\' mental health.
+
+2. Some students study abroad because they want to improve their language skills.（または: Students who want to improve their language skills often study abroad.）
+
+3. If the government builds more parks, people will exercise more.
+
+4. After my city introduced a bike-sharing system, traffic decreased.（または: …system, which led to a decrease in traffic.）
+
+5. Despite being unhealthy, fast food is eaten by millions of people every day.（または: Although fast food is unhealthy, millions of people eat it every day.）
+
+6. Employees who work from home save commuting time.（または: By working from home, employees save commuting time.）
+
+7. It worries many experts that children play outside less than before.（または: The fact that children play outside less than before worries many experts.）
+
+8. A company that offers flexible hours attracts more talented workers.</div>
+  <div class="m-note"><strong>確認ポイント：</strong>1つの正解ではなく、道具ごとに複数の書き方があります。あなたの答案で見るべきは①主節が必ずあるか（断片文でない）②コンマ切りしていないか ③although+butの二重使いがないか。5のDespite being…や7のIt … that…が書けていたら6.0を超える運用力です。</div>`
+},
+/* ---------- DAY 29 ---------- */
+{
+  title:'頻出トピック語彙＋よくあるミスTop10',
+  time:'約35分',
+  goal:'頻出5分野の語彙を文の中で使え、日本人学習者の定番ミスを自分で直せる。',
+  lesson:`
+    <h4>頻出5分野の使える語彙</h4>
+    <table>
+      <tr><th>分野</th><th>語彙（例文の形で覚える）</th></tr>
+      <tr><td>教育</td><td>compulsory education（義務教育）/ curriculum / extracurricular activities / academic performance / lifelong learning</td></tr>
+      <tr><td>環境</td><td>carbon emissions / renewable energy / sustainable / disposable products / environmental awareness</td></tr>
+      <tr><td>テクノロジー</td><td>digital literacy / automation / face-to-face communication / screen time / technological advances</td></tr>
+      <tr><td>健康</td><td>sedentary lifestyle（座りがちな生活）/ obesity / mental well-being / work-life balance / preventive care</td></tr>
+      <tr><td>社会</td><td>ageing population / urbanisation / income inequality / civic participation / social cohesion</td></tr>
+    </table>
+    <div class="tip"><strong>覚え方：</strong>単語単体ではなく「a sedentary lifestyle leads to obesity」のように<strong>文の形</strong>で覚えると、本番でそのまま使えます。</div>
+    <h4>日本人学習者のミスTop10</h4>
+    <table>
+      <tr><th>ミス</th><th>正しい形</th></tr>
+      <tr><td>1. almost people</td><td>most people（almostは副詞）</td></tr>
+      <tr><td>2. discuss about the problem</td><td>discuss the problem（discussは他動詞）</td></tr>
+      <tr><td>3. People is…</td><td>People are…（peopleは複数）</td></tr>
+      <tr><td>4. informations / advices</td><td>information / advice（不可算）</td></tr>
+      <tr><td>5. It is difficult for study.</td><td>It is difficult to study.</td></tr>
+      <tr><td>6. I think it is good.（曖昧）</td><td>I believe this policy is beneficial because…</td></tr>
+      <tr><td>7. a lot of / kids / stuff（口語）</td><td>many, a great deal of / children / things, issues</td></tr>
+      <tr><td>8. The number of cars are increasing.</td><td>The number of cars is increasing.（主語はnumber）</td></tr>
+      <tr><td>9. 冠詞の欠落：Government should…</td><td>The government should… / Governments should…</td></tr>
+      <tr><td>10. On the other hand の誤用（単なる追加）</td><td>対比のときだけ使う。追加は In addition</td></tr>
+    </table>
+  `,
+  drills:[
+    {q:'「ほとんどの人が賛成した」正しいのは？', c:['Almost people agreed.','Most people agreed.','Almost of people agreed.'], a:1, fb:'almostは副詞なので名詞を直接修飾できません。most people / almost all peopleが正しい形です。'},
+    {q:'正しい文は？', c:['We discussed about the environment.','We discussed the environment.','We discussed on the environment.'], a:1, fb:'discussは他動詞。前置詞は不要です（talk about / debate aboutとの混同に注意）。'},
+    {q:'「The number of tourists ___ increasing.」に入るのは？', c:['are','is','were'], a:1, fb:'主語はThe number（単数）。a number of tourists are…（多くの観光客が）との違いに注意。'}
+  ],
+  task:{
+    intro:'①5分野から1語ずつ選び、それぞれ意見を含む英文を1文ずつ作ってください（計5文）。②次のミス入り文5つを訂正してください。',
+    prompt:'【②の訂正問題】<br>1. Almost students have smartphone.<br>2. Government should discuss about this problem.<br>3. The number of old people are increasing, it is serious problem.<br>4. I think remote work is good. It has a lot of good points for workers.<br>5. Children can get many informations from internet.',
+    placeholder:'【①作文】\n1.（教育）Extracurricular activities are as important as…\n…\n【②訂正】\n1. Almost students have smartphone. → Most students have smartphones.\n…',
+    minWords:80
+  },
+  checklist:['5分野すべての語彙を使った','①は単語の羅列でなく意見を含む文にした','②の5文すべてのミスを特定・訂正できた'],
+  model:`<div class="m-en">【①作文例】
+1.（教育）Extracurricular activities are as important as academic performance in developing well-rounded students.
+2.（環境）Governments should tax disposable products to raise environmental awareness.
+3.（テクノロジー）Schools must teach digital literacy so that children can judge online information critically.
+4.（健康）A sedentary lifestyle is one of the main causes of obesity in developed countries.
+5.（社会）An ageing population places a heavy financial burden on the working generation.
+
+【②訂正例】
+1. → Most students have smartphones.（almost→most、単数→複数）
+2. → The government should discuss this problem.（冠詞＋discussの前置詞削除）
+3. → The number of old people is increasing, which is a serious problem.（is＋コンマ切り解消＋冠詞）
+4. → I believe remote work is beneficial because it offers workers many advantages.（曖昧なgood/a lot ofを格上げ）
+5. → Children can get a great deal of information from the internet.（不可算＋冠詞）</div>
+  <div class="m-note"><strong>確認ポイント：</strong>②では1文に複数のミスが仕込まれています（3は3か所）。全部見つけられたか数えてみてください。明日の模試の見直し5分では、まさにこのTop10（冠詞・単複・almost・discuss about）を優先チェックします。</div>`
+},
+/* ---------- DAY 30 ---------- */
+{
+  title:'Task 2 模擬試験＋30日総まとめ',
+  time:'約60分',
+  goal:'初見の問題を40分で書き切り、6.0チェックリストで自己添削して30日を締めくくる。',
+  lesson:`
+    <h4>最終日：本番と同じ条件で</h4>
+    <p><strong>タイマー40分・辞書なし</strong>。下の問題は初見のはずです。これまでの手順（タイプ判定→アウトライン5分→執筆30分→見直し5分）をそのまま実行してください。</p>
+    <h4>本番の動き方（最終確認）</h4>
+    <table>
+      <tr><th>時間</th><th>やること</th><th>使うDay</th></tr>
+      <tr><td>0〜5分</td><td>タイプ判定→立場決定→アウトライン</td><td>Day 17-18</td></tr>
+      <tr><td>5〜35分</td><td>Intro（40語）→Body×2（各90語）→Concl（40語）</td><td>Day 19-22</td></tr>
+      <tr><td>35〜40分</td><td>見直し：冠詞・単複・almost・コンマ切り</td><td>Day 28-29</td></tr>
+    </table>
+    <h4>弱点→復習マップ</h4>
+    <table>
+      <tr><th>チェックが付かない項目</th><th>復習するDay</th></tr>
+      <tr><td>立場が不明確・ブレた</td><td>Day 17・24</td></tr>
+      <tr><td>段落構成・語数配分</td><td>Day 18</td></tr>
+      <tr><td>トピックセンテンス・展開</td><td>Day 20-21</td></tr>
+      <tr><td>接続表現</td><td>Day 23</td></tr>
+      <tr><td>複文・文法ミス</td><td>Day 28-29</td></tr>
+    </table>
+    <h4>30日を終えたあなたへ：次のステップ</h4>
+    <p>①<strong>週2本ペースで初見のエッセイを書き続ける</strong>（Day 24-27の4タイプをローテーション）②Task 1は週1本で感覚を維持 ③可能なら添削サービスや講師のフィードバックを受ける——ここまでの型があれば、フィードバックの吸収効率が全く違います。6.5を目指す場合は、語彙の言い換えの幅と譲歩→反論（Day 24の第4段落）の運用がカギになります。</p>
+  `,
+  drills:[
+    {q:'最初の5分でやるべきことの正しい順番は？', c:['書き始める→考える','タイプ判定→立場決定→アウトライン','語彙のブレインストーミング→暗記フレーズの準備'], a:1, fb:'Day 17-18の手順そのまま。タイプ判定を飛ばすと構成ごと間違えるリスクがあります。'},
+    {q:'見直し5分で優先すべきは？', c:['より高度な語彙への書き換え','冠詞・単複・コンマ切りなどの機械的ミス','段落の入れ替え'], a:1, fb:'Day 29のTop10ミスを機械的にチェック。大きな書き換えは時間切れとミスを招きます。'},
+    {q:'250語に届かないとき、足すべきなのは？', c:['結論をもう1段落','Bodyの例をもう1文展開','序論に一般論を追加'], a:1, fb:'例の展開（For example…の後にもう1文）が最も安全な増量法。序論・結論を膨らませるのは配分崩れになります。'}
+  ],
+  task:{
+    intro:'【模擬試験】タイマー40分。これまでの手順をすべて使って書いてください。書き終えたらチェックリストで自己採点し、回答例と比較して30日間の総仕上げをしましょう。',
+    prompt:'Some people believe that social media does more harm than good to society. To what extent do you agree or disagree?',
+    placeholder:'（40分タイマーをスタート。まず5分でタイプ判定とアウトラインを）',
+    minWords:250
+  },
+  checklist:['【TR】250語以上ある','【TR】立場が序論で明示され、最後まで一貫している','【TR】理由2つがそれぞれ例つきで展開されている','【CC】4段落構成で、各Bodyの1文目がトピックセンテンスになっている','【CC】接続語が適量（文頭2〜3個/段落）で、指示語・関係詞も使えた','【LR】設問の丸写しがなく、話題に合った語彙（Day 29）を使えた','【GRA】複文が4文以上あり、断片文・コンマ切りがない','【GRA】冠詞・単複・almost/most・discussの前置詞をチェックした','40分以内に結論まで書き切った'],
+  model:`<div class="m-en">It is often claimed that social media damages society more than it benefits it. While I accept that these platforms create genuine problems, I disagree with this view, because the connection and access to information they provide outweigh their negative effects.
+
+Admittedly, social media has a dark side. Endless scrolling can harm concentration and sleep, and the constant comparison with other people\'s carefully edited lives can lower young users\' self-esteem. False information also spreads faster than corrections. However, these problems stem from how the tools are used rather than from the tools themselves, and they can be reduced through education and sensible regulation.
+
+The first major benefit of social media is that it connects people who would otherwise be isolated. Elderly people can talk to their grandchildren abroad, patients with rare diseases can find support communities, and small businesses can reach customers without expensive advertising. For example, many family-run shops survived recent economic downturns largely because they could sell directly to followers online.
+
+Furthermore, social media has made information and opportunity dramatically more accessible. News now reaches people within minutes, charities raise funds from millions of small donors, and ordinary citizens can make their voices heard on public issues. This openness strengthens, rather than weakens, civic participation in society.
+
+In conclusion, although the risks of social media are real, they are manageable problems of use, not fatal flaws. Because these platforms connect isolated people and open up information to everyone, I believe social media ultimately does society considerably more good than harm.（約250語）</div>
+  <div class="m-note"><strong>この答案の構造と30日の集大成ポイント：</strong>①序論＝言い換え＋「問題は認めるが反対」という譲歩つきの明確な立場（Day 19・24）②第2段落＝譲歩→反論のセット（Day 24）③Body2つ＝トピックセンテンス→説明→一般例（Day 20-21）④接続はAdmittedly / However / Furthermore＋指示語（Day 23）⑤複文多数・断片文なし（Day 28）。<br><br><strong>お疲れさまでした！</strong>チェックリストで8項目以上ついていれば、6.0の型は完成しています。あとは初見の問題での反復です。Day 30の弱点マップに沿って復習しつつ、週2本のペースを維持してください。</div>`
+}
+];
+
+/* =========================================================
+   はじめに（イントロページ）
+   ========================================================= */
+function renderIntro(){
+  container.innerHTML = `
+    <div class="lesson-card">
+      <span class="day-label en">WELCOME TO PART 2</span>
+      <h1 class="lesson-title">はじめに — この15日間で目指すこと</h1>
+      <div class="goal-box"><strong>PART 2へようこそ！</strong>ここからはIELTSライティングの主戦場、Task 2（エッセイ）です。配点はTask 1の2倍。1日30〜60分×15日で、バンド6.0のエッセイを40分で書き切る力を作ります。</div>
+
+      <div class="sec-h"><span class="tag">GOAL</span>15日後、あなたはこうなっています</div>
+      <div class="lesson-body">
+        <ul class="goal-list">
+          <li><span class="gnum">1</span><span>初見の設問を読んで<strong>1分でタイプを判定</strong>し、5分で「立場＋理由2つ＋例」のアウトラインが作れる</span></li>
+          <li><span class="gnum">2</span><span><strong>40分・250語以上</strong>で、序論→ボディ×2→結論の4段落エッセイを書き切れる</span></li>
+          <li><span class="gnum">3</span><span>Opinion・Discussion・Advantage/Disadvantage・Problem/Solutionの<strong>4タイプすべての「型」</strong>を持っている</span></li>
+          <li><span class="gnum">4</span><span>立場の一貫性・段落構成・複文・定番ミスを、<strong>チェックリストで自己添削できる</strong></span></li>
+        </ul>
+        <p style="font-size:.88rem;color:var(--gray)">「何を書けばいいか思いつかない」「書いているうちに主張がずれる」——Task 2の悩みのほとんどは、才能ではなく手順で解決します。この15日間はその手順のインストールです。</p>
+
+        <div class="sec-h"><span class="tag">WHY</span>なぜこの構成なのか？</div>
+        <p>PART 1と同じく、<strong>採点基準（TR・CC・LR・GRA）から逆算</strong>した3段階です。いきなり過去問を書き始めるのではなく、エッセイを「部品」に分解して1日1つずつ習得してから、タイプ別の実戦に入ります。</p>
+        <div class="phase-grid">
+          <div class="phase">
+            <span class="p-label en">PHASE 1｜DAY 16-18</span>
+            <h5>エッセイの「設計図」</h5>
+            <p>採点基準・設問分析とアイデア出し・4段落テンプレート。書く前の5分で勝負が決まることを学びます。</p>
+          </div>
+          <div class="phase">
+            <span class="p-label en">PHASE 2｜DAY 19-23</span>
+            <h5>段落の「部品」を作る</h5>
+            <p>序論・トピックセンテンス・PEE展開・結論・接続表現。毎日1つの部品を練習し、エッセイを組み立てられる状態に。</p>
+          </div>
+          <div class="phase">
+            <span class="p-label en">PHASE 3｜DAY 24-30</span>
+            <h5>タイプ別「実戦」＋模試</h5>
+            <p>4大タイプを1日1本フルで執筆。Day 28-29で文法と語彙を仕上げ、Day 30の模試で30日間を締めくくります。</p>
+          </div>
+        </div>
+
+        <div class="sec-h"><span class="tag">VOICE</span>先輩受講生の変化</div>
+        <div class="voice-grid">
+          <div class="voice-card">
+            <span class="stars">★★★★★</span>
+            <p>「エッセイは『英語力』の前に『段取り』だと気づけたのが大きかった。アウトライン5分の習慣だけで、途中で手が止まることがなくなり、本番も時間内に250語書けました。」</p>
+            <p class="who">H.I.さん（30歳・金融機関勤務／イギリス大学院準備）</p>
+            <span class="score">Writing 5.5 → 6.5</span>
+          </div>
+          <div class="voice-card">
+            <span class="stars">★★★★★</span>
+            <p>「毎回立場がブレて5.5だった私に、Day 24の『completely agreeで押し切っていい』は衝撃でした。バランスよく書こうとするほど下がっていたんだと納得。次の受験で6.0が出ました。」</p>
+            <p class="who">K.M.さん（28歳・広告代理店勤務／オーストラリア留学準備）</p>
+            <span class="score">Writing 5.5 → 6.0</span>
+          </div>
+        </div>
+
+        <div class="sec-h"><span class="tag">HOW</span>学習の進め方（3つの約束）</div>
+        <ul class="goal-list">
+          <li><span class="gnum">1</span><span><strong>1日1Day、順番どおりに。</strong>Day 24以降の実戦は、Day 16〜23の部品を前提に設計されています。</span></li>
+          <li><span class="gnum">2</span><span><strong>Day 24からの4本は必ずタイマー40分で。</strong>時間無制限の練習は本番の力になりません。</span></li>
+          <li><span class="gnum">3</span><span><strong>回答例は書き終えてから開く。</strong>先に読むと「わかったつもり」で終わり、書く力がつきません。</span></li>
+        </ul>
+        <p style="font-size:.85rem;color:var(--gray)">PART 1を終えたあなたなら大丈夫。それでは、Day 16から始めましょう！</p>
+      </div>
+      <button class="start-cta" onclick="goTo(0)">Day 16 を始める →</button>
+    </div>`;
+  window.scrollTo({top:0});
+}
+
+/* =========================================================
+   レンダリング
+   ========================================================= */
+let current = -1;
+let progress = {};
+try{ progress = JSON.parse(load(PROG_KEY) || '{}') }catch(e){ progress = {} }
+
+const dayNav = document.getElementById('dayNav');
+const mobileSelect = document.getElementById('mobileSelect');
+const container = document.getElementById('lessonContainer');
+
+function doneCount(){ return Object.values(progress).filter(Boolean).length }
+
+function renderNav(){
+  dayNav.innerHTML = `
+    <li><button class="${current===-1?'active':''}" onclick="goTo(-1)">
+      <span class="num en">INTRO</span><span>はじめに</span>
+    </button></li>` +
+    DAYS.map((d,i)=>`
+    <li><button class="${i===current?'active':''}" onclick="goTo(${i})">
+      <span class="num en">DAY ${i+16}</span><span>${d.title}</span>
+      ${progress[i]?'<span class="done-mark">✓</span>':''}
+    </button></li>`).join('');
+  mobileSelect.innerHTML = `<option value="-1" ${current===-1?'selected':''}>はじめに｜この講座の使い方</option>` +
+    DAYS.map((d,i)=>
+    `<option value="${i}" ${i===current?'selected':''}>Day ${i+16}｜${d.title} ${progress[i]?'✓':''}</option>`).join('');
+  const pct = Math.round(doneCount()/DAYS.length*100);
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressText').textContent = pct+'% 完了';
+  document.getElementById('headerProgress').textContent = doneCount()+' / 15 完了';
+}
+
+function renderLesson(){
+  if(current === -1){ renderIntro(); return; }
+  const d = DAYS[current];
+  const drillsHtml = d.drills.map((dr,di)=>`
+    <div class="drill">
+      <p class="q"><span class="qnum en">Q${di+1}</span>${dr.q}</p>
+      <div class="choices">
+        ${dr.c.map((c,ci)=>`<button class="choice" onclick="answer(${di},${ci},this)">${String.fromCharCode(65+ci)}. ${c}</button>`).join('')}
+      </div>
+      <div class="fb" id="fb-${di}"></div>
+    </div>`).join('');
+
+  const checklistHtml = d.checklist.map(c=>`
+    <li><label><input type="checkbox"> ${c}</label></li>`).join('');
+
+  container.innerHTML = `
+    <div class="lesson-card">
+      <span class="day-label en">DAY ${current+16} / 30</span>
+      <h1 class="lesson-title">${d.title}</h1>
+      <span class="time-badge">⏱ 学習時間の目安：${d.time}</span>
+      <div class="goal-box"><strong>今日のゴール：</strong>${d.goal}</div>
+
+      <div class="sec-h"><span class="tag">LESSON</span>レッスン</div>
+      <div class="lesson-body">${d.lesson}</div>
+
+      <div class="sec-h"><span class="tag">DRILL</span>確認ドリル</div>
+      ${drillsHtml}
+
+      <div class="sec-h"><span class="tag">WRITING</span>ライティング課題</div>
+      <div class="task-box">
+        <p>${d.task.intro}</p>
+        <div class="prompt">${d.task.prompt}</div>
+      </div>
+      <textarea class="writing" id="writingArea" placeholder="${d.task.placeholder}"></textarea>
+      <div class="wc-row">
+        <span>${d.task.minWords ? '目標語数：'+d.task.minWords+'語以上' : '語数は自由（メモ形式でOK）'}</span>
+        <span class="wc">語数：<strong id="wordCount">0</strong></span>
+      </div>
+
+      <div class="sec-h"><span class="tag">CHECK</span>セルフチェック</div>
+      <ul class="checklist">${checklistHtml}</ul>
+
+      <div class="sec-h"><span class="tag">MODEL</span>回答例</div>
+      <p style="font-size:.85rem;color:var(--gray)">必ず自分で書き終えてから開いてください。答えではなく「自分の答案に何が足りないか」を見つけるために使いましょう。</p>
+      <details class="model-wrap">
+        <summary>回答例を表示する</summary>
+        <div class="model-body">${d.model || ''}</div>
+      </details>
+
+      <div class="complete-row">
+        <button class="btn-complete ${progress[current]?'done':''}" id="completeBtn" onclick="toggleComplete()">
+          ${progress[current]?'✓ 完了しました':'このDayを完了にする'}
+        </button>
+        <span style="font-size:.82rem;color:var(--gray)">課題を書き終えてセルフチェックを済ませたら完了！</span>
+      </div>
+      <div class="nav-row">
+        <button class="btn-nav" onclick="goTo(${current-1})">← ${current===0?'はじめに':'Day '+(current+15)}</button>
+        <button class="btn-nav" onclick="goTo(${current+1})" ${current===DAYS.length-1?'disabled':''}>Day ${current+17} →</button>
+      </div>
+    </div>`;
+
+  const ta = document.getElementById('writingArea');
+  ta.addEventListener('input', ()=>{
+    const words = ta.value.trim().split(/\s+/).filter(w=>w.match(/[a-zA-Z]/)).length;
+    document.getElementById('wordCount').textContent = words;
+  });
+  window.scrollTo({top:0});
+}
+
+window.goTo = function(i){
+  if(i<-1||i>=DAYS.length) return;
+  current = i;
+  renderNav(); renderLesson();
+};
+window.answer = function(di,ci,btn){
+  const d = DAYS[current].drills[di];
+  const fb = document.getElementById('fb-'+di);
+  const choices = btn.parentElement.querySelectorAll('.choice');
+  choices.forEach((c,i)=>{
+    c.classList.remove('correct','wrong');
+    if(i===d.a) c.classList.add('correct');
+  });
+  if(ci!==d.a) btn.classList.add('wrong');
+  fb.className = 'fb show';
+  fb.innerHTML = (ci===d.a
+    ? '<span class="r ok">✓ 正解！</span> '
+    : '<span class="r ng">✗ 不正解。正解は '+String.fromCharCode(65+d.a)+'</span> ') + d.fb;
+};
+window.toggleComplete = function(){
+  progress[current] = !progress[current];
+  store(PROG_KEY, JSON.stringify(progress));
+  renderNav();
+  const btn = document.getElementById('completeBtn');
+  btn.className = 'btn-complete ' + (progress[current]?'done':'');
+  btn.textContent = progress[current]?'✓ 完了しました':'このDayを完了にする';
+};
+mobileSelect.addEventListener('change', e=>goTo(Number(e.target.value)));
+
+renderNav(); renderLesson();
+</script>
+</body>
+</html>
